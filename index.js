@@ -17,7 +17,7 @@ var obserable = new Obserable();
 
 Vue.obserable = obserable;
 const router = new VueRouter({
-  mode: 'history',
+  
   routes: [
      {path: '*', name: 'error', component: FError },
      { path: '/login/', name: 'login', component: Login, props: true },

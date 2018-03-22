@@ -15,7 +15,7 @@ var config = {
         inline: true,
         port: 4000,
         hot: true,
-        historyApiFallback: true
+        //historyApiFallback: true 
     },
     externals: {
         //'react':'React',
