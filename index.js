@@ -17,6 +17,7 @@ var obserable = new Obserable();
 
 Vue.obserable = obserable;
 const router = new VueRouter({
+  mode: 'history',
   routes: [
      {path: '*', name: 'error', component: FError },
      { path: '/login/', name: 'login', component: Login, props: true },
@@ -35,7 +36,7 @@ new Vue({
 	template: `<div id="app1">
       <Main :obserable='obserable'></Main>
        <Button type="primary">Default</Button>
-       
+
     </div>`,
 	methods: {
 	},
