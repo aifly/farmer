@@ -26,7 +26,6 @@ const router = new VueRouter({
 
 new Vue({
 	router,
-	mode: 'history',
 	data: {
 		obserable,
 		imgs,

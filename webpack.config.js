@@ -14,7 +14,8 @@ var config = {
     devServer: {
         inline: true,
         port: 4000,
-        hot: true
+        hot: true,
+        historyApiFallback: true
     },
     externals: {
         //'react':'React',
