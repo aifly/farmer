@@ -37,6 +37,20 @@ var config = {
     ],
     module: {
 
+        rules:[
+            {
+                use:[
+                    {loader: 'vue-loader'},
+                    {
+                        loader: 'iview-loader',
+                        options: {
+                            prefix: false
+                        }
+                    }
+                ]
+            }
+        ],
+
         loaders: [{
             test: /\.js|\.es6$/,
             exclude: /node_modules/,

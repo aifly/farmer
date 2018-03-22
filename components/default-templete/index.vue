@@ -1,16 +1,12 @@
 <template>
-	<div class="zmiti-login-ui">
-		login222222
-		<p>111111</p>
-
-		<Icon type="checkmark" />
+	<div class="zmiti-index-ui">
+		
 	</div>
 </template>
 
 <script>
 	import './index.css';
 	import $ from 'jquery';
-	import Vue from "vue";
 
 	export default {
 		props:['obserable'],
@@ -25,12 +21,8 @@
 		
 		methods:{
 			
+ 
 
-		},
-		mounted(){
- 			setTimeout(()=>{
- 				//console.log( Vue.obserable )
- 			},1000)
 		}
 	}
 </script>

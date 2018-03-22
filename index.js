@@ -4,13 +4,13 @@ import Obserable from './components/lib/obserable';
 import Main from './components/main/index'
 import Login from './components/login/index'
 import FError from './components/ferror/index'
-import KeenUI from 'keen-ui';
-import 'keen-ui/dist/keen-ui.css';
+import iView from 'iview';
 import VueRouter from 'vue-router'
 import './components/css/index.css';
-import { UiAlert, UiButton } from 'keen-ui';
-Vue.use(KeenUI);
+import './components/css/theme.css';
+
 Vue.use(VueRouter)
+Vue.use(iView)
 
 
 var obserable = new Obserable();
@@ -34,11 +34,12 @@ new Vue({
 	el: '#app',
 	template: `<div id="app1">
       <Main :obserable='obserable'></Main>
+       <Button type="primary">Default</Button>
+       
     </div>`,
 	methods: {
 	},
 	components: {
-		UiButton,
 		Main,
 		Login,
 		FError
