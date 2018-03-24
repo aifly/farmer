@@ -1,5 +1,5 @@
 <template>
-	<div class="zmiti-login-ui">
+	<div class="symbin-login-ui">
 		login222222
 		<p>111111</p>
 

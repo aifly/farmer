@@ -34,8 +34,13 @@ new Vue({
 	el: '#app',
 	template: `<div id="app1">
       <Main :obserable='obserable'></Main>
-       <Button type="primary">Default</Button>
-
+       <Button type="primary">登录</Button>
+		<div v-if="Math.random() > 0.5">
+		  
+		</div>
+		<div v-else>
+		  Now you don't
+		</div>
     </div>`,
 	methods: {
 	},
