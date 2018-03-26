@@ -10,6 +10,8 @@
 	import './index.css';
 	import $ from 'jquery';
 	import symbinUtil from '../lib/util';
+
+
 	import Vue from "vue";
 
 	export default {
@@ -34,7 +36,15 @@
 						adminpwd:_this.password
 					},
 					fn(data){
-						console.log(data);
+						if(data.getret === 0){
+							var param = data;
+							delete param.getret;
+							delete param.getmsg;
+							symbinUtil.clearCookie('login');
+							symbinUtil.setCookie('login',JSON.stringify(param),1);
+							window.location.hash = '/home/';
+							_this.$Message.success('登录成功~')
+						}
 					}
 				})
 			}

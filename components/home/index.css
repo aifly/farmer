@@ -39,12 +39,7 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-.layout-logo {
-  color: #FFF; }
-  .layout-logo img {
-    width: 60px !important; }
-
-.symbin-main-menu {
-  background: #000; }
+.sysbin-home-ui {
+  color: #000; }
 
 /*# sourceMappingURL=index.css.map */
