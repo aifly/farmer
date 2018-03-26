@@ -39,13 +39,23 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-.layout-logo {
-  color: #FFF; }
-  .layout-logo img {
-    height: 40px;
-    width: auto; }
-
-.symbin-main-menu {
-  background: #000; }
+.symbin-tab-ui {
+  background: #fff; }
+  .symbin-tab-ui .symbin-tab-bar {
+    width: 200px;
+    height: 100%;
+    background: #EAEDF1;
+    position: absolute;
+    left: 0;
+    top: 0; }
+    .symbin-tab-ui .symbin-tab-bar .symbin-tab-title {
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      font-weight: bold;
+      background: #D9DEE4; }
+    .symbin-tab-ui .symbin-tab-bar .symbin-tab-menu .ivu-menu-submenu-title, .symbin-tab-ui .symbin-tab-bar .symbin-tab-menu .ivu-menu-item {
+      padding: 6px 10px; }
 
 /*# sourceMappingURL=index.css.map */

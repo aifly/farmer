@@ -64,7 +64,7 @@
                         </Submenu>
                     </Menu>
                 </Sider>
-                <Layout :style="{padding: '0 24px 24px'}">
+                <Layout>
                    <router-view></router-view>
                 </Layout>
             </Layout>
@@ -103,5 +103,8 @@
  <style >
      .ivu-layout-header{
         padding: 0 !important; 
+     }
+     .ivu-layout{
+        position: relative;
      }
  </style>

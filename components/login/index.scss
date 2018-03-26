@@ -5,7 +5,12 @@ $baseColor: #fcffb4;
 $viewW: 750px;
 $color: #be0000;
 
-.symbin-index-main-ui {
-	background: #000000;
+.symbin-login-ui {
+
+	.symbin-login-scene,.symbin-login-C{
+		
+		font-size: 0;
+	}
 	
+
 }
