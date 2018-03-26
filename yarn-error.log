@@ -42,6 +42,7 @@ npm manifest:
       "html-loader": "^0.5.4",
       "html-webpack-plugin": "^2.30.1",
       "iscroll": "^5.2.0",
+      "iview": "^2.11.0",
       "iview-loader": "^1.1.0",
       "jquery": "^2.2.3",
       "less": "^2.5.3",
@@ -4642,7 +4643,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 3221225786
   Command: C:\Windows\system32\cmd.exe
   Arguments: /d /s /c webpack-dev-server --hot --inline --port 4000
   Directory: F:\xuchang2018\project\farmer
