@@ -3,7 +3,9 @@
         <Layout>
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
-                    <div class="layout-logo symbin-left">dd</div>
+                    <div class="layout-logo">
+                        <img :src="imgs.logo"  />
+                    </div>
                     <div class="layout-nav">
                         <MenuItem name="1">
                             <Icon type="ios-navigate"></Icon>
@@ -78,7 +80,7 @@
 		name:'zmitiindex',
 		data(){
 			return{
-				
+				imgs:window.imgs
 			}
 		},
 		components:{
