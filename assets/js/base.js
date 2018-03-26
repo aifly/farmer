@@ -1,6 +1,5 @@
 var imgs = {
-	
-
+	logo :"./assets/images/logo.png"
 }
 
 var arr = [];

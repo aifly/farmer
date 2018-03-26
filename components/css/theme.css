@@ -33,7 +33,7 @@
   font-size: 14px;
 }
 .ivu-breadcrumb a {
-  color: #495060;
+  color: #373d41;
   transition: color 0.2s ease-in-out;
 }
 .ivu-breadcrumb a:hover {
@@ -41,7 +41,7 @@
 }
 .ivu-breadcrumb > span:last-child {
   font-weight: bold;
-  color: #495060;
+  color: #373d41;
 }
 .ivu-breadcrumb > span:last-child .ivu-breadcrumb-item-separator {
   display: none;
@@ -470,7 +470,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   font-size: 12px;
   line-height: 1.5;
-  color: #495060;
+  color: #373d41;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -562,8 +562,8 @@ Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
 https://twitter.com/benjsperry  https://twitter.com/ionicframework
 MIT License: https://github.com/driftyco/ionicons
 */
-/* 
-@font-face {
+/*
+    @font-face {
  font-family: @ionicons-font-family;
  src:url("@{ionicons-font-path}/ionicons.eot?v=@{ionicons-version}");
  src:url("@{ionicons-font-path}/ionicons.eot?v=@{ionicons-version}#iefix") format("embedded-opentype"),
@@ -572,7 +572,8 @@ MIT License: https://github.com/driftyco/ionicons
   url("@{ionicons-font-path}/ionicons.svg?v=@{ionicons-version}#Ionicons") format("svg");
  font-weight: normal;
  font-style: normal;
-} */
+}
+*/
 .ivu-icon {
   display: inline-block;
   font-family: "Ionicons";
@@ -5479,7 +5480,7 @@ MIT License: https://github.com/driftyco/ionicons
   font-size: 12px;
   border-radius: 4px;
   transition: color 0.2s linear, background-color 0.2s linear, border 0.2s linear, box-shadow 0.2s linear;
-  color: #495060;
+  color: #373d41;
   background-color: #f7f7f7;
   border-color: #dddee1;
 }
@@ -5528,7 +5529,7 @@ MIT License: https://github.com/driftyco/ionicons
   background: transparent;
 }
 .ivu-btn:hover {
-  color: #6d7380;
+  color: #5f6467;
   background-color: #f9f9f9;
   border-color: #e4e5e7;
 }
@@ -5546,7 +5547,7 @@ MIT License: https://github.com/driftyco/ionicons
 }
 .ivu-btn:active,
 .ivu-btn.active {
-  color: #454c5b;
+  color: #343a3e;
   background-color: #ebebeb;
   border-color: #ebebeb;
 }
@@ -5828,7 +5829,7 @@ fieldset[disabled] .ivu-btn-primary.active > a:only-child:after {
   border-bottom-color: #dddee1;
 }
 .ivu-btn-ghost {
-  color: #495060;
+  color: #373d41;
   background-color: transparent;
   border-color: #dddee1;
 }
@@ -5845,7 +5846,7 @@ fieldset[disabled] .ivu-btn-primary.active > a:only-child:after {
   background: transparent;
 }
 .ivu-btn-ghost:hover {
-  color: #6d7380;
+  color: #5f6467;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: #e4e5e7;
 }
@@ -5863,7 +5864,7 @@ fieldset[disabled] .ivu-btn-primary.active > a:only-child:after {
 }
 .ivu-btn-ghost:active,
 .ivu-btn-ghost.active {
-  color: #454c5b;
+  color: #343a3e;
   background-color: rgba(0, 0, 0, 0.05);
   border-color: rgba(0, 0, 0, 0.05);
 }
@@ -5981,7 +5982,7 @@ fieldset[disabled] .ivu-btn-ghost.active > a:only-child:after {
   box-shadow: 0 0 0 2px rgba(18, 205, 23, 0.2);
 }
 .ivu-btn-dashed {
-  color: #495060;
+  color: #373d41;
   background-color: transparent;
   border-color: #dddee1;
   border-style: dashed;
@@ -5999,7 +6000,7 @@ fieldset[disabled] .ivu-btn-ghost.active > a:only-child:after {
   background: transparent;
 }
 .ivu-btn-dashed:hover {
-  color: #6d7380;
+  color: #5f6467;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: #e4e5e7;
 }
@@ -6017,7 +6018,7 @@ fieldset[disabled] .ivu-btn-ghost.active > a:only-child:after {
 }
 .ivu-btn-dashed:active,
 .ivu-btn-dashed.active {
-  color: #454c5b;
+  color: #343a3e;
   background-color: rgba(0, 0, 0, 0.05);
   border-color: rgba(0, 0, 0, 0.05);
 }
@@ -6135,7 +6136,7 @@ fieldset[disabled] .ivu-btn-dashed.active > a:only-child:after {
   box-shadow: 0 0 0 2px rgba(18, 205, 23, 0.2);
 }
 .ivu-btn-text {
-  color: #495060;
+  color: #373d41;
   background-color: transparent;
   border-color: transparent;
 }
@@ -6152,7 +6153,7 @@ fieldset[disabled] .ivu-btn-dashed.active > a:only-child:after {
   background: transparent;
 }
 .ivu-btn-text:hover {
-  color: #6d7380;
+  color: #5f6467;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.2);
 }
@@ -6170,7 +6171,7 @@ fieldset[disabled] .ivu-btn-dashed.active > a:only-child:after {
 }
 .ivu-btn-text:active,
 .ivu-btn-text.active {
-  color: #454c5b;
+  color: #343a3e;
   background-color: rgba(0, 0, 0, 0.05);
   border-color: rgba(0, 0, 0, 0.05);
 }
@@ -7176,7 +7177,7 @@ fieldset[disabled] .ivu-btn-info.active > a:only-child:after {
   position: relative;
   padding: 8px 48px 8px 16px;
   border-radius: 6px;
-  color: #495060;
+  color: #373d41;
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 10px;
@@ -7192,7 +7193,7 @@ fieldset[disabled] .ivu-btn-info.active > a:only-child:after {
 }
 .ivu-alert-desc {
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   line-height: 21px;
   display: none;
   text-align: justify;
@@ -7248,7 +7249,7 @@ fieldset[disabled] .ivu-btn-info.active > a:only-child:after {
   position: relative;
   border-radius: 6px;
   margin-bottom: 10px;
-  color: #495060;
+  color: #373d41;
   line-height: 1.5;
 }
 .ivu-alert-with-desc.ivu-alert-with-icon {
@@ -7297,7 +7298,7 @@ fieldset[disabled] .ivu-btn-info.active > a:only-child:after {
   transform: rotate(90deg);
 }
 .ivu-collapse-content {
-  color: #495060;
+  color: #373d41;
   padding: 0 16px;
   background-color: #fff;
 }
@@ -7493,7 +7494,7 @@ fieldset[disabled] .ivu-btn-info.active > a:only-child:after {
 }
 .ivu-notice-desc {
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   text-align: justify;
   line-height: 1.5;
 }
@@ -7696,7 +7697,7 @@ span.ivu-radio + * {
   margin: 0;
   padding: 0 15px;
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   border: 1px solid #dddee1;
@@ -8135,7 +8136,7 @@ span.ivu-radio + * {
   line-height: 1.5;
   padding: 4px 7px;
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   background-color: #fff;
   background-image: none;
   position: relative;
@@ -8438,10 +8439,10 @@ textarea.ivu-input-number {
 .ivu-tag:not(.ivu-tag-border):not(.ivu-tag-dot):not(.ivu-tag-checked) {
   background: transparent;
   border: 0;
-  color: #495060;
+  color: #373d41;
 }
 .ivu-tag:not(.ivu-tag-border):not(.ivu-tag-dot):not(.ivu-tag-checked) .ivu-icon-ios-close-empty {
-  color: #495060 !important;
+  color: #373d41 !important;
 }
 .ivu-tag-color-red {
   color: #ed3f14 !important;
@@ -8466,7 +8467,7 @@ textarea.ivu-input-number {
   height: 32px;
   line-height: 32px;
   border: 1px solid #e9eaec !important;
-  color: #495060 !important;
+  color: #373d41 !important;
   background: #fff !important;
   padding: 0 12px;
 }
@@ -8556,7 +8557,7 @@ textarea.ivu-input-number {
   opacity: 0.85;
 }
 .ivu-tag-text {
-  color: #495060;
+  color: #373d41;
 }
 .ivu-tag-text a:first-child:last-child {
   display: inline-block;
@@ -8643,7 +8644,7 @@ textarea.ivu-input-number {
   flex: 0 0 auto;
 }
 .ivu-layout-header {
-  background: #495060;
+  background: #373d41;
   padding: 0 50px;
   height: 64px;
   line-height: 64px;
@@ -8651,7 +8652,7 @@ textarea.ivu-input-number {
 .ivu-layout-sider {
   transition: all 0.2s ease-in-out;
   position: relative;
-  background: #495060;
+  background: #373d41;
   min-width: 0;
 }
 .ivu-layout-sider-children {
@@ -8670,7 +8671,7 @@ textarea.ivu-input-number {
   height: 48px;
   line-height: 48px;
   color: #fff;
-  background: #495060;
+  background: #373d41;
   z-index: 1000;
   transition: all 0.2s ease-in-out;
 }
@@ -8694,7 +8695,7 @@ textarea.ivu-input-number {
   width: 36px;
   height: 42px;
   line-height: 42px;
-  background: #495060;
+  background: #373d41;
   color: #fff;
   font-size: 18px;
   border-radius: 0 6px 6px 0;
@@ -8702,7 +8703,7 @@ textarea.ivu-input-number {
   transition: background .3s ease;
 }
 .ivu-layout-sider-zero-width-trigger:hover {
-  background: #5b6270;
+  background: #4b5054;
 }
 .ivu-layout-sider-zero-width-trigger.ivu-layout-sider-zero-width-trigger-left {
   right: 0;
@@ -8712,7 +8713,7 @@ textarea.ivu-input-number {
 .ivu-layout-footer {
   background: #f5f7f9;
   padding: 24px 50px;
-  color: #495060;
+  color: #373d41;
   font-size: 14px;
 }
 .ivu-layout-content {
@@ -8924,7 +8925,7 @@ textarea.ivu-input-number {
 .ivu-page-item a {
   margin: 0 6px;
   text-decoration: none;
-  color: #495060;
+  color: #373d41;
 }
 .ivu-page-item:hover {
   border-color: #12cd17;
@@ -9047,7 +9048,7 @@ textarea.ivu-input-number {
   padding: 4px 7px;
   font-size: 12px;
   border: 1px solid #dddee1;
-  color: #495060;
+  color: #373d41;
   background-color: #fff;
   background-image: none;
   position: relative;
@@ -9602,7 +9603,7 @@ textarea.ivu-page-options-elevator input {
   padding-left: 48px;
   padding-top: 18px;
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   position: relative;
 }
 .ivu-modal-confirm-body-render {
@@ -9643,7 +9644,7 @@ textarea.ivu-page-options-elevator input {
   width: 100%;
   box-sizing: border-box;
   vertical-align: middle;
-  color: #495060;
+  color: #373d41;
   font-size: 14px;
   line-height: normal;
 }
@@ -9797,7 +9798,7 @@ textarea.ivu-page-options-elevator input {
   outline: none;
   border: none;
   box-sizing: border-box;
-  color: #495060;
+  color: #373d41;
   background-color: transparent;
   position: relative;
   cursor: pointer;
@@ -9868,7 +9869,7 @@ textarea.ivu-page-options-elevator input {
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -10133,7 +10134,7 @@ textarea.ivu-page-options-elevator input {
   overflow: auto;
 }
 .ivu-poptip-body-content-inner {
-  color: #495060;
+  color: #373d41;
 }
 .ivu-poptip-inner {
   width: 100%;
@@ -10302,7 +10303,7 @@ textarea.ivu-page-options-elevator input {
   font-size: 12px;
   border: 1px solid #dddee1;
   border-radius: 4px;
-  color: #495060;
+  color: #373d41;
   background-color: #fff;
   background-image: none;
   position: relative;
@@ -10462,7 +10463,7 @@ textarea.ivu-input {
   font-size: inherit;
   font-weight: normal;
   line-height: 1;
-  color: #495060;
+  color: #373d41;
   text-align: center;
   background-color: #eee;
   border: 1px solid #dddee1;
@@ -10563,7 +10564,7 @@ textarea.ivu-input {
   font-size: 12px;
   border: 1px solid #dddee1;
   border-radius: 4px;
-  color: #495060;
+  color: #373d41;
   background-color: #fff;
   background-image: none;
   position: relative;
@@ -10796,7 +10797,7 @@ textarea.ivu-form-item-error .ivu-transfer .ivu-input {
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -10914,7 +10915,7 @@ textarea.ivu-form-item-error .ivu-transfer .ivu-input {
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -10999,7 +11000,7 @@ textarea.ivu-form-item-error .ivu-transfer .ivu-input {
 .ivu-transfer-list-header {
   padding: 8px 16px;
   background: #f9fafc;
-  color: #495060;
+  color: #373d41;
   border: 1px solid #dddee1;
   border-bottom: 1px solid #e9eaec;
   border-radius: 6px 6px 0 0;
@@ -11106,7 +11107,7 @@ li.ivu-transfer-list-content-not-found:only-child {
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -11163,7 +11164,7 @@ li.ivu-transfer-list-content-not-found:only-child {
   height: 100%;
   max-width: 100%;
   overflow: hidden;
-  color: #495060;
+  color: #373d41;
   font-size: 12px;
   background-color: #fff;
   box-sizing: border-box;
@@ -11472,7 +11473,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -11568,7 +11569,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -11624,7 +11625,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  color: #495060;
+  color: #373d41;
   zoom: 1;
 }
 .ivu-tabs:before,
@@ -11844,7 +11845,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   padding: 0;
   outline: none;
   list-style: none;
-  color: #495060;
+  color: #373d41;
   font-size: 14px;
   position: relative;
   z-index: 900;
@@ -11879,7 +11880,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   background: #fff;
 }
 .ivu-menu-dark {
-  background: #495060;
+  background: #373d41;
 }
 .ivu-menu-primary {
   background: #12cd17;
@@ -11915,7 +11916,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   height: inherit;
   line-height: inherit;
   border-bottom: 2px solid transparent;
-  color: #495060;
+  color: #373d41;
 }
 .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item-active,
 .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu-active,
@@ -12028,7 +12029,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover,
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover {
   color: #fff;
-  background: #495060;
+  background: #373d41;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
@@ -12052,7 +12053,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   background: #363e4f;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
-  background: #495060;
+  background: #373d41;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-has-parent-submenu .ivu-menu-submenu-title {
   background: transparent;
@@ -12062,7 +12063,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td,
   line-height: normal;
   padding: 7px 16px;
   clear: both;
-  color: #495060;
+  color: #373d41;
   font-size: 12px !important;
   white-space: nowrap;
   list-style: none;
@@ -12510,7 +12511,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
   vertical-align: middle;
   float: left;
   font-size: 12px;
-  color: #495060;
+  color: #373d41;
   line-height: 1;
   padding: 10px 12px 10px 0;
   box-sizing: border-box;
@@ -12778,7 +12779,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
 }
 .ivu-upload-list-file {
   padding: 4px;
-  color: #495060;
+  color: #373d41;
   border-radius: 4px;
   transition: background-color 0.2s ease-in-out;
   overflow: hidden;
@@ -12792,7 +12793,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
   display: inline-block;
   width: 12px;
   height: 12px;
-  color: #495060;
+  color: #373d41;
   text-align: center;
 }
 .ivu-upload-list-file:hover {
@@ -12802,7 +12803,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
   color: #12cd17;
 }
 .ivu-upload-list-file:hover > span i {
-  color: #495060;
+  color: #373d41;
 }
 .ivu-upload-list-file:hover .ivu-upload-list-remove {
   opacity: 1;
@@ -12862,7 +12863,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
   border-radius: 3px;
   cursor: pointer;
   vertical-align: top;
-  color: #495060;
+  color: #373d41;
   transition: all 0.2s ease-in-out;
 }
 .ivu-tree-title:hover {
