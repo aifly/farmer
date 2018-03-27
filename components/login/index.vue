@@ -108,8 +108,15 @@
 
 					var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
 					pointLight.position.x = 100;
-					pointLight.position.z = -200;
-					pointLight.position.y = 100;
+					pointLight.position.z = -100;
+					pointLight.position.y = 200;
+
+					/*var pointLight1 = new THREE.PointLight( 0xff0000, 0.8 );
+					pointLight1.position.x = 100;
+					pointLight1.position.z = 0;
+					pointLight1.position.y = -100;
+
+					scene.add(pointLight1);*/
 
 					camera.add( pointLight );
 					
@@ -124,9 +131,9 @@
 		        var cubeCamera = new THREE.CubeCamera( 1, 20000, 256 );
 				cubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-		        var geometry = new THREE.IcosahedronGeometry( 20, 1 );
+		        var geometry = new THREE.IcosahedronGeometry( 4, 1 );
 				for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
-					geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
+					geometry.faces[ i ].color.setHex(  0x7f4216 );
 				}
 				var material = new THREE.MeshStandardMaterial( {
 					vertexColors: THREE.FaceColors,
@@ -136,8 +143,8 @@
 					side: THREE.DoubleSide
 				} );
 				var sphere = new THREE.Mesh( geometry, material );
-				sphere.position.y = -100;
-				sphere.position.z = 100;
+				sphere.position.y = -40;
+				sphere.position.z = 120;
 				scene.add( sphere );
 
 
@@ -174,15 +181,16 @@
 		        var ang = 0;
 		        var render = function(){
 
-		        	ang++;
+		        	ang+=.5;
 
 		        	requestAnimationFrame(render);
 		        	if( !self.isMove ){
 			        	renderer.render(scene,camera);
 			        	if(object){
 			        		object.rotation.y +=.003;
-			        		sphere.rotation.x = Math.sin(ang*Math.PI/180);
-			        		
+			        		sphere.rotation.y +=.014;
+			        		sphere.position.x = Math.sin(Math.PI/180*ang)*110;
+			        		sphere.position.z = Math.cos(Math.PI/180*ang)*110;
 			        		//pointLight.rotation.y +=.021;
 			        	}
 		        	}

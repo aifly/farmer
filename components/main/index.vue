@@ -27,26 +27,14 @@
             <Layout>
                 <Sider hide-trigger class='symbin-main-menu' :style='{height:(viewH - 64)+"px"}' >
                     <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
-                        <Submenu name="1">
+                        <Submenu :key='menu.name' :name="i*1+1" v-for='(menu,i) in menus'>
                             <template slot="title">
-                               人员管理
+                               {{menu.name}}
                             </template>
-                            <MenuItem name="1-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
-                            <MenuItem name="1-2"><Icon type="ionic"></Icon>地主管理</MenuItem>
-                        </Submenu>
-                        <Submenu name="2">
-                            <template slot="title">
-                                农产品管理
-                            </template>
-                            <MenuItem name="2-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
-                            <MenuItem name="2-2"><Icon type="ionic"></Icon>农夫管理</MenuItem>
-                        </Submenu>
-                        <Submenu name="3">
-                            <template slot="title">
-                                财务管理
-                            </template>
-                            <MenuItem name="3-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
-                            <MenuItem name="3-2"><Icon type="ionic"></Icon>农夫管理</MenuItem>
+                            <MenuItem  :key='sm.name' :name="i+'-'+(k+1)" v-for='(sm,k) in menu.subMenu'>
+                                <Icon type="ionic"></Icon>
+                                <router-link :to='sm.link'>{{sm.name}}</router-link>
+                            </MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
@@ -71,12 +59,56 @@
 		data(){
 			return{
 				imgs:window.imgs,
-                viewH:document.documentElement.clientHeight
+                viewH:document.documentElement.clientHeight,
+                openNames:['1'],
+                defaultMenu:[
+                    {
+                        name:'管理员设置',
+                        subMenu:[
+                            {
+                                name:'添加管理员',
+                                link:'/admin/'
+                            },
+                            {
+                                name:'管理员管理',
+                                link:'/admin/'
+                            }
+                        ]
+                    },{
+                        name:'栏目设置',
+                        subMenu:[
+                            {
+                                name:'添加栏目',
+                                link:'/admin/'
+                            },
+                            {
+                                name:'栏目管理',
+                                link:'/admin/'
+                            }
+                        ]
+                    },{
+                        name:'权限设置',
+                        subMenu:[
+                            {
+                                name:'添加权限',
+                                link:'/admin/'
+                            },
+                            {
+                                name:'管理权限',
+                                link:'/admin/'
+                            }
+                        ]
+                    }
+                ],
+                menus:[]
 			}
 		},
 		components:{
 		},
-		
+		mounted(){
+            this.menus = this.defaultMenu.concat([]);
+
+        },
 		methods:{
 			
  

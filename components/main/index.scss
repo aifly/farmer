@@ -9,16 +9,17 @@
 
 .symbin-main-menu{
 	background: #333744!important;
+	li{
+			@include pos(r);
+	}
+	a{
+		@include pos(a);
+		width: 100%;
+		height: 100%;
+		color:inherit;
+	}
 }
-.ivu-menu-submenu-title{
-	background: #42485B!important;
-}
-.ivu-menu-submenu-title-icon{
-	float: left!important;
-}
-.ivu-menu-item{
-	padding-left: 24px!important;
-}
+
 i.ivu-icon-ionic{
 	opacity: 0;
 }
