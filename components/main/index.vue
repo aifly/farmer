@@ -39,25 +39,22 @@
                     <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
                         <Submenu name="1">
                             <template slot="title">
-                                <Icon type="ios-navigate"></Icon>
-                                Item 1
+                               人员管理
                             </template>
-                            <MenuItem name="1-1">Option 1</MenuItem>
-                            <MenuItem name="1-2">Option 2</MenuItem>
-                            <MenuItem name="1-3">Option 3</MenuItem>
+                            <MenuItem name="1-1"> <Icon type="ios-navigate"></Icon>农夫管理</MenuItem>
+                            <MenuItem name="1-2">地主管理</MenuItem>
+                            <MenuItem name="1-3">管理员管理</MenuItem>
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
-                                <Icon type="ios-keypad"></Icon>
-                                Item 2
+                                农产品管理
                             </template>
                             <MenuItem name="2-1">Option 1</MenuItem>
                             <MenuItem name="2-2">Option 2</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">
-                                <Icon type="ios-analytics"></Icon>
-                                Item 3
+                                财务管理
                             </template>
                             <MenuItem name="3-1">Option 1</MenuItem>
                             <MenuItem name="3-2">Option 2</MenuItem>

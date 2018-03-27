@@ -36,7 +36,12 @@
 		}
 		.symbin-tab-menu{
 			.ivu-menu-submenu-title,.ivu-menu-item{
-				padding:6px 10px;
+				background: #EAEDF1!important;
+			}
+			.ivu-menu{
+				.ivu-menu-submenu-title,.ivu-menu-item{
+				background: #f4f6f8!important;
+				}	
 			}
 		}
 

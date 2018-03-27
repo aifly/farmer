@@ -7,28 +7,28 @@
 	                    <template slot="title">
 	                        用户管理
 	                    </template>
-	                    <MenuItem name="1-1"> <router-link to="/user/">农夫</router-link></MenuItem>
-	                    <MenuItem name="1-2"><router-link to="/order/">地主</router-link></MenuItem>
+	                    <MenuItem name="1-1"> <router-link to="/user/"><Icon type="ionic"></Icon>农夫</router-link></MenuItem>
+	                    <MenuItem name="1-2"><router-link to="/order/"><Icon type="ios-navigate"></Icon>地主</router-link></MenuItem>
 	                </Submenu>
 	                <Submenu name="2">
 	                    <template slot="title">
 	                        用户管理
 	                    </template>
-	                    <MenuItem name="2-1">新增用户</MenuItem>
-	                    <MenuItem name="2-2">活跃用户</MenuItem>
+	                    <MenuItem name="2-1"><Icon type="ios-navigate"></Icon>新增用户</MenuItem>
+	                    <MenuItem name="2-2"><Icon type="ios-navigate"></Icon>活跃用户</MenuItem>
 	                </Submenu>
 	                <Submenu name="3">
 	                    <template slot="title">
 	                        统计分析
 	                    </template>
 	                    <MenuGroup title="使用">
-	                        <MenuItem name="3-1">新增和启动</MenuItem>
-	                        <MenuItem name="3-2">活跃分析</MenuItem>
-	                        <MenuItem name="3-3">时段分析</MenuItem>
+	                        <MenuItem name="3-1"><Icon type="ios-navigate"></Icon>新增和启动</MenuItem>
+	                        <MenuItem name="3-2"><Icon type="ios-navigate"></Icon>活跃分析</MenuItem>
+	                        <MenuItem name="3-3"><Icon type="ios-navigate"></Icon>时段分析</MenuItem>
 	                    </MenuGroup>
 	                    <MenuGroup title="留存">
-	                        <MenuItem name="3-4">用户留存</MenuItem>
-	                        <MenuItem name="3-5">流失用户</MenuItem>
+	                        <MenuItem name="3-4"><Icon type="ios-navigate"></Icon>用户留存</MenuItem>
+	                        <MenuItem name="3-5"><Icon type="ios-navigate"></Icon>流失用户</MenuItem>
 	                    </MenuGroup>
 	                </Submenu>
 	            </Menu>
