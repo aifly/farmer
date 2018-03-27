@@ -1,5 +1,5 @@
 <template>
-	<div class="sysbin-usergroup-ui">
+	<div class="sysbin-group-ui">
 		<Tab @sym-tab='tab' title='用户管理' :tabs='tabs' :tabIndex='tabIndex'>
 			<template slot='symbin-tab-menu'>
 			 	<Menu :theme="theme2" width='180' :openNames='["1"]' class='symbin-tab-menu'>

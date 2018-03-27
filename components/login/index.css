@@ -39,7 +39,34 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-.symbin-login-ui .symbin-login-scene, .symbin-login-ui .symbin-login-C {
-  font-size: 0; }
+.symbin-login-ui {
+  overflow: hidden; }
+  .symbin-login-ui .symbin-login-scene, .symbin-login-ui .symbin-login-C {
+    position: relative;
+    z-index: 10;
+    font-size: 0; }
+  .symbin-login-ui .symbin-login-cloud {
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+    opacity: 0;
+    -webkit-animation: scale 5s linear infinite;
+    animation: scale 5s linear infinite; }
+  .symbin-login-ui .symbin-login-cloud1 {
+    z-index: 12;
+    -webkit-animation: scale 3s linear infinite;
+    animation: scale 3s linear infinite; }
+
+@keyframes scale {
+  0% {
+    opacity: 0; }
+  30% {
+    opacity: .7; }
+  100% {
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    -webkit-transform: scale(3);
+    transform: scale(3);
+    opacity: 0; } }
 
 /*# sourceMappingURL=index.css.map */
