@@ -2,11 +2,49 @@
 	<div  class="symbin-login-ui lt-full" :style="{background: 'url('+imgs.loginBg+') no-repeat right top',backgroundSize:'cover' }">
 		<Row type='flex'>
 			<Col span='16'>
-				<div @mousemove='mousemove($event)' @mouseout='isMove = false' class="symbin-login-scene" ref='scene' :style='{height:viewH+"px"}'>1</div>
+				<div @mousemove='mousemove($event)' @mouseout='isMove = false' class="symbin-login-scene" ref='scene' :style='{height:viewH+"px"}'>
+					<div class="symbin-login-title">
+						<img :src="imgs.loginTitle">
+					</div>
+				</div>
 			</Col>
 			<Col span='8'>
 				<div class="symbin-login-C"  :style='{height:viewH+"px"}'>
-					2
+					<div class="symbin-login-form">
+						<h1>
+							<img :src="imgs.loginLogo">
+						</h1>
+						<div class="symbin-form-item">
+							<Row type='flex'>
+								<Col span='3'>
+									<img :src="imgs.loginPerson">
+								</Col>
+								<Col span='18'>
+									<input v-model='username' placeholder="请输入账号" type="text" name="">
+								</Col>
+							</Row>
+							
+						</div>
+						<div class="symbin-form-item">
+							<Row type='flex'>
+								<Col span='3'>
+									<img :src="imgs.loginLock">
+								</Col>
+								<Col span='18'>
+									<input v-model='password' placeholder="请输入密码" type="password" name="">
+								</Col>
+							</Row>
+							
+							
+						</div>
+						<Row type='flex' class='symbin-login-operator'>
+							<Col span='12'>注册</Col>
+							<Col span='12'>忘记密码</Col>
+						</Row>
+						<div class="symbin-login-btn" @click='login'>
+							登录	
+						</div>
+					</div>
 				</div>
 			</Col>
 		</Row>
@@ -40,6 +78,7 @@
 				imgs:window.imgs,
 				username:'',
 				password:'',
+				isLogined:false,
 				isMove:false,
 				viewH:document.documentElement.clientHeight
 			}
@@ -65,6 +104,7 @@
 							symbinUtil.setCookie('login',JSON.stringify(param),1);
 							window.location.hash = '/home/';
 							_this.$Message.success('登录成功~')
+							_this.isLogined = true;
 						}
 					}
 				})
@@ -88,7 +128,7 @@
 
 		        var camera = new THREE.PerspectiveCamera(45, viewW / viewH, 1,1000);
 
-		        camera.position.set(0, 40,400);
+		        camera.position.set(0, 40,250);
 
 		        camera.lookAt(scene.position);
 
@@ -158,7 +198,7 @@
 			                }
 			            });
 			           	////obj.position.y = -60;
-			           	obj.scale.set(1.5, 1.5, 1.5)
+			           	//obj.scale.set(1.5, 1.5, 1.5)
 			            object = obj;
 			            scene.add(obj);
 			            obj.position.y = 20;
@@ -181,14 +221,14 @@
 
 		        	ang+=.5;
 
-		        	requestAnimationFrame(render);
+		        	!self.isLogined && requestAnimationFrame(render);
 		        	if( !self.isMove ){
 			        	renderer.render(scene,camera);
 			        	if(object){
 			        		object.rotation.y +=.003;
 			        		sphere.rotation.y +=.02;
-			        		sphere.position.x = Math.sin(Math.PI/180*ang)*110;
-			        		sphere.position.z = Math.cos(Math.PI/180*ang)*110;
+			        		sphere.position.x = Math.sin(Math.PI/180*ang)*100;
+			        		sphere.position.z = Math.cos(Math.PI/180*ang)*100;
 			        		//pointLight.rotation.y +=.021;
 			        	}
 		        	}
