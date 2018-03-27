@@ -1,0 +1,24 @@
+﻿@import "../css/base.scss";
+ 
+
+$baseColor: #fcffb4;
+$viewW: 750px;
+$color: #be0000;
+
+.sysbin-usergroup-ui {
+	.ivu-menu-item>a{
+		color:#000;
+		display: block;
+		width: 100%;
+		height: 100%;
+
+
+	}
+
+	.ivu-menu-item-selected{
+		background: #00c1de + 20;
+		
+	}
+
+
+}

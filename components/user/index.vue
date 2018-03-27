@@ -1,6 +1,6 @@
 <template>
-	<div class="sysbin-home-ui">
-		
+	<div class="sysbin-user-ui">
+		这里是用户信息
 	</div>
 </template>
 
@@ -8,32 +8,18 @@
 	import './index.css';
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
-	import Tab from '../tab/index';
+
 	import $ from 'jquery';
 
 	export default {
 		props:['obserable'],
+		name:'zmitiindex',
 		data(){
 			return{
-				tabIndex:0,
-				theme2:"light",
-				tabs:[
-					{
-						name:'全部'
-					},{
-						name:'已审核',
-						children:[
-							{name:"审核通过"},
-							{name:"审核未通过"}
-						]
-					},{
-						name:'未审核'
-					}
-				]
+				
 			}
 		},
 		components:{
-			Tab
 		},
 
 		beforeCreate(){
@@ -41,10 +27,9 @@
 			//symbinUtil.clearCookie('login');
 
 		},
+		
 		methods:{
-			tab(index){
-				this.tabIndex = index;
-			}
+
 		}
 	}
 </script>

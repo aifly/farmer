@@ -4,6 +4,9 @@ import Obserable from './components/lib/obserable';
 import Main from './components/main/index'
 import Login from './components/login/index'
 import Home from './components/home/index'
+import Usergroup from './components/usergroup/index'
+import User from './components/user/index'
+import Order from './components/order/index'
 import FError from './components/ferror/index'
 import iView from 'iview';
 import VueRouter from 'vue-router'
@@ -23,6 +26,10 @@ const router = new VueRouter({
      {path: '*', name: 'error', component: FError },
      { path: '/login/', name: 'login', component: Login, props: true },
      { path: '/home/', name: 'home', component: Home, props: true },
+     { path: '/usergroup/', name: 'usergroup', component: Usergroup, props: true,children:[
+     	{ path: '/user/', name: 'user', component: User},
+     	{ path: '/order/', name: 'order', component: Order},
+     ] },
   ]
 });
 
@@ -43,7 +50,10 @@ new Vue({
 		Main,
 		Login,
 		FError,
-		Home
+		Home,
+		Usergroup,
+		User,
+		Order
 	},
 	mounted() {
 
