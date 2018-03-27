@@ -1,5 +1,5 @@
 <template>
-	<div class="sysbin-usergroup-ui">
+	<div class="sysbin-group-ui">
 		<Tab @sym-tab='tab' title='用户管理' :tabs='tabs' :tabIndex='tabIndex'>
 			<template slot='symbin-tab-menu'>
 			 	<Menu :theme="theme2" width='180' :openNames='["1"]' class='symbin-tab-menu'>
@@ -8,7 +8,7 @@
 	                        用户管理
 	                    </template>
 	                    <MenuItem name="1-1"> <router-link to="/user/"><Icon type="ionic"></Icon>农夫</router-link></MenuItem>
-	                    <MenuItem name="1-2"><router-link to="/order/"><Icon type="ios-navigate"></Icon>地主</router-link></MenuItem>
+	                    <MenuItem name="1-2"><router-link to="/order/"><Icon type="ionic"></Icon>地主</router-link></MenuItem>
 	                </Submenu>
 	                <Submenu name="2">
 	                    <template slot="title">

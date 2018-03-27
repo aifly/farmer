@@ -19,3 +19,9 @@
 .ivu-menu-item{
 	padding-left: 24px!important;
 }
+i.ivu-icon-ionic{
+	opacity: 0;
+}
+.ivu-menu-item > a > i{
+	margin-right: 6px;
+}

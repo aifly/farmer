@@ -12,20 +12,10 @@
                         <Menu mode="horizontal" theme="dark" active-name="1">
                             <div class="layout-nav">
                                 <MenuItem name="1">
-                                    <Icon type="ios-navigate"></Icon>
-                                    Item 1
+                                    控制台
                                 </MenuItem>
                                 <MenuItem name="2">
-                                    <Icon type="ios-keypad"></Icon>
-                                    Item 2
-                                </MenuItem>
-                                <MenuItem name="3">
-                                    <Icon type="ios-analytics"></Icon>
-                                    Item 3
-                                </MenuItem>
-                                <MenuItem name="4">
-                                    <Icon type="ios-paper"></Icon>
-                                    Item 4
+                                    权限面版
                                 </MenuItem>
                             </div>
                         </Menu>
@@ -41,23 +31,22 @@
                             <template slot="title">
                                人员管理
                             </template>
-                            <MenuItem name="1-1"> <Icon type="ios-navigate"></Icon>农夫管理</MenuItem>
-                            <MenuItem name="1-2">地主管理</MenuItem>
-                            <MenuItem name="1-3">管理员管理</MenuItem>
+                            <MenuItem name="1-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
+                            <MenuItem name="1-2"><Icon type="ionic"></Icon>地主管理</MenuItem>
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
                                 农产品管理
                             </template>
-                            <MenuItem name="2-1">Option 1</MenuItem>
-                            <MenuItem name="2-2">Option 2</MenuItem>
+                            <MenuItem name="2-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
+                            <MenuItem name="2-2"><Icon type="ionic"></Icon>农夫管理</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">
                                 财务管理
                             </template>
-                            <MenuItem name="3-1">Option 1</MenuItem>
-                            <MenuItem name="3-2">Option 2</MenuItem>
+                            <MenuItem name="3-1"><Icon type="ionic"></Icon>农夫管理</MenuItem>
+                            <MenuItem name="3-2"><Icon type="ionic"></Icon>农夫管理</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
