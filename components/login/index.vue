@@ -254,6 +254,8 @@
  				//console.log( Vue.obserable )
  				this.initWebgl();
  			},100)
+
+ 			
 		}
 	}
 </script>

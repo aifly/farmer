@@ -37,9 +37,31 @@
 		},
 
 		beforeCreate(){
-			var validate = sysbinVerification.validate(this);
+			this.validateData = sysbinVerification.validate(this);
 			//symbinUtil.clearCookie('login');
 
+		},
+		mounted(){
+
+			var s =this;
+
+			/*symbinUtil.ajax({
+ 				//url:'https://api.symbin.cn/v1/admin/addmenu',
+ 				url:'https://api.symbin.cn/v1/admin/delmenu',
+ 				data:{
+ 					adminusername:s.validateData.adminusername,
+ 					admintoken:s.validateData.admintoken,
+ 					menuids:1109426180,
+ 					menuname:"子菜单",
+ 					menuename:'',
+ 					menuurl:"/home1/",
+ 					sort:1,
+ 					showwhere:2
+ 				},
+ 				fn(data){
+ 					console.log(data);
+ 				}
+ 			})*/
 		},
 		methods:{
 			tab(index){
