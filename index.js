@@ -27,11 +27,12 @@ const router = new VueRouter({
      {path: '*', name: 'error', component: FError },
      { path: '/login/', name: 'login', component: Login, props: true },
      { path: '/home/', name: 'home', component: Home, props: true },
-     { path: '/admin/', name: 'admin', component: Admin, props: true},
+    
      { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},
      	{ path: '/order/', name: 'order', component: Order},
-     ] },
+     	{ path: '/admin/:id', name: 'admin', component: Admin},
+     ] }
   ]
 });
 

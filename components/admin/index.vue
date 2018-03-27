@@ -15,21 +15,8 @@
 		props:['obserable'],
 		data(){
 			return{
-				tabIndex:0,
 				theme2:"light",
-				tabs:[
-					{
-						name:'全部'
-					},{
-						name:'已审核',
-						children:[
-							{name:"审核通过"},
-							{name:"审核未通过"}
-						]
-					},{
-						name:'未审核'
-					}
-				]
+				
 			}
 		},
 		components:{
