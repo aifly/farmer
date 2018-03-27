@@ -1,6 +1,8 @@
 <template>
 	<div class="symbin-admin-ui">
-		d
+		<div class="symbin-admin-count">
+			<h5>添加管理员</h5>
+		</div>
 	</div>
 </template>
 
