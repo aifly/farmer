@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<Modal v-model="addUser" title="新增管理员" @on-ok="确认" @on-cancel="取消" class-name="adduser-cls">
+		<Modal v-model="addUser" title="新增管理员" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel" class-name="adduser-cls">
 		<div class="addUser-body">
 			<Row align="middle" justify="center">
 				<Col span="3" offset="4" class-name="text-rig top7 rig8">
@@ -212,7 +212,13 @@
 					}
 				})				
 
-			}
+			},
+			ok(){
+				console.log("ok");
+			},
+			cancel(){
+				console.log("cancel");
+			},
 
 		},
 		mounted(){
