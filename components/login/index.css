@@ -45,6 +45,62 @@
     position: relative;
     z-index: 10;
     font-size: 0; }
+  .symbin-login-ui .symbin-login-title {
+    position: absolute;
+    width: 40%;
+    top: 20vh;
+    left: 28%; }
+  .symbin-login-ui .symbin-login-C {
+    font-size: 14px;
+    z-index: 100;
+    position: relative; }
+    .symbin-login-ui .symbin-login-C .symbin-login-form {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+      transform: translate3d(-50%, -50%, 0);
+      background: rgba(255, 255, 255, 0.3);
+      padding: 60px 40px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+      .symbin-login-ui .symbin-login-C .symbin-login-form h1 {
+        width: 40%;
+        text-align: center;
+        margin: 0 auto 80px; }
+      .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-form-item {
+        margin-top: 50px;
+        width: 300px;
+        border-bottom: 1px solid #67b5d7;
+        padding-bottom: 4px; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-form-item input {
+          background: transparent;
+          border: none;
+          width: 270px;
+          outline: none;
+          font-size: 16px;
+          color: #67b5d7; }
+          .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-form-item input::-webkit-input-placeholder {
+            /*WebKit browsers*/
+            color: #67b5d7; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-form-item img {
+          width: 20px;
+          vertical-align: bottom; }
+      .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-operator {
+        font-size: 12px;
+        margin-top: 10px;
+        color: #67b5d7; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-operator > div:nth-of-type(2) {
+          text-align: right; }
+      .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-btn {
+        background: #18a2e9;
+        border-radius: 3px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        margin-top: 40px;
+        font-size: 16px;
+        cursor: pointer; }
   .symbin-login-ui .symbin-login-cloud {
     position: absolute;
     bottom: 0;
