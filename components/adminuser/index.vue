@@ -205,7 +205,6 @@
 						admintoken:s.validateData.admintoken,
 					},
 					fn(data){
-
 						console.log(data);
 						if(data.getret === 0){
 							//s.userListdate = data.list;
