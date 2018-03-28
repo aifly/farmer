@@ -1,5 +1,5 @@
 <template>
-	<div class="sysbin-home-ui">
+	<div class="symbin-home-ui">
 		
 	</div>
 </template>
