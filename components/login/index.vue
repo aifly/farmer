@@ -131,15 +131,13 @@
 		        var cubeCamera = new THREE.CubeCamera( 1, 20000, 256 );
 				cubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-		        var geometry = new THREE.IcosahedronGeometry( 4, 1 );
+		        var geometry = new THREE.IcosahedronGeometry(4, 0 );
 				for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
 					geometry.faces[ i ].color.setHex(  0x7f4216 );
 				}
-				var material = new THREE.MeshStandardMaterial( {
+				var material = new THREE.MeshPhongMaterial( {
 					vertexColors: THREE.FaceColors,
-					roughness: 0.0,
-					flatShading: true,
-					envMap: cubeCamera.renderTarget.texture,
+					
 					side: THREE.DoubleSide
 				} );
 				var sphere = new THREE.Mesh( geometry, material );
@@ -188,7 +186,7 @@
 			        	renderer.render(scene,camera);
 			        	if(object){
 			        		object.rotation.y +=.003;
-			        		sphere.rotation.y +=.014;
+			        		sphere.rotation.y +=.02;
 			        		sphere.position.x = Math.sin(Math.PI/180*ang)*110;
 			        		sphere.position.z = Math.cos(Math.PI/180*ang)*110;
 			        		//pointLight.rotation.y +=.021;

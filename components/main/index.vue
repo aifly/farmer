@@ -67,11 +67,11 @@
                         subMenu:[
                             {
                                 name:'添加管理员',
-                                link:'/admin/'
+                                link:'/admin/1'
                             },
                             {
                                 name:'管理员管理',
-                                link:'/admin/'
+                                link:'/admin/2'
                             }
                         ]
                     },{
@@ -79,11 +79,11 @@
                         subMenu:[
                             {
                                 name:'添加栏目',
-                                link:'/admin/'
+                                link:'/admin/3'
                             },
                             {
                                 name:'栏目管理',
-                                link:'/admin/'
+                                link:'/admin/4'
                             }
                         ]
                     },{

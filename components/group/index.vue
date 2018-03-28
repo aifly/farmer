@@ -61,6 +61,16 @@
 			Tab
 		},
 
+		mounted(){
+
+		},
+
+		watch:{
+			$route(to){
+				console.log(to)
+			}
+		},
+
 		beforeCreate(){
 			var validate = sysbinVerification.validate(this);
 			//symbinUtil.clearCookie('login');
