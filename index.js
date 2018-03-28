@@ -28,7 +28,7 @@ const router = new VueRouter({
      {path: '*', name: 'error', component: FError },
      { path: '/login/', name: 'login', component: Login, props: true },
      { path: '/home/', name: 'home', component: Home, props: true },
-      { path: '/adminuser/:id', name: 'adminuser', component: Adminuser, props: true },
+      { path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
     
      { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},
@@ -59,7 +59,8 @@ new Vue({
 		Group,
 		User,
 		Order,
-		Admin
+		Admin,
+		Adminuser
 	},
 	mounted() {
 

@@ -67,11 +67,7 @@
                         subMenu:[
                             {
                                 name:'添加管理员',
-                                link:'/adminuser/1'
-                            },
-                            {
-                                name:'管理员管理',
-                                link:'/admin/2'
+                                link:'/adminuser/'
                             }
                         ]
                     },{

@@ -140,7 +140,7 @@
 				],
 				mark:'',
 				selectUser:'',
-				addUser:true,
+				addUser:false,
 				inUsername:'',
 				inNickname:'',
 				inUserpwd:'',
