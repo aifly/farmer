@@ -66,7 +66,7 @@
                         name:'管理员设置',
                         subMenu:[
                             {
-                                name:'添加管理员',
+                                name:'系统管理员管理',
                                 link:'/adminuser/'
                             }
                         ]
