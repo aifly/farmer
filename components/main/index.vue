@@ -74,12 +74,8 @@
                         name:'栏目设置',
                         subMenu:[
                             {
-                                name:'添加栏目',
-                                link:'/admin/3'
-                            },
-                            {
-                                name:'栏目管理',
-                                link:'/admin/4'
+                                name:'后台栏目管理',
+                                link:'/column/list'
                             }
                         ]
                     },{

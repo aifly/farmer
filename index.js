@@ -10,6 +10,7 @@ import Group from './components/group/index'
 import User from './components/user/index'
 import Order from './components/order/index'
 import FError from './components/ferror/index'
+import Column from './components/column/index'
 import iView from 'iview';
 import VueRouter from 'vue-router'
 import './components/css/index.css';
@@ -34,6 +35,7 @@ const router = new VueRouter({
      	{ path: '/user/', name: 'user', component: User},
      	{ path: '/order/', name: 'order', component: Order},
      	{ path: '/admin/:id', name: 'admin', component: Admin},
+     	{ path: '/column/:id', name: 'column', component: Column},
      ] }
   ]
 });
@@ -60,7 +62,8 @@ new Vue({
 		User,
 		Order,
 		Admin,
-		Adminuser
+		Adminuser,
+		Column
 	},
 	mounted() {
 
