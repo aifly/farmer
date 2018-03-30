@@ -1,28 +1,36 @@
 ﻿@import "../css/base.scss";
-.layout-logo{
-	color: #FFF;
-	img{
-		height: 35px;
-		width: auto;
+.layout{
+	.layout-logo{
+		color: #FFF;
+		img{
+			height: 35px;
+			width: auto;
+		}
 	}
-}
 
-.symbin-main-menu{
-	background: #333744!important;
-	li{
-			@include pos(r);
+	.symbin-main-menu{
+		background: #333744!important;
+		li{
+				@include pos(r);
+		}
+		a{
+			@include pos(a);
+			width: 100%;
+			height: 100%;
+			color:inherit;
+		}
+		a:hover{
+			color: inherit;
+		}
 	}
-	a{
-		@include pos(a);
-		width: 100%;
-		height: 100%;
-		color:inherit;
-	}
-}
 
-i.ivu-icon-ionic{
-	opacity: 0;
-}
-.ivu-menu-item > a > i{
-	margin-right: 6px;
+	i.ivu-icon-ionic{
+		opacity: 0;
+	}
+	.ivu-menu-item > a > i{
+		margin-right: 6px;
+	}
+	.ivu-menu-submenu .ivu-menu-item{
+		padding-left: 24px!important;
+	}
 }

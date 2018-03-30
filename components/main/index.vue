@@ -29,7 +29,7 @@
                     <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
                         <Submenu :key='menu.name' :name="i*1+1" v-for='(menu,i) in menus'>
                             <template slot="title">
-                               {{menu.name}}
+                                <Icon type="ionic"></Icon>{{menu.name}}
                             </template>
                             <MenuItem  :key='sm.name' :name="i+'-'+(k+1)" v-for='(sm,k) in menu.subMenu'>
                                 <Icon type="ionic"></Icon>
@@ -66,24 +66,16 @@
                         name:'管理员设置',
                         subMenu:[
                             {
-                                name:'添加管理员',
-                                link:'/admin/1'
-                            },
-                            {
-                                name:'管理员管理',
-                                link:'/admin/2'
+                                name:'系统管理员管理',
+                                link:'/adminuser/'
                             }
                         ]
                     },{
                         name:'栏目设置',
                         subMenu:[
                             {
-                                name:'添加栏目',
-                                link:'/admin/3'
-                            },
-                            {
-                                name:'栏目管理',
-                                link:'/admin/4'
+                                name:'后台栏目管理',
+                                link:'/column/list'
                             }
                         ]
                     },{

@@ -1,6 +1,6 @@
 <template>
 	<div class="sysbin-group-ui">
-		<Tab  title='用户管理' :tabs='tabs' :tabIndex='tabIndex'>
+		<Tab  title='栏目管理' :tabs='tabs' :tabIndex='tabIndex'>
 			<div slot='symbin-tab-menu'>
 				<ul class="symbin-tab-menu">
 					<li @click.stop.prevent='tab1(i,tab.children)' v-for='(tab,i) in tabs' :class='{"active":tabIndex[0] ===i && !tab.children,"level1":tab.children && !tab.status,"open":tab.status }'>
@@ -35,24 +35,12 @@
 				theme2:"light",
 				tabs:[
 					{
-						name:'全部',
-						link:'/home/'
-					},{
-						name:'已审核',
-						status:true,//true表示展开，false为收起
-						children:[
-							{
-								name:"审核通过",
-								link:'/order/'
-							},
-							{
-								name:"审核未通过",
-								link:'/user/'
-							}
-						]
-					},{
-						name:'未审核',
-						link:'/order/'
+						name:'新增栏目',
+						link:'/column/add'
+					},
+					{
+						name:'栏目列表',
+						link:'/column/list'
 					}
 				]
 			}
