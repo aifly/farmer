@@ -31,7 +31,7 @@
 									<img :src="imgs.loginLock">
 								</Col>
 								<Col span='18'>
-									<input v-model='password' placeholder="请输入密码" type="password" name="">
+									<input @keydown.13='login' v-model='password' placeholder="请输入密码" type="password" name="">
 								</Col>
 							</Row>
 							
@@ -44,6 +44,12 @@
 						<div class="symbin-login-btn" @click='login'>
 							登录	
 						</div>
+
+						<transition name='error'>
+							<div class="symbin-login-msg" v-if='showError'>
+								{{errorMsg}}
+							</div>
+						</transition>
 					</div>
 				</div>
 			</Col>
@@ -80,6 +86,8 @@
 				password:'',
 				isLogined:false,
 				isMove:false,
+				showError:false,
+				errorMsg:'',
 				viewH:document.documentElement.clientHeight
 			}
 		},
@@ -87,8 +95,25 @@
 		},
 		
 		methods:{
+			toastError(msg =  '用户名不能为空'){
+				this.errorMsg = msg;
+ 				this.showError = true;
+ 				setTimeout(()=>{
+ 					this.errorMsg = '';
+ 					this.showError = false;
+ 				},2000)
+			},
 			login(){
 				var _this = this;
+
+				if(!this.username){
+					this.toastError();
+ 					return;
+				}
+				if(!this.password){
+					this.toastError('密码不能为空');
+ 					return;
+				}
 				symbinUtil.ajax({
 					url:window.config.baseUrl+'/admin/adminlogin',
 					data:{
@@ -105,6 +130,8 @@
 							window.location.hash = '/home/';
 							_this.$Message.success('登录成功~')
 							_this.isLogined = true;
+						}else{
+							_this.toastError('用户名或密码错误');
 						}
 					}
 				})
@@ -168,22 +195,29 @@
 
 		        var self = this;
 
-		        var cubeCamera = new THREE.CubeCamera( 1, 20000, 256 );
-				cubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
+		        var sphereList = [];
 
-		        var geometry = new THREE.IcosahedronGeometry(4, 0 );
-				for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
-					geometry.faces[ i ].color.setHex(  0x7f4216 );
-				}
-				var material = new THREE.MeshPhongMaterial( {
-					vertexColors: THREE.FaceColors,
-					
-					side: THREE.DoubleSide
-				} );
-				var sphere = new THREE.Mesh( geometry, material );
-				sphere.position.y = -40;
-				sphere.position.z = 120;
-				scene.add( sphere );
+		        for(var k = 0;k<10;k++){
+		        	console.log(1)
+		        	var geometry = new THREE.IcosahedronGeometry(Math.random()*3+2, 0 );
+					for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
+						geometry.faces[ i ].color.setHex(  0x7f4216 );
+					}
+					var material = new THREE.MeshPhongMaterial( {
+						vertexColors: THREE.FaceColors,
+						side: THREE.DoubleSide
+					} );
+					var sphere = new THREE.Mesh( geometry, material );
+					sphere.position.y = -40 *Math.random()-10;
+					sphere.position.z = Math.random()*20+10;
+					scene.add( sphere );
+
+					sphereList.push({sphere,ang:Math.random()*360|0 ,speed:Math.random()*2|0+1});
+
+		        }
+
+
+
 
 
 		        var mtlLoader = new THREE.MTLLoader();
@@ -221,14 +255,25 @@
 
 		        	ang+=.5;
 
+		        	sphereList.forEach((item)=>{
+	        			var sphere = item.sphere;
+	        			item.ang += item.speed;
+	        		})
+
 		        	!self.isLogined && requestAnimationFrame(render);
 		        	if( !self.isMove ){
 			        	renderer.render(scene,camera);
 			        	if(object){
 			        		object.rotation.y +=.003;
-			        		sphere.rotation.y +=.02;
-			        		sphere.position.x = Math.sin(Math.PI/180*ang)*100;
-			        		sphere.position.z = Math.cos(Math.PI/180*ang)*100;
+
+			        		sphereList.forEach((item)=>{
+			        			var sphere = item.sphere;
+
+			        			sphere.rotation.y +=.01*Math.random()*3;
+				        		sphere.position.x = Math.sin(Math.PI/180*item.ang)*60;
+				        		sphere.position.z = Math.cos(Math.PI/180*item.ang)*60;	
+			        		})
+			        		
 			        		//pointLight.rotation.y +=.021;
 			        	}
 		        	}
@@ -253,7 +298,7 @@
  			setTimeout(()=>{
  				//console.log( Vue.obserable )
  				this.initWebgl();
- 			},100)
+ 			},1000)
 
  			
 		}
