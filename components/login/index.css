@@ -62,7 +62,8 @@
       transform: translate3d(-50%, -50%, 0);
       background: rgba(255, 255, 255, 0.3);
       padding: 60px 40px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      overflow: hidden; }
       .symbin-login-ui .symbin-login-C .symbin-login-form h1 {
         width: 40%;
         text-align: center;
@@ -101,6 +102,23 @@
         margin-top: 40px;
         font-size: 16px;
         cursor: pointer; }
+      .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg {
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        background: #ca141f;
+        color: #fff;
+        text-align: center;
+        bottom: 0;
+        left: 0;
+        line-height: 30px; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-enter-active, .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-leave-active {
+          -webkit-transition: 0.4s;
+          transition: 0.4s; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-enter, .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-leave-to {
+          opacity: 0;
+          -webkit-transform: translate3d(0, 30px, 0);
+          transform: translate3d(0, 30px, 0); }
   .symbin-login-ui .symbin-login-cloud {
     position: absolute;
     bottom: 0;
