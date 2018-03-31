@@ -79,7 +79,7 @@
 								<span class="text-danger">*</span><span>所属父级:</span>
 							</Col>
 							<Col span="12">
-								<Cascader :data="ColumnsData" v-model="parentmenuid" :load-data="loadData" change-on-select></Cascader>
+								<Cascader :data="ColumnsData" v-model="parentmenuid"  change-on-select></Cascader>
 							</Col>
 						</Row>
 					</div>
@@ -124,7 +124,6 @@
 						title:"栏目名称/English",
 						key:"menuname-en",
 						render:(h,params)=>{
-							//console.log(params);
 							return h('div',[
 								h('span',{
 									style:{
@@ -202,7 +201,6 @@
 						title:"栏目名称/English",
 						key:"menuname-en",
 						render:(h,params)=>{
-							//console.log(params);
 							return h('div',[
 								h('span',{
 									style:{
@@ -324,6 +322,7 @@
 						menuid:_menuid,
 					},
 					fn(data){
+						
 						if(data.getret===0){
 							s.leftListdata = data.list.filter((item,i)=>{
 								return item.showwhere === 2;//左侧
@@ -331,7 +330,6 @@
 							s.topListdate = data.list.filter((item,i)=>{
 								return item.showwhere === 1;//左侧
 							});
-							console.log(data.list[0])
 							if(rak==="allList"){
 								s.bindParentmenu(data);
 							}
@@ -348,7 +346,6 @@
 							  	content:data.getmsg,
 							  	duration: 10
 							  });
-							 console.log(data.getret)
 							 if(data.getret === 1300){
 							 	window.location.hash = '/login/'
 
@@ -359,12 +356,14 @@
 				})
 			},
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
+
 				data.list.forEach((dt,i)=>{
 				 	this.ColumnsData.push({
+				 		
 				 		label:dt.menuname,
 				 		value:dt.menuid,
-				 		children:[],
-				 		loading:false,
+				 		//children:dt.children
+		//		 	
 				 	})
 				 })
 
@@ -374,7 +373,6 @@
 				item.loading=true;
 				var arr = [];
 				this.getColumnslist(item.value,(data)=>{
-					///console.log(data.list.length)
 					data.list.forEach((dt,i)=>{
 
 						arr.push({
@@ -402,10 +400,10 @@
 				this.getaddColumns()
 			},
 			cancel(){
-				console.log("cancel");
+				//console.log("cancel");
 			},
 			edit(index){
-				console.log(this.leftListdata);
+				//console.log(this.leftListdata);
 
 			},
 			remove(index,lig){//删除栏目数据
