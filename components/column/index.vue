@@ -104,6 +104,7 @@
 		data(){
 			return{
 				addColumn:false,
+				showHeader:false,
 				menuname:'',
 				showwhere:'',
 				menuename:'',
@@ -114,6 +115,15 @@
 						type: 'expand',
 						title:"",
 						width:30,
+						render:(h,params)=>{
+							return h("Table",{
+								props:{
+									data:this.subListdate,
+									columns:this.subListColums,
+									border:false,					
+								}
+							})
+						}
 					},
 					{
 						title:"ID号",
@@ -160,27 +170,17 @@
 									}
 
 								},'编辑'),
-								h('Poptip',{
+								h('Button',{
 									props:{
-										confirm:true,
-										title:'确定要删除吗？????'
-									},
-									on:{
-										ok(){
-											alert(1)
-										},
-										cancel(){
-											alert(2)
-										}
+									type:"text",
+								},
+								on:{
+									click:()=>{
+										this.remove(params.index,1)
 									}
-								},[
-									h("Button",{
-										props:{
-											type:'text'
-										}
-									},'删除')
-								]),
-								]);
+								}
+
+								},'删除')]);
 						}
 
 					}
@@ -251,8 +251,75 @@
 
 					}
 				],
+				subListColums:
+				[
+					{
+						type: 'expand',
+						title:"",
+						width:30,
+					},
+					{
+						title:"ID号",
+						key:"menuid",
+						width:120,
+					},
+					{
+						title:"栏目名称/English",
+						key:"menuname-en",
+						render:(h,params)=>{
+							return h('div',[
+								h('span',{
+									style:{
+										color:"red"
+									}
+								},params.row.menuname ),
+								h('span',{
+									style:{
+										color:'#000'
+									}
+								},' / ' + params.row.menuename)
+							])
+						}
+					},
+					{
+						title:"链接地址",
+						key:"menuurl"
+					},
+					{
+						title:"操作",
+						key:"showwhere",
+						width:130,
+						render:(h,params)=>{
+							return h('div',[
+								h('Button',{
+									props: {
+                                        type: 'text',
+                                    },
+									on:{
+										click:()=>{
+											this.edit(params.index,2)
+										}
+									}
+
+								},'编辑'),
+								h('Button',{
+									props:{
+									type:"text",
+								},
+								on:{
+									click:()=>{
+										this.remove(params.index,2)
+									}
+								}
+
+								},'删除')]);
+						}
+
+					}
+				],
 				topListdate:[],
 				leftListdata:[],
+				subListdate:[],
 				parentmenuid: [],
 				//loadData:'',
 				ColumnsData:[
@@ -359,33 +426,13 @@
 
 			},
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
-
-
-				/*this.ColumnsData = [
-					label:'',
-					value:'',
-					children:[]
-				];
-*/	
-
-				
-
-/*
-				this.ColumnsData.push({
-					label:dt.menuname,
-					value:dt.menuid,
-					children:children
-				})
-
-*/
 				var dt = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'));
 				dt.forEach((item,i)=>{
 					this.ColumnsData.push(item)
 				})
-				//this.ColumnsData = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'))
 				
 			},
-			loadData(item,callback){
+			loadData(item,callback){//新增栏目中的下拉选项
 				//if(item.value!=""){
 				item.loading=true;
 				var arr = [];
@@ -458,6 +505,9 @@
 			bingAgain(){//重新绑定列表数据
 				this.getColumnslist("relist");
 			}
+			//showSubline(index,lig){//显示下级栏目
+
+			//}
 
 		}
 	}

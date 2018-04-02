@@ -26,4 +26,10 @@
 			padding-left: 0px!important; 
 			}
 		}
+	.ivu-table-expanded-cell{
+		padding: 15px;
+		.ivu-table-header{
+			display: none;//本地应该用show-header:设置，但不知道什么原因不正确，暂用此方式
+		}
+	}
 }
