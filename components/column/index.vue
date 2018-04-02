@@ -355,19 +355,35 @@
 					}
 				})
 			},
+			fillColumnData(data){
+
+			},
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
-				console.log(data.list)
 
-				data.list.forEach((dt,i)=>{
-				 	this.ColumnsData.push({
-				 		
-				 		label:dt.menuname,
-				 		value:dt.menuid,
-				 		//children:dt.children
-		//		 	
-				 	})
-				 })
 
+				/*this.ColumnsData = [
+					label:'',
+					value:'',
+					children:[]
+				];
+*/	
+
+				
+
+/*
+				this.ColumnsData.push({
+					label:dt.menuname,
+					value:dt.menuid,
+					children:children
+				})
+
+*/
+				var dt = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'));
+				dt.forEach((item,i)=>{
+					this.ColumnsData.push(item)
+				})
+				//this.ColumnsData = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'))
+				
 			},
 			loadData(item,callback){
 				//if(item.value!=""){
