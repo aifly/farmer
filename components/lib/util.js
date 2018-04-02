@@ -13,10 +13,15 @@ var symbinUtil = {
 		return url.match(pattern) ? url.replace(eval('/(' + arg + '=)([^&]*)/gi'), replaceText) : (url.match('[\?]') ? url + '&' + replaceText : url + '?' + replaceText);
 	},
 	ajax(option){
+		var opt = option.data;
+		if(option.validate){
+			opt.adminusername = option.validate.adminusername;
+			opt.admintoken = option.validate.admintoken;
+		}
 		$.ajax({
 			url:option.url,
 			type:option.type || 'post',
-			data:option.data,
+			data:opt,
 			error(){
 				option.fnError && option.fnError();
 			}

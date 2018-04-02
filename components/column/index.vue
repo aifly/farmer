@@ -94,8 +94,74 @@
 	import './index.css';
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
+	//import symbinTable from './symbintable.vue';
+
 
 	import $ from 'jquery';
+
+
+	var defaultColums = [
+		{
+			title:"ID号",
+			key:"menuid",
+			width:120,
+		},
+		{
+			title:"栏目名称/English",
+			key:"menuname-en",
+			render:(h,params)=>{
+				return h('div',[
+					h('span',{
+						style:{
+							color:"red"
+						}
+					},params.row.menuname ),
+					h('span',{
+						style:{
+							color:'#000'
+						}
+					},' / ' + params.row.menuename)
+				])
+			}
+		},
+		{
+			title:"链接地址",
+			key:"menuurl"
+		},
+		{
+			title:"操作",
+			key:"showwhere",
+			width:130,
+			render:(h,params)=>{
+
+				return h('div',[
+					h('Button',{
+						props: {
+                            type: 'text',
+                        },
+						on:{
+							click:()=>{
+								this.edit(params.index,1)
+							}
+						}
+
+					},'编辑'),
+					h('Button',{
+						props:{
+						type:"text",
+					},
+					on:{
+						click:()=>{
+							this.remove(params.index,1)
+						}
+					}
+
+					},'删除')]);
+			}
+
+		}
+	]
+
 
 	export default {
 		props:['obserable'],
@@ -109,82 +175,210 @@
 				showwhere:'',
 				menuename:'',
 				menuurl:'',
-				leftListColums:
-				[
+
+				leftExpandColums1:[
+					{
+						type: 'expand',
+						title:"",
+						width:30,
+						render:(h,params,i)=>{
+
+
+							var sourceData = [];
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							console.log( params.row)
+							this.leftListdata.forEach((item,i)=>{
+								//console.log(item.menuid , params.row)
+								if(item.menuid === params.row.menuid){
+									console.log(item.menuid)
+									sourceData =  this.leftListdata[i].children || [];
+									this.lastIndex = i;
+								}
+							})
+
+							//this.lastData = sourceData.concat([]);
+							sourceData.forEach((item)=>{
+								item._expanded = true;
+							})
+							return h('Table',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums2
+								}
+								
+							})
+						}
+					},
+					
+				].concat(defaultColums),
+				leftExpandColums2:[
 					{
 						type: 'expand',
 						title:"",
 						width:30,
 						render:(h,params)=>{
-							return h("Table",{
-								props:{
-									data:this.subListdate,
-									columns:this.subListColums,
-									border:false,					
+
+
+							var sourceData = [];
+
+							console.log(params.row.menuid)
+
+							var data = this.leftListdata[this.lastIndex].children.filter({})
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							
+							this.leftListdata.forEach((item,i)=>{
+								if(item.menuid === params.row.menuid){
+									console.log(this.leftListdata[i]);
+									sourceData =  this.leftListdata[this.lastIndex].children || [];
+									this.lastIndex1 = i;
 								}
+							})
+
+
+
+							this.lastData = sourceData.concat([]);
+							sourceData.forEach((item)=>{
+								item._expanded = true;
+							})
+							return h('Table',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums3
+								}
+								
 							})
 						}
 					},
+					
+				].concat(defaultColums),
+				leftExpandColums3:[
 					{
-						title:"ID号",
-						key:"menuid",
-						width:120,
-					},
-					{
-						title:"栏目名称/English",
-						key:"menuname-en",
-						render:(h,params)=>{
-							return h('div',[
-								h('span',{
-									style:{
-										color:"red"
-									}
-								},params.row.menuname ),
-								h('span',{
-									style:{
-										color:'#000'
-									}
-								},' / ' + params.row.menuename)
-							])
-						}
-					},
-					{
-						title:"链接地址",
-						key:"menuurl"
-					},
-					{
-						title:"操作",
-						key:"showwhere",
-						width:130,
-						render:(h,params)=>{
+						type: 'expand',
+						title:"",
+						width:30,
+						render:(h,params,i)=>{
 
-							return h('div',[
-								h('Button',{
-									props: {
-                                        type: 'text',
-                                    },
-									on:{
-										click:()=>{
-											this.edit(params.index,1)
-										}
-									}
 
-								},'编辑'),
-								h('Button',{
-									props:{
-									type:"text",
-								},
-								on:{
-									click:()=>{
-										this.remove(params.index,1)
-									}
+							var sourceData = [];
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							
+							this.leftListdata.forEach((item,i)=>{
+								if(item.menuid === params.row.menuid){
+									sourceData =  this.leftListdata[this.lastIndex].children[this.lastIndex1].children|| [];
 								}
+							})
 
-								},'删除')]);
+							console.log(sourceData)
+
+
+
+							//this.lastData = sourceData.concat([]);
+							/*sourceData.forEach((item)=>{
+								item._expanded = true;
+							})*/
+							return h('Table',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums4
+								}
+								
+							})
 						}
+					},
+					
+				].concat(defaultColums),
+				leftExpandColums4:[
+					{
+						type: 'expand',
+						title:"",
+						width:30,
+						render:(h,params,i)=>{
 
+
+							var sourceData = [];
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							
+							this.lastData.forEach((item,i)=>{
+								if(item.menuid === params.row.menuid){
+									sourceData =  this.lastData[i].children || [];
+								}
+							})
+							
+							return h('Table',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums5
+								}
+								
+							})
+						}
+					},
+					
+				].concat(defaultColums),
+
+				leftExpandColums5:[
+					{
+						type: 'expand',
+						title:"",
+						width:30,
+						render:(h,params,i)=>{
+
+
+							var sourceData = [];
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							
+							this.lastData.forEach((item,i)=>{
+								if(item.menuid === params.row.menuid){
+									sourceData =  this.lastData[i].children || [];
+								}
+							})
+							
+							return h('div',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums3
+								}
+								
+							})
+						}
+					},
+					
+				].concat(defaultColums),
+				leftListColums:[
+					{
+						type: 'expand',
+						title:"",
+						width:30,
+						render:(h,params)=>{
+
+
+							var sourceData = [];
+
+							//this.lastData = this.lastData || this.leftListdata.concat([]);
+							
+							this.leftListdata.forEach((item,i)=>{
+								if(item.menuid === params.row.menuid){
+									sourceData =  this.leftListdata[i].children|| [];
+								}
+							})
+
+							this.lastData = sourceData.concat([]);
+						
+							return h('Table',{
+								props:{
+									data:sourceData,
+									columns:this.leftExpandColums1
+								}
+								
+							})
+						}
 					}
-				],
+				].concat(defaultColums),
 				topListColums:
 				[
 					{
@@ -334,7 +528,7 @@
 			}
 		},
 		components:{
-
+			//symbinTable:symbinTable
 		},
 		mounted(){//页面加载完成后显示
 			this.getColumnslist("allList");//显示栏目列表
@@ -383,9 +577,8 @@
 
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/getmenulist",
+					validate:s.validateData,
 					data:{
-						adminusername:s.validateData.adminusername,
-						admintoken:s.validateData.admintoken,
 						menuid:_menuid,
 					},
 					fn(data){
@@ -395,7 +588,7 @@
 								return item.showwhere === 2;//左侧
 							});
 							s.topListdate = data.list.filter((item,i)=>{
-								return item.showwhere === 1;//左侧
+								return item.showwhere === 1;//顶部
 							});
 							if(rak==="allList"){
 								s.bindParentmenu(data);

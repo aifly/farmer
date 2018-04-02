@@ -59,6 +59,10 @@
 			<img :src="imgs.cloud">
 		</div>
 
+		<div class="symbin-copyright">
+			北京小彬科技有限公司  备案号：京ICP备17018534号
+		</div>
+
 		<div class="symbin-login-cloud symbin-login-cloud1">
 			<img :src="imgs.cloud1">
 		</div>
@@ -174,6 +178,11 @@
 					//scene.add( ambientLight );
 
 					var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+					pointLight.castShadow = true;
+					pointLight.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 200, 10000 ) );
+				pointLight.shadow.bias = - 0.00022;
+				pointLight.shadow.mapSize.width = 2048;
+				pointLight.shadow.mapSize.height = 2048;
 					pointLight.position.x = 100;
 					pointLight.position.z = -100;
 					pointLight.position.y = 200;
