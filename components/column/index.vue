@@ -356,6 +356,7 @@
 				})
 			},
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
+				console.log(data.list)
 
 				data.list.forEach((dt,i)=>{
 				 	this.ColumnsData.push({
