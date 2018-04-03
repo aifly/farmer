@@ -182,25 +182,17 @@
 						title:"",
 						width:30,
 						render:(h,params,i)=>{
-
-
 							var sourceData = [];
-
 							//this.lastData = this.lastData || this.leftListdata.concat([]);
-							console.log( params.row)
-							this.leftListdata.forEach((item,i)=>{
+							this.lastData.forEach((item,i)=>{
 								//console.log(item.menuid , params.row)
 								if(item.menuid === params.row.menuid){
-									console.log(item.menuid)
-									sourceData =  this.leftListdata[i].children || [];
-									this.lastIndex = i;
+									sourceData =  this.lastData[i].children || [];
 								}
 							})
 
-							//this.lastData = sourceData.concat([]);
-							sourceData.forEach((item)=>{
-								item._expanded = true;
-							})
+							this.lastData1 = sourceData.concat([]);
+
 							return h('Table',{
 								props:{
 									data:sourceData,
@@ -218,27 +210,18 @@
 						title:"",
 						width:30,
 						render:(h,params)=>{
-
-
 							var sourceData = [];
-
-							console.log(params.row.menuid)
-
-							var data = this.leftListdata[this.lastIndex].children.filter({})
-
 							//this.lastData = this.lastData || this.leftListdata.concat([]);
 							
-							this.leftListdata.forEach((item,i)=>{
+							this.lastData1.forEach((item,i)=>{
 								if(item.menuid === params.row.menuid){
-									console.log(this.leftListdata[i]);
-									sourceData =  this.leftListdata[this.lastIndex].children || [];
-									this.lastIndex1 = i;
+									sourceData =  this.lastData1[i].children || [];
 								}
 							})
 
 
 
-							this.lastData = sourceData.concat([]);
+							this.lastData2 = sourceData.concat([]);
 							sourceData.forEach((item)=>{
 								item._expanded = true;
 							})
@@ -265,20 +248,12 @@
 
 							//this.lastData = this.lastData || this.leftListdata.concat([]);
 							
-							this.leftListdata.forEach((item,i)=>{
+							this.lastData2.forEach((item,i)=>{
 								if(item.menuid === params.row.menuid){
-									sourceData =  this.leftListdata[this.lastIndex].children[this.lastIndex1].children|| [];
+									sourceData =  this.lastData2[i].children || [];
 								}
 							})
 
-							console.log(sourceData)
-
-
-
-							//this.lastData = sourceData.concat([]);
-							/*sourceData.forEach((item)=>{
-								item._expanded = true;
-							})*/
 							return h('Table',{
 								props:{
 									data:sourceData,
@@ -296,8 +271,6 @@
 						title:"",
 						width:30,
 						render:(h,params,i)=>{
-
-
 							var sourceData = [];
 
 							//this.lastData = this.lastData || this.leftListdata.concat([]);
@@ -329,21 +302,10 @@
 
 
 							var sourceData = [];
-
-							//this.lastData = this.lastData || this.leftListdata.concat([]);
-							
-							this.lastData.forEach((item,i)=>{
-								if(item.menuid === params.row.menuid){
-									sourceData =  this.lastData[i].children || [];
-								}
-							})
-							
 							return h('div',{
 								props:{
 									data:sourceData,
-									columns:this.leftExpandColums3
 								}
-								
 							})
 						}
 					},
