@@ -104,21 +104,23 @@
         cursor: pointer; }
       .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg {
         position: absolute;
-        width: 100%;
+        width: 80%;
         height: 30px;
-        background: #ca141f;
+        background: #e7a193;
         color: #fff;
-        text-align: center;
-        bottom: 0;
-        left: 0;
-        line-height: 30px; }
+        top: 37%;
+        left: 10%;
+        line-height: 30px;
+        text-indent: 1em; }
+        .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg .ivu-icon {
+          font-size: 20px;
+          position: relative;
+          top: 3px; }
         .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-enter-active, .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-leave-active {
           -webkit-transition: 0.4s;
           transition: 0.4s; }
         .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-enter, .symbin-login-ui .symbin-login-C .symbin-login-form .symbin-login-msg.error-leave-to {
-          opacity: 0;
-          -webkit-transform: translate3d(0, 30px, 0);
-          transform: translate3d(0, 30px, 0); }
+          opacity: 0; }
   .symbin-login-ui .symbin-copyright {
     position: absolute;
     width: 100%;

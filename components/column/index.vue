@@ -100,67 +100,73 @@
 	import $ from 'jquery';
 
 
-	var defaultColums = [
-		{
-			title:"ID号",
-			key:"menuid",
-			width:120,
-		},
-		{
-			title:"栏目名称/English",
-			key:"menuname-en",
-			render:(h,params)=>{
-				return h('div',[
-					h('span',{
-						style:{
-							color:"red"
-						}
-					},params.row.menuname ),
-					h('span',{
-						style:{
-							color:'#000'
-						}
-					},' / ' + params.row.menuename)
-				])
-			}
-		},
-		{
-			title:"链接地址",
-			key:"menuurl"
-		},
-		{
-			title:"操作",
-			key:"showwhere",
-			width:130,
-			render:(h,params)=>{
+	function defaultColums(_this){
+		 return [
+			{
+				title:"ID号",
+				key:"menuid",
+				width:120,
+			},
+			{
+				title:"栏目名称/English",
+				key:"menuname-en",
+				render:(h,params)=>{
+					return h('div',[
+						h('span',{
+							style:{
+								color:"red"
+							}
+						},params.row.menuname ),
+						h('span',{
+							style:{
+								color:'#000'
+							}
+						},' / ' + params.row.menuename)
+					])
+				}
+			},
+			{
+				title:"链接地址",
+				key:"menuurl"
+			},
+			{
+				title:"操作",
+				key:"showwhere",
+				width:130,
+				render:(h,params)=>{
 
-				return h('div',[
-					h('Button',{
-						props: {
-                            type: 'text',
-                        },
+					return h('div',[
+						h('Button',{
+							props: {
+	                            type: 'text',
+	                        },
+							on:{
+								click:()=>{
+									this.edit(params.index,1)
+								}
+							}
+
+						},'编辑'),
+						h('Button',{
+							props:{
+							type:"text",
+						},
 						on:{
 							click:()=>{
-								this.edit(params.index,1)
+								console.log(params.row.menuid);
+
+								_this.remove(params.row.menuid,1)
 							}
 						}
 
-					},'编辑'),
-					h('Button',{
-						props:{
-						type:"text",
-					},
-					on:{
-						click:()=>{
-							this.remove(params.index,1)
-						}
-					}
+						},'删除')]);
+				}
 
-					},'删除')]);
 			}
+		]
+	}
 
-		}
-	]
+	
 
 
 	export default {
@@ -175,6 +181,7 @@
 				showwhere:'',
 				menuename:'',
 				menuurl:'',
+
 
 				leftExpandColums1:[
 					{
@@ -203,7 +210,7 @@
 						}
 					},
 					
-				].concat(defaultColums),
+				].concat(defaultColums(this)),
 				leftExpandColums2:[
 					{
 						type: 'expand',
@@ -235,7 +242,7 @@
 						}
 					},
 					
-				].concat(defaultColums),
+				].concat(defaultColums(this)),
 				leftExpandColums3:[
 					{
 						type: 'expand',
@@ -264,53 +271,10 @@
 						}
 					},
 					
-				].concat(defaultColums),
+				].concat(defaultColums(this)),
 				leftExpandColums4:[
-					{
-						type: 'expand',
-						title:"",
-						width:30,
-						render:(h,params,i)=>{
-							var sourceData = [];
-
-							//this.lastData = this.lastData || this.leftListdata.concat([]);
-							
-							this.lastData.forEach((item,i)=>{
-								if(item.menuid === params.row.menuid){
-									sourceData =  this.lastData[i].children || [];
-								}
-							})
-							
-							return h('Table',{
-								props:{
-									data:sourceData,
-									columns:this.leftExpandColums5
-								}
-								
-							})
-						}
-					},
-					
-				].concat(defaultColums),
-
-				leftExpandColums5:[
-					{
-						type: 'expand',
-						title:"",
-						width:30,
-						render:(h,params,i)=>{
-
-
-							var sourceData = [];
-							return h('div',{
-								props:{
-									data:sourceData,
-								}
-							})
-						}
-					},
-					
-				].concat(defaultColums),
+				].concat(defaultColums(this)),
+			
 				leftListColums:[
 					{
 						type: 'expand',
@@ -340,7 +304,7 @@
 							})
 						}
 					}
-				].concat(defaultColums),
+				].concat(defaultColums(this)),
 				topListColums:
 				[
 					{
@@ -407,72 +371,7 @@
 
 					}
 				],
-				subListColums:
-				[
-					{
-						type: 'expand',
-						title:"",
-						width:30,
-					},
-					{
-						title:"ID号",
-						key:"menuid",
-						width:120,
-					},
-					{
-						title:"栏目名称/English",
-						key:"menuname-en",
-						render:(h,params)=>{
-							return h('div',[
-								h('span',{
-									style:{
-										color:"red"
-									}
-								},params.row.menuname ),
-								h('span',{
-									style:{
-										color:'#000'
-									}
-								},' / ' + params.row.menuename)
-							])
-						}
-					},
-					{
-						title:"链接地址",
-						key:"menuurl"
-					},
-					{
-						title:"操作",
-						key:"showwhere",
-						width:130,
-						render:(h,params)=>{
-							return h('div',[
-								h('Button',{
-									props: {
-                                        type: 'text',
-                                    },
-									on:{
-										click:()=>{
-											this.edit(params.index,2)
-										}
-									}
-
-								},'编辑'),
-								h('Button',{
-									props:{
-									type:"text",
-								},
-								on:{
-									click:()=>{
-										this.remove(params.index,2)
-									}
-								}
-
-								},'删除')]);
-						}
-
-					}
-				],
+				
 				topListdate:[],
 				leftListdata:[],
 				subListdate:[],
@@ -505,9 +404,8 @@
 				var s = this;
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/addmenu",
+					validate:s.validateData,
 					data:{
-						adminusername:s.validateData.adminusername,
-						admintoken:s.validateData.admintoken,
 						menuname:s.menuname,
 						parentmenuid:s.parentmenuid[s.parentmenuid.length-1],
 						menuename:s.menuename,
@@ -542,6 +440,7 @@
 					validate:s.validateData,
 					data:{
 						menuid:_menuid,
+						status:1
 					},
 					fn(data){
 						
@@ -577,9 +476,7 @@
 					}
 				})
 			},
-			fillColumnData(data){
-
-			},
+			
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
 				var dt = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'));
 				dt.forEach((item,i)=>{
@@ -625,7 +522,7 @@
 				//console.log(this.leftListdata);
 
 			},
-			remove(index,lig){//删除栏目数据
+			remove(menuid,lig){//删除栏目数据
 				//lig为列表标识，1表示左侧列表；2表示顶部列表
 				var s=this;
 				var listdata;
@@ -637,15 +534,17 @@
 				}
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/delmenu",
+					validate:s.validateData,
 					data:{
-						adminusername:s.validateData.adminusername,
-						admintoken:s.validateData.admintoken,
-						menuids:listdata[index].menuid,
+						menuids:menuid,
+						deltype:1,//物理删除
 					},
 					fn(data){
+						console.log(data)
 						if(data.getret===0){
 							s.$Message.success(data.getmsg);
-							listdata.splice(index, 1);
+							s.getColumnslist();
+							//listdata.splice(index, 1);
 						}
 						else{
 							  s.$Message.error({

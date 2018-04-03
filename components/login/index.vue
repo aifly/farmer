@@ -47,7 +47,7 @@
 
 						<transition name='error'>
 							<div class="symbin-login-msg" v-if='showError'>
-								{{errorMsg}}
+								<Icon type="ios-close-outline"></Icon>{{errorMsg}}
 							</div>
 						</transition>
 					</div>
@@ -221,7 +221,7 @@
 					sphere.position.z = Math.random()*20+10;
 					scene.add( sphere );
 
-					sphereList.push({sphere,ang:Math.random()*360|0 ,speed:Math.random()*2|0+1});
+					sphereList.push({sphere,ang:Math.random()*360|0 ,speed:Math.random()*1});
 
 		        }
 
@@ -273,7 +273,7 @@
 		        	if( !self.isMove ){
 			        	renderer.render(scene,camera);
 			        	if(object){
-			        		object.rotation.y +=.003;
+			        		object.rotation.y +=.001;
 
 			        		sphereList.forEach((item)=>{
 			        			var sphere = item.sphere;

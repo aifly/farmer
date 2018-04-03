@@ -93,15 +93,21 @@ $color: #be0000;
 			overflow: hidden;
 			.symbin-login-msg{
 				@include pos(a);
-				width: 100%;
+				width: 80%;
 				height: 30px;
-				background: #ca141f;
+				background: #e7a193;
 				color:#fff;
-				text-align: center;
-				bottom: 0;
-				left: 0;
+				top: 37%;
+				left: 10%;
 				line-height: 30px;
+				text-indent: 1em;
 
+				
+				.ivu-icon{
+					font-size: 20px;
+					@include pos(r);
+					top: 3px;
+				}
 
 				&.error-enter-active, &.error-leave-active {
 					@include transition(.4s);
@@ -109,7 +115,6 @@ $color: #be0000;
 
 				&.error-enter, &.error-leave-to {
 					opacity:0;
-					@include transform(translate3d(0,30px,0));
 				}
 
 
