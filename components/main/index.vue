@@ -51,10 +51,12 @@
 
 <script>
 	import './index.css';
-	import $ from 'jquery';
+    import Vue from 'vue';
+    import symbinUtil from '../lib/util';
+    import sysbinVerification from '../lib/verification';
 
 	export default {
-		props:['obserable'],
+		props:[],
 		name:'zmitiindex',
 		data(){
 			return{
@@ -97,14 +99,85 @@
 		},
 		components:{
 		},
-		mounted(){
-            this.menus = this.defaultMenu.concat([]);
+        beforeCreate(){
+            this.validateData = sysbinVerification.validate(this);
 
         },
+		mounted(){
+           ///this.menus = this.defaultMenu.concat([]);
+            var obserable = Vue.obserable;
+            obserable.on('fillMenu',(data)=>{
+                
+                this.menus = data|| [];
+
+            })
+
+
+            var obserable = Vue.obserable;
+            this.loadMenu({
+                status:1,
+                showwhere:2
+            },(data)=>{
+                
+                var arr = []
+                data.list.forEach((menu,i)=>{
+                    var children = menu.children;
+                    var childArr = []
+                    children.forEach(child=>{
+                        childArr.push({
+                            name:child.menuname,
+                            link:child.menuurl+''+(child.children?child.menuid:'')
+                        })
+                    })
+                    arr.push({
+                        name:menu.menuname,
+                        subMenu:childArr
+                    })
+                })
+
+                obserable.trigger({
+                    type:'fillMenu',
+                    data:arr
+                })
+
+                
+            }); 
+
+
+
+        },
+       
 		methods:{
 			
  
+            loadMenu(option,fn){
+                var s = this;
+                symbinUtil.ajax({
+                    url:window.config.baseUrl+"/admin/getmenulist",
+                    validate:s.validateData,
+                    data:{
+                        status:option.status,
+                        showwhere:option.showwhere
+                    },
+                    fn(data){
+                        
+                        if(data.getret===0){
 
+                            fn && fn(data);
+                        }
+                        else{
+                             s.$Message.error({
+                                content:data.getmsg,
+                                duration: 10
+                              });
+                             if(data.getret === 1300){
+                                window.location.hash = '/login/'
+                             }
+                        }
+                        
+                    }
+                })
+            }
 		}
 	}
 </script>

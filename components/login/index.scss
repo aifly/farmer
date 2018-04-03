@@ -6,7 +6,13 @@ $viewW: 750px;
 $color: #be0000;
 
 .symbin-login-ui {
-
+	&>div{
+		/* @include pos(a);
+		width: 1600px;
+		left: 50%;
+		top: 0;
+		margin-left: -800px; */
+	}
 	.symbin-login-scene,.symbin-login-C{
 		@include pos(r);
 		z-index: 10;
@@ -135,10 +141,14 @@ $color: #be0000;
 
 	.symbin-login-cloud{
 		@include pos(a);
-		bottom: 0;
+		bottom: 10vh;
 		z-index: 0;
-		opacity:0;
-		@include animation(scale 5s linear infinite );
+		left: 22vw;
+		width: 20vw;
+		
+		z-index: 100;
+		opacity:1;
+		//@include animation(scale 5s linear infinite );
 	}
 	.symbin-login-cloud1{
 		z-index: 12;

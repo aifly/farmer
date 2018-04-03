@@ -1,71 +1,74 @@
 <template>
-	<div  class="symbin-login-ui lt-full" :style="{background: 'url('+imgs.loginBg+') no-repeat right top',backgroundSize:'cover' }">
-		<Row type='flex'>
-			<Col span='16'>
-				<div @mousemove='mousemove($event)' @mouseout='isMove = false' class="symbin-login-scene" ref='scene' :style='{height:viewH+"px"}'>
-					<div class="symbin-login-title">
-						<img :src="imgs.loginTitle">
+	<div  class="symbin-login-ui lt-full" :style="{background: 'url('+imgs.loginBg+') no-repeat right center',backgroundSize:'cover' }">
+		
+		<div>
+			<Row type='flex'>
+				<Col span='16'>
+					<div @mousemove='mousemove($event)' @mouseout='isMove = false' class="symbin-login-scene" ref='scene' :style='{height:viewH+"px"}'>
+						<div hidden="" class="symbin-login-title">
+							<img :src="imgs.loginTitle">
+						</div>
 					</div>
-				</div>
-			</Col>
-			<Col span='8'>
-				<div class="symbin-login-C"  :style='{height:viewH+"px"}'>
-					<div class="symbin-login-form">
-						<h1>
-							<img :src="imgs.loginLogo">
-						</h1>
-						<div class="symbin-form-item">
-							<Row type='flex'>
-								<Col span='3'>
-									<img :src="imgs.loginPerson">
-								</Col>
-								<Col span='18'>
-									<input v-model='username' placeholder="请输入账号" type="text" name="">
-								</Col>
-							</Row>
-							
-						</div>
-						<div class="symbin-form-item">
-							<Row type='flex'>
-								<Col span='3'>
-									<img :src="imgs.loginLock">
-								</Col>
-								<Col span='18'>
-									<input @keydown.13='login' v-model='password' placeholder="请输入密码" type="password" name="">
-								</Col>
-							</Row>
-							
-							
-						</div>
-						<Row type='flex' class='symbin-login-operator'>
-							<Col span='12'>注册</Col>
-							<Col span='12'>忘记密码</Col>
-						</Row>
-						<div class="symbin-login-btn" @click='login'>
-							登录	
-						</div>
-
-						<transition name='error'>
-							<div class="symbin-login-msg" v-if='showError'>
-								<Icon type="ios-close-outline"></Icon>{{errorMsg}}
+				</Col>
+				<Col span='8'>
+					<div class="symbin-login-C"  :style='{height:viewH+"px"}'>
+						<div class="symbin-login-form">
+							<h1>
+								<img :src="imgs.loginLogo">
+							</h1>
+							<div class="symbin-form-item">
+								<Row type='flex'>
+									<Col span='3'>
+										<img :src="imgs.loginPerson">
+									</Col>
+									<Col span='18'>
+										<input v-model='username' placeholder="请输入账号" type="text" name="">
+									</Col>
+								</Row>
+								
 							</div>
-						</transition>
+							<div class="symbin-form-item">
+								<Row type='flex'>
+									<Col span='3'>
+										<img :src="imgs.loginLock">
+									</Col>
+									<Col span='18'>
+										<input @keydown.13='login' v-model='password' placeholder="请输入密码" type="password" name="">
+									</Col>
+								</Row>
+								
+								
+							</div>
+							<Row type='flex' class='symbin-login-operator'>
+								<Col span='12'>注册</Col>
+								<Col span='12'>忘记密码</Col>
+							</Row>
+							<div class="symbin-login-btn" @click='login'>
+								登录	
+							</div>
+
+							<transition name='error'>
+								<div class="symbin-login-msg" v-if='showError'>
+									<Icon type="ios-close-outline"></Icon>{{errorMsg}}
+								</div>
+							</transition>
+						</div>
 					</div>
-				</div>
-			</Col>
-		</Row>
-
-		<div class="symbin-login-cloud">
-			<img :src="imgs.cloud">
+				</Col>
+			</Row>
+			<div class="symbin-login-cloud">
+				<img :src="imgs.cloud">
+			</div>
+			<!-- <div class="symbin-login-cloud symbin-login-cloud1">
+				<img :src="imgs.cloud1">
+			</div>
+			 -->
+			<div class="symbin-copyright">
+				北京小彬科技有限公司  备案号：京ICP备17018534号
+			</div>
 		</div>
 
-		<div class="symbin-copyright">
-			北京小彬科技有限公司  备案号：京ICP备17018534号
-		</div>
-
-		<div class="symbin-login-cloud symbin-login-cloud1">
-			<img :src="imgs.cloud1">
-		</div>
+		
 
 		<!-- <Input v-model="username" placeholder="请输入用户名"></Input>	
 		<Input type='password' v-model="password" placeholder="请输入用密码" :clearable='true'></Input>
@@ -131,7 +134,7 @@
 							delete param.getmsg;
 							symbinUtil.clearCookie('login');
 							symbinUtil.setCookie('login',JSON.stringify(param),1);
-							window.location.hash = '/home/';
+							window.location.hash = '/console/';
 							_this.$Message.success('登录成功~')
 							_this.isLogined = true;
 						}else{
@@ -155,11 +158,13 @@
 		        });
 
 		        renderer.setSize(viewW, viewH);
+
+		        renderer.shadowMapEnabled = true;
 		        //renderer.setClearAlpha(0);
 
 		        var camera = new THREE.PerspectiveCamera(45, viewW / viewH, 1,1000);
 
-		        camera.position.set(0, 40,250);
+		        camera.position.set(0, 40,200);
 
 		        camera.lookAt(scene.position);
 
@@ -179,12 +184,12 @@
 
 					var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
 					pointLight.castShadow = true;
-					pointLight.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 200, 10000 ) );
-				pointLight.shadow.bias = - 0.00022;
-				pointLight.shadow.mapSize.width = 2048;
-				pointLight.shadow.mapSize.height = 2048;
+					pointLight.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 200, 1000 ) );
+					
+					pointLight.shadow.mapSize.width = 2048;
+					pointLight.shadow.mapSize.height = 2048;
 					pointLight.position.x = 100;
-					pointLight.position.z = -100;
+					pointLight.position.z = 120;
 					pointLight.position.y = 200;
 
 					/*var pointLight1 = new THREE.PointLight( 0xff0000, 0.8 );
@@ -274,6 +279,7 @@
 			        	renderer.render(scene,camera);
 			        	if(object){
 			        		object.rotation.y +=.001;
+			        		object.rotation.x =-.15;
 
 			        		sphereList.forEach((item)=>{
 			        			var sphere = item.sphere;
@@ -296,7 +302,7 @@
 
 				if(this.object){
 					this.object.rotation.y = (e.pageX - this.centerX)/this.centerX/10+2;
-					this.object.rotation.x = (e.pageY - this.centerY)/this.centerY/10;
+					//this.object.rotation.x = (e.pageY - this.centerY)/this.centerY/10;
 					this.renderer.render(this.scene,this.camera);
 				}
 

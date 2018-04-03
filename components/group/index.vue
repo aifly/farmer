@@ -25,7 +25,8 @@
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
 	import Tab from '../tab/index';
-	import $ from 'jquery';
+	import Vue from 'vue';
+
 
 	export default {
 		props:['obserable'],
@@ -50,14 +51,14 @@
 		},
 
 		mounted(){
+			var obserable = Vue.obserable;
+			obserable.on('fillTabs',(data)=>{
 
+				this.tabs = data || [];
+			})
 		},
 
-		watch:{
-			$route(to){
-				console.log(to)
-			}
-		},
+		
 
 		beforeCreate(){
 			var validate = sysbinVerification.validate(this);
