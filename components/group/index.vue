@@ -58,7 +58,9 @@
 			})
 		},
 
-		
+		beforeDestory(){
+			
+		},
 
 		beforeCreate(){
 			var validate = sysbinVerification.validate(this);
@@ -67,8 +69,11 @@
 		},
 		methods:{
 			tab1(index,level){
+
 				if(level && level.length){
+					console.log('this.tabs[index].status => '+this.tabs[index].status)
 					this.tabs[index].status = !this.tabs[index].status;
+
 				}else{
 					this.tabIndex = [index,-1]
 				}
