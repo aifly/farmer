@@ -273,10 +273,10 @@
 							//s.bingAgain();//显示栏目列表
 						}
 						else{
-							  s.$Message.error({
-							  	content:data.getmsg,
-							  	duration: 10
-							  });
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 10
+							});
 						}
 					}
 				})				
