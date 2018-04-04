@@ -18,46 +18,40 @@
 				</div>
 			</div>
 			<!--弹窗样式-->
-				<Modal v-model="addRole" title="新增角色" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel">
+				<Modal v-model="addRole" title="新增角色" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel" :loading='isLoading'>
 					<div class="addColumn-body">
-						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig top7 rig8">
-								<span class="text-danger">*</span><span>栏目名称:</span>
-							</Col>
-							<Col span="12"></Col>
-						</Row>
-						<br>
-						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig top7 rig8">
-								<span>英文名称:</span>
-							</Col>
-							<Col span="12"></Col>
-						</Row>
-						<br>
-						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig top7 rig8">
-								<span class="text-danger">*</span><span>连接地址:</span>
-							</Col>
-							<Col span="12"></Col>
-						</Row>
-						<br>
-						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig rig8">
-								<span class="text-danger">*</span><span>显示位置:</span>
-							</Col>
-							<Col span="12">
-								
-							</Col>
-						</Row>
-						<br>
-						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig top7 rig8">
-								<span class="text-danger">*</span><span>所属父级:</span>
-							</Col>
-							<Col span="12">
-								
-							</Col>
-						</Row>
+						<Form ref="formRole" :model="formRole" :rules="ruleForm" inline>
+							<Row align="middle" justify="center">
+								<Col span="3" offset="4" class-name="text-rig top7 rig8">
+									<span class="text-danger">*</span><span>角色名称:</span>
+								</Col>
+								<Col span="12">
+									<FormItem prop="rolename"><Input v-model="formRole.rolename" placeholder="请录入角色名称"></Input></FormItem>
+								</Col>
+							</Row>
+							<Row align="middle" justify="center">
+								<Col span="3" offset="4" class-name="text-rig top7 rig8">
+									<span>英文名称:</span>
+								</Col>
+								<Col span="12"><FormItem prop="roleename"><Input v-model="formRole.roleename" placeholder="请录入英文名称"></Input></FormItem></Col>
+							</Row>
+							<Row align="middle" justify="center">
+								<Col span="3" offset="4" class-name="text-rig top7 rig8">
+									<span>是否默认:</span>
+								</Col>
+								<Col span="12">
+							       <FormItem prop="defaultRole"><Checkbox v-model="formRole.defaultRole" value="0" true-value="0" false-value="1">默认角色</Checkbox></FormItem>
+								</Col>
+							</Row>
+							<Row align="middle" justify="center">
+								<Col span="3" offset="4" class-name="text-rig top7 rig8">
+									<span class="text-danger">*</span><span>权限设置:</span>
+								</Col>
+								<Col span="12">
+							       <FormItem prop="actionids"><Checkbox v-model="formRole.actionids" value="0" true-value="0" false-value="1">默认权限</Checkbox></FormItem>
+								</Col>
+							</Row>
+						</Form>
 					</div>
 				</Modal>
 				<!--弹窗样式结束-->
@@ -78,7 +72,11 @@
 
 		data(){
 			return {
-				addRole:false,
+				addRole:true,
+				isLoading:true,
+				formRole:[],
+				ruleForm:[],
+				roleListdata:[],
 				roleListColums:[
 					{
                         title: '序号',
@@ -135,9 +133,17 @@
 						}
                     }
 				],
-				roleListdata:[],
-
-
+				formRole: {
+                    rolename: ''
+                },
+                ruleForm: {
+                    rolename: [
+                        { required: true, message: '角色名称不能为空或已有重名！', trigger: 'blur' }
+                    ],
+                    actionids:[
+                    	{ required: true, message: '权限不能为空', trigger: 'blur' }
+                    ]
+                }
 			}
 		},
 		components:{
@@ -149,19 +155,82 @@
 		},
 		methods:{
 			ok(){
-			
+				
+				this.isLoading = true;
+				this.$refs['formRole'].validate((valid)=>{
+
+					if(valid){
+						this.insertRole();
+						this.isLoading = false;
+					}
+					else{
+						this.isLoading = false;
+					}
+				})
 			},
 			cancel(){
 			
 			},
 			bingAgain(){
 			
+			},
+			getRolelist(){
+				var s = this;
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/getrolelist",
+					validate:s.validateData,
+					data:{
+
+					},
+					fn(data){
+						console.log(data);
+						if(data.getret === 0){
+
+							s.$Message.success(data.getmsg);
+						}
+						else{
+							  s.$Message.error({
+							  	content:data.getmsg,
+							  	duration: 10
+							  });
+						}
+					}
+				})	
+			},
+			insertRole(){
+				var s = this;
+				console.log(s.formRole.defaultRole);
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/addrole",
+					validate:s.validateData,
+					data:{
+						rolename:s.formRole.rolename,
+						roleename:s.formRole.roleename,
+						isdefault:s.formRole.defaultRole,
+						actionids:s.formRole.actionids,
+					},
+					fn(data){
+						console.log(data);
+						if(data.getret === 0){
+
+							s.$Message.success(data.getmsg);
+						}
+						else{
+							  s.$Message.error({
+							  	content:data.getmsg,
+							  	duration: 10
+							  });
+						}
+					}
+				})
 			}
 			
 		},
 		mounted(){//页面加载完成后显示
 
 			var obserable = Vue.obserable;
+
+			this.getRolelist();
 			
 		},
 	}
