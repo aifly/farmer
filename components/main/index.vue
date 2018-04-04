@@ -85,10 +85,10 @@
                         subMenu:[
                             {
                                 name:'角色管理',
-                                link:'/role/'
+                                link:'/admin/'
                             },
                             {
-                                name:'权限管理',
+                                name:'权限',
                                 link:'/admin/'
                             }
                         ]

@@ -153,7 +153,7 @@
 						},
 						on:{
 							click:()=>{
-								console.log(params.row.menuid);
+								//console.log(params.row.menuid);
 
 								_this.remove(params.row.menuid,1)
 							}
