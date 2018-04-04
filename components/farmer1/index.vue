@@ -1,6 +1,6 @@
 <template>
 	<div class="symbin-landowner-ui">
-		地主页面
+		农场主页面。
 	</div>
 
 </template>

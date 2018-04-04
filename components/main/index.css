@@ -44,9 +44,13 @@
   .layout .layout-logo img {
     height: 35px;
     width: auto; }
+.layout .ivu-layout-sider-children {
+  overflow: hidden; }
 .layout .layout-nav li > a {
   color: rgba(255, 255, 255, 0.7); }
   .layout .layout-nav li > a:hover {
+    color: white; }
+  .layout .layout-nav li > a.router-link-active {
     color: white; }
 .layout .symbin-main-menu {
   background: #333744 !important; }

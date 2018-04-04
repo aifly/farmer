@@ -4,8 +4,8 @@
 			<div slot='symbin-tab-menu'>
 				<ul class="symbin-tab-menu">
 					<li @click.stop.prevent='tab1(i,tab.children)' v-for='(tab,i) in tabs' :class='{"active":tabIndex[0] ===i && !tab.children,"level1":tab.children && !tab.status,"open":tab.status }'>
-						<div v-if='tab.link'><router-link :to="tab.link">{{tab.name}}</router-link></div>
-						<div v-if='!tab.link'>{{tab.name}}</div>
+						<div v-if='!(tab.children && tab.children.length>0)'><router-link :to="tab.link">{{tab.name}}</router-link></div>
+						<div v-if='tab.children && tab.children.length>0'>{{tab.name}}</div>
 						<ol :style='{height:(tab.status?tab.children.length*30:0)+"px"}' v-if='tab.children' >
 							<li @click.stop.prevent='tab2(i,k)' :class="{'active':tabIndex[1]===k}" v-for='(child,k) in tab.children'>
 								<div v-if='child.link'><router-link :to="child.link">{{child.name}}</router-link></div>
@@ -54,12 +54,14 @@
 			var obserable = Vue.obserable;
 			obserable.on('fillTabs',(data)=>{
 
+				console.log(data);
+
 				this.tabs = data || [];
 			})
 		},
 
 		beforeDestory(){
-			
+
 		},
 
 		beforeCreate(){

@@ -8,10 +8,18 @@
 		}
 	}
 
+	.ivu-layout-sider-children{
+		overflow: hidden;
+	}
+
 	.layout-nav{
 		li>a{
 			color:rgba(255, 255, 255, 0.7);
 			&:hover{
+				color:rgba(255, 255, 255, 1);
+			}
+		
+			&.router-link-active{
 				color:rgba(255, 255, 255, 1);
 			}
 		}

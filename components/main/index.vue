@@ -11,8 +11,8 @@
                     <Col>
                         <Menu mode="horizontal" theme="dark" active-name="1">
                             <div class="layout-nav">
-                                <MenuItem :name='i' v-for='(menu,i) in topMenu'>
-                                    <router-link :to="menu.link">{{menu.name}}</router-link>
+                                <MenuItem :keys='i' :name='i' v-for='(menu,i) in topMenu'>
+                                    <router-link  :to="menu.link">{{menu.name}}</router-link>
                                 </MenuItem>
                             </div>
                         </Menu>
@@ -108,11 +108,13 @@
                 switch(to.name){
                     case 'rolepanel':
                         this.menus = this.defaultMenu;
+                      
                     break;
                     case 'console':
                         this.menus = this.defaultLeftMenu;
                     break;
                 }
+               
             }
         },
 		mounted(){
