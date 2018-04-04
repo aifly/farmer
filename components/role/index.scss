@@ -1,6 +1,6 @@
 ﻿@import "../css/base.scss";
 
-.symbin-column-ui{
+.symbin-role-ui{
 	.symbin-admin-count{
 		padding: 0 15px;
 	}
@@ -20,16 +20,4 @@
 		font-weight: normal;
 
 		}
-	.ivu-table-cell{
-		.ivu-btn{
-			padding-right:8px!important;
-			padding-left: 0px!important; 
-			}
-		}
-	.ivu-table-expanded-cell{
-		padding: 15px;
-		.ivu-table-header{
-			display: none;//本地应该用show-header:设置，但不知道什么原因不正确，暂用此方式
-		}
-	}
 }

@@ -84,11 +84,11 @@
                         name:'权限设置',
                         subMenu:[
                             {
-                                name:'添加权限',
-                                link:'/admin/'
+                                name:'角色管理',
+                                link:'/role/'
                             },
                             {
-                                name:'管理权限',
+                                name:'权限管理',
                                 link:'/admin/'
                             }
                         ]

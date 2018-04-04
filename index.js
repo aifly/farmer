@@ -14,6 +14,7 @@ import Console from './components/console/index';
 import Landowner from './components/landowner/index';
 import Farmer from './components/farmer/index';
 import Farmer1 from './components/farmer1/index';
+import Role from './components/role/index';
 import iView from 'iview';
 import VueRouter from 'vue-router'
 import './components/css/index.css';
@@ -29,22 +30,24 @@ Vue.obserable = obserable;
 const router = new VueRouter({
   
   routes: [
-     {path: '*', name: 'error', component: FError },
-     { path: '/login/', name: 'login', component: Login, props: true },
-     { path: '/home/', name: 'home', component: Home, props: true },
-      { path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
-      { path: '/console/', name: 'console', component: Console, props: true },
-      { path: '/landowner/', name: 'landowner', component: Landowner, props: true },
+    {path: '*', name: 'error', component: FError },
+    { path: '/login/', name: 'login', component: Login, props: true },
+	{ path: '/home/', name: 'home', component: Home, props: true },
+	{ path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
+    { path: '/console/', name: 'console', component: Console, props: true },
+    { path: '/landowner/', name: 'landowner', component: Landowner, props: true },
+    { path: '/role/', name: 'role', component: Role, props: true },
      
     
-     { path: '/group/', name: 'group', component: Group, props: true,children:[
+    { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},
      	{ path: '/order/', name: 'order', component: Order},
      	{ path: '/admin/:id', name: 'admin', component: Admin},
      	{ path: '/column/:id', name: 'column', component: Column},
      	{ path: '/farmer/:id', name: 'farmer', component: Farmer, props: true },
       	{ path: '/farmer1/:id', name: 'farmer1', component: Farmer1, props: true },
-     ] }
+    	] 
+	}
   ]
 });
 
