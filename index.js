@@ -14,6 +14,7 @@ import Console from './components/console/index';
 import Landowner from './components/landowner/index';
 import Farmer from './components/farmer/index';
 import Farmer1 from './components/farmer1/index';
+import Rolepanel from './components/rolepanel/index';
 import Role from './components/role/index';
 import iView from 'iview';
 import VueRouter from 'vue-router'
@@ -37,6 +38,7 @@ const router = new VueRouter({
     { path: '/console/', name: 'console', component: Console, props: true },
     { path: '/landowner/', name: 'landowner', component: Landowner, props: true },
     { path: '/role/', name: 'role', component: Role, props: true },
+    { path: '/rolepanel/', name: 'rolepanel', component: Rolepanel, props: true },
      
     
     { path: '/group/', name: 'group', component: Group, props: true,children:[

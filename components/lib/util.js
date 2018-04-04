@@ -26,7 +26,12 @@ var symbinUtil = {
 				option.fnError && option.fnError();
 			}
 		}).done((dt)=>{
-			option.fn && option.fn(dt);
+			if(dt.getret === 1300){
+				this.clearCookie('login');
+				window.location.hash = '/login';
+			}else{
+				option.fn && option.fn(dt);
+			}
 		})
 	},
 	setCookie(cname, cvalue, exdays){

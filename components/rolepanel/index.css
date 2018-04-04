@@ -39,35 +39,26 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-.layout .layout-logo {
-  color: #FFF; }
-  .layout .layout-logo img {
-    height: 35px;
-    width: auto; }
-.layout .ivu-layout-sider-children {
-  overflow: hidden; }
-.layout .layout-nav li > a {
-  color: rgba(255, 255, 255, 0.7); }
-  .layout .layout-nav li > a:hover {
-    color: white; }
-  .layout .layout-nav li > a.router-link-active {
-    color: white; }
-.layout .symbin-main-menu {
-  background: #333744 !important; }
-  .layout .symbin-main-menu li {
-    position: relative; }
-  .layout .symbin-main-menu a {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    color: inherit; }
-  .layout .symbin-main-menu a:hover {
-    color: inherit; }
-.layout i.ivu-icon-ionic {
-  opacity: 0; }
-.layout .ivu-menu-item > a > i {
-  margin-right: 6px; }
-.layout .ivu-menu-submenu .ivu-menu-item {
-  padding-left: 24px !important; }
+.symbin-rolepanel-ui .symbin-admin-count {
+  padding: 0 15px; }
+.symbin-rolepanel-ui .symbin-console-title {
+  padding: 16px 0px;
+  min-height: 70px;
+  border-bottom: 1px solid #ddd; }
+.symbin-rolepanel-ui h5 {
+  margin: 8px;
+  border-left: 2px solid #88B7E0;
+  text-indent: 8px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+  font-weight: normal; }
+.symbin-rolepanel-ui .ivu-table-cell .ivu-btn {
+  padding-right: 8px !important;
+  padding-left: 0px !important; }
+.symbin-rolepanel-ui .ivu-table-expanded-cell {
+  padding: 15px; }
+  .symbin-rolepanel-ui .ivu-table-expanded-cell .ivu-table-header {
+    display: none; }
 
 /*# sourceMappingURL=index.css.map */

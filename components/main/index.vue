@@ -11,11 +11,8 @@
                     <Col>
                         <Menu mode="horizontal" theme="dark" active-name="1">
                             <div class="layout-nav">
-                                <MenuItem name="1">
-                                    控制台
-                                </MenuItem>
-                                <MenuItem name="2">
-                                    权限面版
+                                <MenuItem :keys='i' :name='i' v-for='(menu,i) in topMenu'>
+                                    <router-link  :to="menu.link">{{menu.name}}</router-link>
                                 </MenuItem>
                             </div>
                         </Menu>
@@ -63,6 +60,9 @@
 				imgs:window.imgs,
                 viewH:document.documentElement.clientHeight,
                 openNames:['1'],
+                defaultLeftMenu:[],
+                topMenu:[
+                ],
                 defaultMenu:[
                     {
                         name:'管理员设置',
@@ -103,6 +103,20 @@
             this.validateData = sysbinVerification.validate(this);
 
         },
+        watch:{
+            $route(to){
+                switch(to.name){
+                    case 'rolepanel':
+                        this.menus = this.defaultMenu;
+                      
+                    break;
+                    case 'console':
+                        this.menus = this.defaultLeftMenu;
+                    break;
+                }
+               
+            }
+        },
 		mounted(){
            ///this.menus = this.defaultMenu.concat([]);
             var obserable = Vue.obserable;
@@ -112,15 +126,27 @@
 
             })
 
+            if(this.$route.name === 'login'){
+                return;
+            }
 
             var obserable = Vue.obserable;
             this.loadMenu({
                 status:1,
-                showwhere:2
             },(data)=>{
                 
-                var arr = []
-                data.list.forEach((menu,i)=>{
+                var arr = [];
+
+                data.list.filter(d=>{
+                    return d.showwhere === 1;
+                }).forEach((dt)=>{
+                    this.topMenu.push({
+                        name:dt.menuname,
+                        link:dt.menuurl
+                    })
+                })
+
+                data.list.filter((d)=>{return d.showwhere === 2}).forEach((menu,i)=>{
                     var children = menu.children;
                     var childArr = []
                     children.forEach(child=>{
@@ -135,6 +161,7 @@
                     })
                 })
 
+                this.defaultLeftMenu = arr;
                 obserable.trigger({
                     type:'fillMenu',
                     data:arr
@@ -149,7 +176,7 @@
        
 		methods:{
 			
- 
+           
             loadMenu(option,fn){
                 var s = this;
                 symbinUtil.ajax({
@@ -157,7 +184,6 @@
                     validate:s.validateData,
                     data:{
                         status:option.status,
-                        showwhere:option.showwhere
                     },
                     fn(data){
                         
@@ -166,13 +192,11 @@
                             fn && fn(data);
                         }
                         else{
-                             s.$Message.error({
+                            s.$Message.error({
                                 content:data.getmsg,
                                 duration: 10
-                              });
-                             if(data.getret === 1300){
-                                window.location.hash = '/login/'
-                             }
+                            });
+                             
                         }
                         
                     }
