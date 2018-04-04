@@ -1,14 +1,15 @@
 <template>
-	<div class="symbin-landowner-ui">
-		地主页面
+	<!--地主配仓库页面-->
+	<div class="symbin-landowneraddress-ui ">
+		地主配仓库页面
 	</div>
 
 </template>
-
 <script>
 	import './index.css';
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
+	import farmerUtil from '../lib/farmerutil';
 	import Vue from 'vue';
 	//import symbinTable from './symbintable.vue';
 	export default {
@@ -33,6 +34,11 @@
 		mounted(){//页面加载完成后显示
 
 			var obserable = Vue.obserable;
+
+			var id = this.$route.params.id;
+
+
+			farmerUtil.getColumnByMenuId(id,this);
 			
 		},
 	}
