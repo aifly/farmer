@@ -53,10 +53,14 @@
 		mounted(){
 			var obserable = Vue.obserable;
 			obserable.on('fillTabs',(data)=>{
-
-				console.log(data);
-
 				this.tabs = data || [];
+			});
+
+			obserable.on('fillTabIndex',(data)=>{
+				
+				data[2]!==-1 && (this.tabs[data[2]].status = true);
+				data.length = 2;
+				this.tabIndex = data;
 			})
 		},
 

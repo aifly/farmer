@@ -85,10 +85,10 @@
                         subMenu:[
                             {
                                 name:'角色管理',
-                                link:'/admin/'
+                                link:'/role/'
                             },
                             {
-                                name:'权限',
+                                name:'权限管理',
                                 link:'/admin/'
                             }
                         ]
@@ -125,7 +125,15 @@
                 this.menus = data|| [];
 
             })
+            switch(this.$route.name){
+                case 'rolepanel':
+                    this.menus = this.defaultMenu;
+                break;
+                case 'console':
+                    this.menus = this.defaultLeftMenu;
+                break;
 
+            }
             if(this.$route.name === 'login'){
                 return;
             }
@@ -148,7 +156,8 @@
 
                 data.list.filter((d)=>{return d.showwhere === 2}).forEach((menu,i)=>{
                     var children = menu.children;
-                    var childArr = []
+                    var childArr = [];
+                   
                     children.forEach(child=>{
                         childArr.push({
                             name:child.menuname,
@@ -162,10 +171,12 @@
                 })
 
                 this.defaultLeftMenu = arr;
-                obserable.trigger({
-                    type:'fillMenu',
-                    data:arr
-                })
+                if(this.$route.name !== 'rolepanel'){
+                    obserable.trigger({
+                        type:'fillMenu',
+                        data:arr
+                    })
+                }
 
                 
             }); 

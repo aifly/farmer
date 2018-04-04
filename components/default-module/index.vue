@@ -1,5 +1,4 @@
 <template>
-<template>
 	<div class="symbin-column-ui "><!--注意每次页面需要修改此样式文件名，CSS文件也一样-->
 		<div class="symbin-admin-count">
 			<div class="symbin-console-title">
@@ -21,13 +20,11 @@
 	</div>
 
 </template>
-
-</template>
-
 <script>
 	import './index.css';
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
+	import farmerUtil from '../lib/farmerutil';
 	import Vue from 'vue';
 	//import symbinTable from './symbintable.vue';
 	export default {
