@@ -19,14 +19,13 @@ var farmerUtil = {
 					
 					var arr = [];
 					data.list.forEach((menu,i)=>{
-						console.log('menu.parentmenuid => ',menu.parentmenuid == _menuid )
 						if(menu.parentmenuid === _menuid){
 							var childrenArr = [];
 							data.list.forEach((dt,k)=>{
 								if(dt.parentmenuid === menu.menuid){
 									childrenArr.push({
 										name:dt.menuname,
-										link:dt.menuurl
+										link:dt.menuurl+_menuid
 									})
 								}
 							})
@@ -44,11 +43,33 @@ var farmerUtil = {
 					});
 
 
-
+					//更新tab页面的选中
 					obserable.trigger({
 						type:'fillTabs',
 						data:arr
-					})
+					});
+
+					switch(s.$route.name){
+						case "landownerbaseinfo":
+							obserable.trigger({
+								type:'fillTabIndex',
+								data:[0,0,0]
+							})
+						break;
+						case "landowneraddress":
+							obserable.trigger({
+								type:'fillTabIndex',
+								data:[0,1,0]
+							})
+						break;
+						case "repository":
+							obserable.trigger({
+								type:'fillTabIndex',
+								data:[1,0,-1]
+							})
+						break;
+					}
+					
 				}
 				
 			}

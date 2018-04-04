@@ -28,13 +28,17 @@
 	.symbin-main-menu{
 		background: #333744!important;
 		li{
-				@include pos(r);
+			@include pos(r);
 		}
 		a{
 			@include pos(a);
 			width: 100%;
 			height: 100%;
 			color:inherit;
+			left: 0;
+			top:0;
+			text-align: center;
+			line-height: 50px;
 		}
 		a:hover{
 			color: inherit;

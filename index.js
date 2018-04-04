@@ -11,7 +11,10 @@ import Order from './components/order/index'
 import FError from './components/ferror/index'
 import Column from './components/column/index';
 import Console from './components/console/index';
-import Landowner from './components/landowner/index';
+
+import LandownerBaseInfo from './components/landownerbaseInfo/index';
+import LandownerAddress from './components/landowneraddress/index';
+import Repository from './components/repository/index';
 import Farmer from './components/farmer/index';
 import Farmer1 from './components/farmer1/index';
 import Rolepanel from './components/rolepanel/index';
@@ -36,7 +39,7 @@ const router = new VueRouter({
 	{ path: '/home/', name: 'home', component: Home, props: true },
 	{ path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
     { path: '/console/', name: 'console', component: Console, props: true },
-    { path: '/landowner/', name: 'landowner', component: Landowner, props: true },
+    
     { path: '/role/', name: 'role', component: Role, props: true },
     { path: '/rolepanel/', name: 'rolepanel', component: Rolepanel, props: true },
      
@@ -48,6 +51,9 @@ const router = new VueRouter({
      	{ path: '/column/:id', name: 'column', component: Column},
      	{ path: '/farmer/:id', name: 'farmer', component: Farmer, props: true },
       	{ path: '/farmer1/:id', name: 'farmer1', component: Farmer1, props: true },
+      	{ path: '/landownerbaseinfo/:id', name: 'landownerbaseinfo', component: LandownerBaseInfo, props: true },
+      	{ path: '/landowneraddress/:id', name: 'landowneraddress', component: LandownerAddress, props: true },
+      	{ path: '/repository/:id', name: 'repository', component: Repository, props: true },
     	] 
 	}
   ]
@@ -78,7 +84,6 @@ new Vue({
 		Adminuser,
 		Column,
 		Console,
-		Landowner,
 		Farmer,
 		Farmer1
 	},
