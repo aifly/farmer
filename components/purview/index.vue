@@ -253,19 +253,19 @@
 					url:window.config.baseUrl+"/admin/adduserauthurl",
 					validate:s.validateData,
 					data:{
-						actionname: s.actionname,
-	                    englishname:s.englishname,
-	                    parentactionid:s.parentactionid,
-	                    actionurl:s.actionurl,
-	                    actionnumber:s.actionnumber,
-	                    urllevel:s.urllevel,
-	                    sort:s.sort,
-	                    isparent:s.isparent,
-	                    isdefaultauth:s.isdefaultauth,
-	                    keyword:s.keyword,
-	                    showwhere:s.showwhere,
-	                    menuid:s.menuid,
-	                    comment:s.comment,
+						actionname: s.formItem.actionname,
+	                    englishname:s.formItem.englishname,
+	                    parentactionid:s.formItem.parentactionid,
+	                    actionurl:s.formItem.actionurl,
+	                    actionnumber:s.formItem.actionnumber,
+	                    urllevel:s.formItem.urllevel,
+	                    sort:s.formItem.sort,
+	                    isparent:s.formItem.isparent,
+	                    isdefaultauth:s.formItem.isdefaultauth,
+	                    keyword:s.formItem.keyword,
+	                    showwhere:s.formItem.showwhere,
+	                    menuid:s.formItem.menuid,
+	                    comment:s.formItem.comment,
 					},
 					fn(data){
 						if(data.getret === 0){
@@ -283,7 +283,8 @@
 
 			},
 			ok () {
-                this.$Message.info('Clicked ok');
+				this.getaddColumns();
+                //this.$Message.info('Clicked ok');
 
             },
             cancel () {
