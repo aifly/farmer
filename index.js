@@ -36,6 +36,7 @@ const router = new VueRouter({
   routes: [
     {path: '*', name: 'error', component: FError },
     { path: '/login/', name: 'login', component: Login, props: true },
+    { path: '/', name: 'login', component: Login, props: true },
 	{ path: '/home/', name: 'home', component: Home, props: true },
 	{ path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
     { path: '/console/', name: 'console', component: Console, props: true },

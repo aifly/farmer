@@ -30,8 +30,8 @@ var symbinUtil = {
 				this.clearCookie('login');
 				window.location.hash = '/login';
 			}else{
-				option.fn && option.fn(dt);
 			}
+			option.fn && option.fn(dt);
 		})
 	},
 	setCookie(cname, cvalue, exdays){

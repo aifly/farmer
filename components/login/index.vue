@@ -5,7 +5,7 @@
 			<Row type='flex'>
 				<Col span='16'>
 					<div @mousemove='mousemove($event)' @mouseout='isMove = false' class="symbin-login-scene" ref='scene' :style='{height:viewH+"px"}'>
-						<div hidden="" class="symbin-login-title">
+						<div  class="symbin-login-title">
 							<img :src="imgs.loginTitle">
 						</div>
 					</div>
@@ -138,7 +138,7 @@
 							_this.$Message.success('登录成功~')
 							_this.isLogined = true;
 						}else{
-							_this.toastError('用户名或密码错误');
+							_this.toastError(data.getmsg);
 						}
 					}
 				})
@@ -310,10 +310,12 @@
 
 		},
 		mounted(){
+
  			setTimeout(()=>{
  				//console.log( Vue.obserable )
- 				this.initWebgl();
  			},1000)
+ 			
+ 			this.initWebgl();
 
  			
 		}

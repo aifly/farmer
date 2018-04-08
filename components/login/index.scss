@@ -23,9 +23,9 @@ $color: #be0000;
 
 	.symbin-login-title{
 		@include pos(a);
-		width: 40%;
-		top: 20vh;
-		left: 28%;
+		width: 50%;
+		top: 12vh;
+		left: 23%;
 	}
 
 	.symbin-login-C{
@@ -39,18 +39,20 @@ $color: #be0000;
 			top: 50%;
 			@include transform(translate3d(-50%,-50%,0));
 			background: rgba(255,255,255,.3);
-			padding:60px 40px;
+			padding:8vh 40px;
 			box-shadow:0 0 10px rgba(0,0,0,.4);
+
 			h1{
 				width: 40%;
 				text-align: center;
 				margin: 0 auto 80px;
 			}
+			width: 75%;
 			$color:#67b5d7;
 			.symbin-form-item{
 				
 				margin-top:50px;
-				width: 300px;
+				width: 100%;
 				input{
 					background: transparent;
 					border:none;
