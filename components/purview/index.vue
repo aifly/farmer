@@ -9,52 +9,61 @@
 		    </Row>
 		</div>
 		<Modal
-	        v-model="modal1"
-	        title="新增权限"
+	        v-model="modal1"	       
 	        @on-ok="ok"
 	        @on-cancel="cancel"
 	        width="800">
-	        
+	        <p slot="header">
+	            <span>{{titlemodal}}</span>
+	        </p>
 			<div class="symbin-purview-addinfo">
 				<Form ref="formItem" :model="formItem" :label-width="80">
 					<Row>
-						<Col span="8">
+						<Col span="11">
 							<FormItem label="中文名称">
 					            <Input v-model="formItem.actionname" placeholder="中文名称"></Input>
 					        </FormItem>
 						</Col>
-						<Col span="8">
+						<Col span="1"></Col>
+						<Col span="11">
 							<FormItem label="英文名称">
 					            <Input v-model="formItem.englishname" placeholder="英文名称"></Input>
 					        </FormItem>
 						</Col>
-						<Col span="8">
-							<FormItem label="上一级">
-					            <Select v-model="formItem.parentactionid" placeholder="请选择父级">
-							        <Option v-for="item in parentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-							    </Select>
-					        </FormItem>
-						</Col>
+						
 					</Row>
-			        <FormItem label="URL地址">
-			            <Input v-model="formItem.actionurl" placeholder="权限url地址"></Input>
-			        </FormItem>
-			        <Row>
-			        	<Col span="11">
+					<Row>
+						<Col span="11">
+							<FormItem label="URL地址">
+				            <Input v-model="formItem.actionurl" placeholder="权限url地址"></Input>
+				        </FormItem>
+						</Col>
+						<Col span="11">
 					        <FormItem label="编号">
 					            <Input v-model="formItem.actionnumber" placeholder="权限编号"></Input>
 					        </FormItem>
 			        	</Col>
+					</Row>	        	
+			        <Row>
+						<Col span="11">
+						    <FormItem label="权限级别">
+					            <Select v-model="formItem.urllevel" placeholder="请选择级别">
+							        <Option v-for="item in levelList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+							    </Select>
+							    </FormItem>
+				        </Col>
+					
+					    
 			        	<Col span="11">
-					        <FormItem label="权限级别">
-					            <RadioGroup v-model="formItem.urllevel">
-					                <Radio label="0">第一层</Radio>
-					                <Radio label="1">第二层【注：用于树型结构】</Radio>
-					            </RadioGroup>					            
-					        </FormItem>
-			        	</Col>
+			        		<FormItem label="上一级">			
+				            <Select v-model="formItem.parentactionid" placeholder="请选择父级">
+						        <Option v-for="item in parentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+						    </Select>
+						    </FormItem>
+					    </Col>
 			        </Row>
-
+					
+						
 			        <Row>
 			        	<Col span="11">
 					        <FormItem label="排序">
@@ -102,11 +111,14 @@
 					        </FormItem>
 			        	</Col>
 			        </Row>
-
+					<FormItem label="所属作品" v-show="isShow">
+			            <Input v-model="formItem.worksid" placeholder="所属作品"></Input>
+			        </FormItem>
 			        <FormItem label="备注">
 			            <Input v-model="formItem.comment" placeholder="备注"></Input>
 			        </FormItem>
 		    	</Form>
+		    	<p style="text-align:center;">提示：权限级别，用于树型结构中的层级关系,0:第一层,1:第二层</p>
 	    	</div>
 	    </Modal>
 		<div class="top20"></div>
@@ -127,34 +139,23 @@
 
 		data(){
 			return {
-				modal1: false,
-				currentIndex:'',
-				parentList: [
-                    {
-                        value: '1',
-                        label: 'New York'
-                    },
-                    {
-                        value: '2',
-                        label: 'London'
-                    },
-                    {
-                        value: '3',
-                        label: 'Sydney'
-                    },
-                    {
-                        value: '4',
-                        label: 'Ottawa'
-                    },
-                    {
-                        value: '5',
-                        label: 'Paris'
-                    },
-                    {
-                        value: '6',
-                        label: 'Canberra'
-                    }
-                ],
+				status:'1',//权限状态,默认为有效
+				modal1: false,//默认关闭对话框
+				currentIndex:'',//当前数据标识,默认为空
+				titlemodal:'新增权限',
+				isShow:false,
+				isParents:false,
+				levelList:[{
+					'value':'0',
+					'label':'第一层'
+				},{
+					'value':'1',
+					'label':'第二层'
+				}],
+				parentList: [{
+					'value':'',
+					'label':'请选择父级'
+				}],
 				formItem: {
                     actionname: '',
                     englishname:'',
@@ -172,12 +173,12 @@
                 },
 				columns1: [
 					{
-                        title: '权限ID',
-                        key: 'actionid'
+                        title: '序号',
+                        key: 'sort'
                     },
                     {
-                        title: '父级权限ID',
-                        key: 'parentactionid'
+                        title: '权限ID',
+                        key: 'actionid'
                     },
                     {
                         title: '中文名称',
@@ -204,19 +205,24 @@
                     	key:'createtime',
                     },
                     {
-                        title: '状态',
-                        key: 'status'
+                        title: '权限状态',
+                        key: 'status',
+                        render:(h,params)=>{
+                        	return h('div',[
+                        		h('span',params.row.status==1?'有效':'无效')
+                        	]);
+                        }
                     },
                     {
-                        title: 'Action',
+                        title: '操作',
                         key: 'action',
-                        width: 150,
+                        width: 200,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {
-                                        type: 'primary',
+                                        type: 'default',
                                         size: 'small'
                                     },
                                     style: {
@@ -225,14 +231,31 @@
                                     on: {
                                         click: () => {
                                             this.show(params.index);
-                                            console.log(params,'params');
+                                            console.log(params.index,'params.index');
                                         }
                                     }
                                 }, '修改'),
                                 h('Button', {
                                     props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        display:params.row.status==1?'none':'inline',
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.recovery(params.row.actionid);                                            
+                                        }
+                                    }
+                                }, '恢复'),
+                                h('Button', {
+                                    props: {
                                         type: 'error',
                                         size: 'small'
+                                    },
+                                    style: {
+                                        display:params.row.status==1?'line':'none',
                                     },
                                     on: {
                                         click: () => {
@@ -292,36 +315,37 @@
 				})				
 
 			},
-			open(){
+			open(){//打开新增对话框
 				var s = this;
 				s.modal1 = true;
-                s.formItem.actionname='';
-                s.formItem.englishname='';
-                s.formItem.parentactionid='';
-                s.formItem.actionurl='';
-                s.formItem.actionnumber='';
-                s.formItem.urllevel='';
-                s.formItem.sort='';
-                s.formItem.isparent='';
-                s.formItem.isdefaultauth='';
-                s.formItem.keyword='';
-                s.formItem.showwhere='';
-                s.formItem.menuid='';
-                s.formItem.comment='';
+				s.titlemodal="新增权限";
+				s.isShow=false;//隐藏所属作品			
+                s.formItem={
+                    actionname: '',
+                    englishname:'',
+                    parentactionid:'',
+                    actionurl:'',
+                    actionnumber:'',
+                    urllevel: '0',
+                    sort:'',
+                    isparent:'1',
+                    isdefaultauth:'1',
+                    keyword:'',
+                    showwhere:'1',
+                    menuid:'',
+                    comment:'',
+                }
 			},
 			ok () {
 				var s = this;
-				//this.add();
-                //this.$Message.info('Clicked ok');
                 if(s.currentIndex!=''){
-
+                	this.edit(s.currentIndex);
                 }else{
                 	this.add();
                 }
-
             },
             cancel () {
-                this.$Message.info('Clicked cancel');
+                this.$Message.info('对话框已关闭');
             },
             custom () {
                 this.$Modal.confirm({
@@ -331,36 +355,33 @@
                     cancelText: '取消'
                 });
             },
-            getColumnslist(rak,fn){//获取数据
+            getListData(rak,fn){//获取数据
 				var s=this;
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/getauthllist",
 					type:'post',
 					validate:s.validateData,
 					data:{
-						actionid:s.actionid,
-						parentactionid:s.parentactionid,
-						actionname:s.actionname,
-						englishname:s.englishname,
-						actionnumber:s.actionnumber,
-						urllevel:s.urllevel,
-						actionurl:s.actionurl,
-						createuserid:s.createuserid,
-						createtime:s.createtime,
-						updatauserid:s.updatauserid,
-						updatatime:s.updatatime,
-						sort:s.sort,
-						isparent:s.isparent,
-						isdefaultauth:s.isdefaultauth,
-						showwhere:s.showwhere,
-						menuid:s.menuid,
-						status:s.status,
+						q:Date.parse(new Date()),
 					},
 					fn(data){
 						
 						if(data.getret===0){
-							console.log(data,'data');
+							//console.log(data,'data');
 							s.listData=data.list;
+							s.parentList=[{
+								'value':'',
+								'label':'请选择父级'
+							}];//父级权限数据
+							data.list.forEach((value,key)=>{
+								if(value.urllevel==0){
+									s.parentList.push({										
+										'value':value.actionid,
+										'label':value.actionname
+									})
+								}
+								
+					　　　　});
 						}
 						else{
 
@@ -381,43 +402,27 @@
 				var s = this;
 				s.modal1=true;
 				s.currentIndex=this.listData[index].actionid;
-				console.log(s.currentIndex,'s.currentIndex');
-				s.formItem.actionname=s.listData[index].actionname;
-				s.formItem.englishname=s.listData[index].englishname;
-				s.formItem.parentactionid=s.listData[index].parentactionid;
-				s.formItem.actionurl=s.listData[index].actionurl;
-				s.formItem.actionnumber=s.listData[index].actionnumber;
-				s.formItem.urllevel=s.listData[index].urllevel;
-				s.formItem.sort=s.listData[index].sort;
-				s.formItem.isparent=s.listData[index].isparent;
-				s.formItem.isdefaultauth=s.listData[index].isdefaultauth;
-				s.formItem.keyword=s.listData[index].keyword;
-				s.formItem.showwhere=s.listData[index].showwhere;
-				s.formItem.menuid=s.listData[index].menuid;
-				s.formItem.comment=s.listData[index].comment;
-				/*var html='';
-				html+="<div class=symbin-purview-det>";
-				html+=`权限id：${this.listData[index].actionid}`;
-				html+=`<br>中文名称：${this.listData[index].actionname}`;
-				html+=`<br>英文名称：${this.listData[index].englishname}`;
-				html+=`<br>父级id${this.listData[index].parentactionid}`;
-				html+=`<br>url地址：${this.listData[index].actionurl}`;
-				html+=`<br>所属作品：${this.listData[index].worksid}`;
-				html+=`<br>权限编号：${this.listData[index].actionnumber}`;
-				html+=`<br>权限等级：${this.listData[index].urllevel}`;
-				html+=`<br>排序：${this.listData[index].sort}`;
-				html+=`<br>是否一级权限：${this.listData[index].isparent}`;
-				html+=`<br>关键词：${this.listData[index].keyword}`;
-				html+=`<br>栏目编号：${this.listData[index].menuid}`;
-				html+=`<br>备注：${this.listData[index].comment}`;
-				html+="</div>";*/
-				/*
-				this.$Modal.info({
-                    title: '查看权限',
-                    content: html
-                })*/
+				s.titlemodal="修改权限";
+				s.isShow=true;//显示所属作品
+				//console.log(s.listData[index].actionid,'s.currentIndex');
+				s.formItem={
+					actionname:s.listData[index].actionname,
+					englishname:s.listData[index].englishname,
+					parentactionid:s.listData[index].parentactionid,
+					actionurl:s.listData[index].actionurl,
+					actionnumber:s.listData[index].actionnumber,
+					urllevel:String(s.listData[index].urllevel),
+					sort:s.listData[index].sort,
+					isparent:String(s.listData[index].isparent),
+					isdefaultauth:String(s.listData[index].isdefaultauth),
+					keyword:s.listData[index].keyword,
+					showwhere:String(s.listData[index].showwhere),
+					menuid:s.listData[index].menuid,
+					worksid:s.listData[index].worksid,
+					comment:s.listData[index].comment
+				}
 			},
-			edit(actionid){
+			edit(actionid){//编辑
 				var s = this;
 				var formparams={
 					actionid:actionid,
@@ -425,13 +430,14 @@
                     englishname:s.formItem.englishname,
                     parentactionid:s.formItem.parentactionid,
                     actionurl:s.formItem.actionurl,
+                    worksid:s.formItem.worksid,//所属作品
                     actionnumber:s.formItem.actionnumber,
                     urllevel:s.formItem.urllevel,
                     sort:s.formItem.sort,
                     isparent:s.formItem.isparent,
-                    isdefaultauth:s.formItem.isdefaultauth,
+                    isdefaultauth:s.formItem.isdefaultauth,//是否默认权限
                     keyword:s.formItem.keyword,
-                    showwhere:s.formItem.showwhere,
+                    showwhere:s.formItem.showwhere,//权限显示位置
                     menuid:s.formItem.menuid,
                     comment:s.formItem.comment,
 				}
@@ -442,11 +448,12 @@
 					fn(data){
 						if(data.getret === 0){
 							s.$Message.success(data.getmsg);
+							s.getListData();
 						}
 						else{
 							s.$Message.error({
 								content:data.getmsg,
-								duration: 10
+								duration: 5
 							});
 						}
 					}
@@ -460,26 +467,48 @@
 					validate:s.validateData,
 					data:{
 						actionids:actionids,
-						deltype:1,
 					},
 					fn(data){						
 						if(data.getret===0){
-							console.log(data,'data');
-							s.listData=data.list;
+							s.$Message.success(data.getmsg);
+							s.getListData();
 						}
 						else{
 							s.$Message.error({
 								content:data.getmsg,
-								duration: 10
+								duration: 5
 							});
 						}						
 					}
 				})
-			}			
+			},
+			recovery(actionids){//恢复
+				var s = this;
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/recoveryauth",
+					type:'post',
+					validate:s.validateData,
+					data:{
+						actionids:actionids,
+					},
+					fn(data){						
+						if(data.getret===0){
+							s.$Message.success(data.getmsg);
+							s.getListData();
+						}
+						else{
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 5
+							});
+						}						
+					}
+				})
+			}
+
 		},
 		mounted(){//页面加载完成后显示
-			this.getColumnslist();//获取列表
-			
+			this.getListData();//获取列表
 		},
 	}
 </script>
