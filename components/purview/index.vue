@@ -166,6 +166,7 @@
                         type: 'expand',
                         width: 50,
                         render: (h, params) => {
+                        	this.sublistData=[];
                         	this.sublistData=params.row.children;//子列表数据
                             return h(expandRow, {
                                 props: {
@@ -570,7 +571,7 @@
 			},
 			subshow(index){//打开子列表修改对话框
 				var s = this;
-				s.modal1=true;
+				s.modal1=true;				
 				s.currentIndex=this.sublistData[index].actionid;
 				s.titlemodal="修改权限";
 				s.formItem={
