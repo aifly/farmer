@@ -123,6 +123,7 @@
 	import symbinUtil from '../lib/util';
 	import Vue from 'vue';
 	//import symbinTable from './symbintable.vue';
+	import expandRow from './table-expand.vue';
 	export default {
 		props:['obserable'],
 		name:'zmitiindex',
@@ -162,6 +163,131 @@
                 },
 				columns1: [
 					{
+                        type: 'expand',
+                        width: 50,
+                        render: (h, params) => {
+                            return h(expandRow, {
+                                props: {
+                                    row:params.row,
+                                    children:params.row.children,
+                                    subcolumns: [{
+					                    title: '序号',
+					                    key: 'sort',
+					                    width:80,
+					                },
+					                {
+					                    title: '权限ID',
+					                    key: 'actionid',
+					                    width:150,
+					                },
+					                {
+				                    	title:'父级权限ID',
+				                    	key:'parentactionid',
+				                    	width:150,
+				                    },
+					                {
+					                    title: '中文名',
+					                    key: 'actionname',
+					                    width:150,
+					                },
+					                {
+				                        title: '英文名称',
+				                        key: 'englishname',
+				                        width:120,
+				                    },
+				                    {
+				                        title: '权限编号',
+				                        key: 'actionnumber',
+				                        width:120,
+				                    },
+									{
+				                        title: '级别',
+				                        key: 'urllevel',
+				                        width:80,
+				                        align: 'center',
+				                    },
+				                    {
+				                        title: '权限地址',
+				                        key: 'actionurl',
+				                        width:150,
+				                    },
+				                    {
+				                        title: '状态',
+				                        key: 'status',
+				                        width:80,
+				                        render:(z,text)=>{
+				                        	return z('div',[
+				                        		z('span',text.row.status==1?'有效':'无效')
+				                        	]);
+				                        }
+				                    },
+				                    {
+				                        title: '显示位置',
+				                        key: 'showwhere',
+				                        render:(z,text)=>{
+				                        	return z('div',[
+				                        		z('span',text.row.showwhere=='1'?'顶部导航':'左侧菜单')
+				                        	]);
+				                        }
+				                    },
+				                    {
+				                        title: '操作',
+				                        key: 'action',
+				                        align: 'left',
+				                        render:(z,text)=>{
+				                            return z('div', [
+				                                z('Button', {
+				                                    props: {
+				                                        type: 'default',
+				                                        size: 'small'
+				                                    },
+				                                    style: {
+				                                        marginRight: '5px'
+				                                    },
+				                                    on: {
+				                                        click: () => {
+				                                            this.show(text.index);
+				                                            console.log(text.index,'text.index');
+				                                        }
+				                                    }
+				                                }, '修改'),
+				                                z('Button', {
+				                                    props: {
+				                                        type: 'success',
+				                                        size: 'small'
+				                                    },
+				                                    style: {
+				                                        display:text.row.status==1?'none':'inline',
+				                                    },
+				                                    on: {
+				                                        click: () => {
+				                                            this.recovery(text.row.actionid);                                            
+				                                        }
+				                                    }
+				                                }, '恢复'),
+				                                z('Button', {
+				                                    props: {
+				                                        type: 'error',
+				                                        size: 'small'
+				                                    },
+				                                    style: {
+				                                        display:text.row.status==1?'inline':'none',
+				                                    },
+				                                    on: {
+				                                        click: () => {
+				                                            this.remove(text.row.actionid);
+				                                            
+				                                        }
+				                                    }
+				                                }, '删除')
+				                            ]);
+				                        }
+				                    }]
+                                }
+                            })
+                        }
+                    },
+					{
                         title: '序号',
                         key: 'sort',
                         width:80,
@@ -172,8 +298,14 @@
                         width:150,                        
                     },
                     {
+                    	title:'父级权限ID',
+                    	key:'parentactionid',
+                    	width:150,
+                    },
+                    {
                         title: '中文名称',
                         key: 'actionname',
+                        width:150,
                         render:(h,params)=>{
                         	return h('div',[
                         		h('a',{
@@ -182,7 +314,7 @@
                                     },
                         			on: {
                                         click: () => {
-                                            this.view(params.index);
+                                            this.detail(params.index);
                                         }
                                     }
                         		},params.row.actionname)
@@ -203,15 +335,13 @@
                         title: '级别',
                         key: 'urllevel',
                         width:80,
+                        align: 'center',
                     },
                     {
                         title: '权限地址',
-                        key: 'actionurl'
-                    },
-                    {
-                    	title:'创建时间',
-                    	key:'createtime',
-                    },
+                        key: 'actionurl',
+                        width:150,
+                    },                    
                     {
                         title: '状态',
                         key: 'status',
@@ -234,8 +364,7 @@
                     {
                         title: '操作',
                         key: 'action',
-                        width: 200,
-                        align: 'center',
+                        align: 'left',
                         render: (h, params) => {
                             return h('div', [
                                 h('Button', {
@@ -273,7 +402,7 @@
                                         size: 'small'
                                     },
                                     style: {
-                                        display:params.row.status==1?'line':'none',
+                                        display:params.row.status==1?'inline':'none',
                                     },
                                     on: {
                                         click: () => {
@@ -290,6 +419,7 @@
 			}
 		},
 		components:{
+			expandRow
 		},
 
 		beforeCreate(){
@@ -356,9 +486,9 @@
 			ok () {
 				var s = this;
                 if(s.currentIndex!=''){
-                	this.edit(s.currentIndex);
+                	this.edit(s.currentIndex);//保存修改
                 }else{
-                	this.add();
+                	this.add();//保存新增
                 }
             },
             cancel () {
@@ -384,20 +514,49 @@
 					fn(data){
 						
 						if(data.getret===0){
-							//console.log(data,'data');
-							s.listData=data.list;
+							console.log(data,'data');
+							//s.listData=data.list;
+							var firstdata=data.list;//只第一层
+							var newdata=[];//第二层
 							s.parentList=[{
 								'value':'',
 								'label':'请选择父级'
 							}];//父级权限数据
-							data.list.forEach((value,key)=>{
+							data.list.forEach((v,k)=>{
+								if(v.children){
+									console.log(k,'k');
+									v.children.forEach((value,key)=>{
+										newdata.push({										
+											'actionid':value.actionid,
+											'parentactionid':value.parentactionid,
+											'actionname':value.actionname,
+											'englishname':value.englishname,
+											'actionnumber':value.actionnumber,
+											'urllevel':value.urllevel,
+											'actionurl':value.actionurl,
+											'createuserid':value.createuserid,
+											'createtime':value.createtime,
+											'updatauserid':value.updatauserid,
+											'updatatime':value.updatatime,
+											'sort':value.sort,
+											'isparent':value.isparent,
+											'isdefaultauth':value.isdefaultauth,
+											'showwhere':value.showwhere,
+											'menuid':value.menuid,
+											'status':value.status,
+										})
+									})
+								}
+															
+					　　　　});
+							s.listData=firstdata.concat(newdata);//全部合并
+							data.list.forEach((value,key)=>{						
 								if(value.urllevel==0){
 									s.parentList.push({										
 										'value':value.actionid,
 										'label':value.actionname
 									})
-								}
-								
+								}								
 					　　　　});
 						}
 						else{
@@ -415,7 +574,7 @@
 					}
 				})
 			},
-			show(index){//查看
+			show(index){//打开修改对话框
 				var s = this;
 				s.modal1=true;
 				s.currentIndex=this.listData[index].actionid;
@@ -437,7 +596,7 @@
 					comment:s.listData[index].comment
 				}
 			},
-			view(index){
+			detail(index){//详情
 				var s = this;
 				var html='';
 				var urllevel,isparent,isdefaultauth,showwhere;

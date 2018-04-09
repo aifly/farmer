@@ -24,6 +24,21 @@
 		padding:20px 0;
 		width:750px;
 	}
+	td.ivu-table-expanded-cell{
+		padding-top:0;
+		padding-bottom:0;
+		padding-right:0;
+		background:none;
+	}
+	.symbin-purview-subtable{
+		thead{
+			display:none;
+		}
+		.ivu-table-wrapper{
+			border-top:none;
+			border-bottom:none;
+		}
+	}
 }
 .symbin-purview-det{
 	label{
