@@ -166,6 +166,7 @@
                         type: 'expand',
                         width: 50,
                         render: (h, params) => {
+                        	this.sublistData=params.row.children;//子列表数据
                             return h(expandRow, {
                                 props: {
                                     row:params.row,
@@ -246,8 +247,8 @@
 				                                    },
 				                                    on: {
 				                                        click: () => {
-				                                            this.show(text.index);
-				                                            console.log(text.index,'text.index');
+				                                            this.subshow(text.index);
+				                                            console.log(text.row.actionid,'text.row.actionid');
 				                                        }
 				                                    }
 				                                }, '修改'),
@@ -415,7 +416,8 @@
                         }
                     }
                 ],
-                listData: []
+                listData: [],
+                sublistData:[]
 			}
 		},
 		components:{
@@ -515,41 +517,11 @@
 						
 						if(data.getret===0){
 							console.log(data,'data');
-							//s.listData=data.list;
-							var firstdata=data.list;//只第一层
-							var newdata=[];//第二层
 							s.parentList=[{
 								'value':'',
 								'label':'请选择父级'
 							}];//父级权限数据
-							data.list.forEach((v,k)=>{
-								if(v.children){
-									console.log(k,'k');
-									v.children.forEach((value,key)=>{
-										newdata.push({										
-											'actionid':value.actionid,
-											'parentactionid':value.parentactionid,
-											'actionname':value.actionname,
-											'englishname':value.englishname,
-											'actionnumber':value.actionnumber,
-											'urllevel':value.urllevel,
-											'actionurl':value.actionurl,
-											'createuserid':value.createuserid,
-											'createtime':value.createtime,
-											'updatauserid':value.updatauserid,
-											'updatatime':value.updatatime,
-											'sort':value.sort,
-											'isparent':value.isparent,
-											'isdefaultauth':value.isdefaultauth,
-											'showwhere':value.showwhere,
-											'menuid':value.menuid,
-											'status':value.status,
-										})
-									})
-								}
-															
-					　　　　});
-							s.listData=firstdata.concat(newdata);//全部合并
+							s.listData=data.list;
 							data.list.forEach((value,key)=>{						
 								if(value.urllevel==0){
 									s.parentList.push({										
@@ -579,7 +551,7 @@
 				s.modal1=true;
 				s.currentIndex=this.listData[index].actionid;
 				s.titlemodal="修改权限";
-				//console.log(s.listData[index].actionid,'s.currentIndex');
+				//console.log(index,'s.currentIndex-show');
 				s.formItem={
 					actionname:s.listData[index].actionname,
 					englishname:s.listData[index].englishname,
@@ -594,6 +566,27 @@
 					showwhere:String(s.listData[index].showwhere),
 					menuid:s.listData[index].menuid,
 					comment:s.listData[index].comment
+				}
+			},
+			subshow(index){//打开子列表修改对话框
+				var s = this;
+				s.modal1=true;
+				s.currentIndex=this.sublistData[index].actionid;
+				s.titlemodal="修改权限";
+				s.formItem={
+					actionname:s.sublistData[index].actionname,
+					englishname:s.sublistData[index].englishname,
+					parentactionid:s.sublistData[index].parentactionid,
+					actionurl:s.sublistData[index].actionurl,
+					actionnumber:s.sublistData[index].actionnumber,
+					urllevel:String(s.sublistData[index].urllevel),
+					sort:s.sublistData[index].sort,
+					isparent:String(s.sublistData[index].isparent),
+					isdefaultauth:String(s.sublistData[index].isdefaultauth),
+					keyword:s.sublistData[index].keyword,
+					showwhere:String(s.sublistData[index].showwhere),
+					menuid:s.sublistData[index].menuid,
+					comment:s.sublistData[index].comment
 				}
 			},
 			detail(index){//详情
