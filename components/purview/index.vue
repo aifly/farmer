@@ -163,27 +163,46 @@
 				columns1: [
 					{
                         title: '序号',
-                        key: 'sort'
+                        key: 'sort',
+                        width:80,
                     },
                     {
                         title: '权限ID',
-                        key: 'actionid'
+                        key: 'actionid',
+                        width:150,                        
                     },
                     {
                         title: '中文名称',
-                        key: 'actionname'
+                        key: 'actionname',
+                        render:(h,params)=>{
+                        	return h('div',[
+                        		h('a',{
+                        			style: {
+                                        color: '#2d8cf0'
+                                    },
+                        			on: {
+                                        click: () => {
+                                            this.view(params.index);
+                                        }
+                                    }
+                        		},params.row.actionname)
+                        	]);
+                        }
                     },
                     {
                         title: '英文名称',
-                        key: 'englishname'
+                        key: 'englishname',
+                        width:120,
                     },
                     {
                         title: '权限编号',
-                        key: 'actionnumber'
+                        key: 'actionnumber',
+                        width:120,
                     },
                     {
-                        title: '权限级别',
-                        key: 'urllevel'
+                        title: '级别',
+                        key: 'urllevel',
+                        width:80,
                     },
                     {
                         title: '权限地址',
@@ -194,11 +213,21 @@
                     	key:'createtime',
                     },
                     {
-                        title: '权限状态',
+                        title: '状态',
                         key: 'status',
+                        width:80,
                         render:(h,params)=>{
                         	return h('div',[
                         		h('span',params.row.status==1?'有效':'无效')
+                        	]);
+                        }
+                    },
+                    {
+                        title: '显示位置',
+                        key: 'showwhere',
+                        render:(h,params)=>{
+                        	return h('div',[
+                        		h('span',params.row.showwhere=='1'?'顶部导航':'左侧菜单')
                         	]);
                         }
                     },
@@ -407,6 +436,56 @@
 					menuid:s.listData[index].menuid,
 					comment:s.listData[index].comment
 				}
+			},
+			view(index){
+				var s = this;
+				var html='';
+				var urllevel,isparent,isdefaultauth,showwhere;
+				if(this.listData[index].urllevel=='1'){
+					urllevel='第二层'
+				}else{
+					urllevel='第一层'
+				}
+				if(this.listData[index].isparent=='1'){
+					isparent='接口'
+				}else{
+					isparent='接口分类名'
+				}
+				if(this.listData[index].isdefaultauth=='1'){
+					isdefaultauth='是'
+				}else{
+					isdefaultauth='否'
+				}
+				if(this.listData[index].showwhere=='1'){
+					showwhere='顶部导航菜单'
+				}else{
+					showwhere='左侧菜单'
+				}
+				html+="<div class=symbin-purview-det>";
+				html+=`<label>权限id：</label>${this.listData[index].actionid}`;
+				html+=`<br><label>中文名称：</label>${this.listData[index].actionname}`;
+				html+=`<br><label>英文名称：</label>${this.listData[index].englishname}`;
+				html+=`<br><label>权限父级id：</label>${this.listData[index].parentactionid}`;							
+				html+=`<br><label>权限编号：</label>${this.listData[index].actionnumber}`;
+				html+=`<br><label>权限级别：</label>${urllevel}`;
+				html+=`<br><label>url地址：</label>${this.listData[index].actionurl}`;	
+				html+=`<br><label>创建人：</label>${this.listData[index].createuserid}`;
+				html+=`<br><label>创建时间：</label>${this.listData[index].createtime}`;
+				html+=`<br><label>更新人：</label>${this.listData[index].updatauserid}`;
+				html+=`<br><label>更新时间段：</label>${this.listData[index].updatatime}`;
+				html+=`<br><label>排序：</label>${this.listData[index].sort}`;
+				html+=`<br><label>是否是接口权限：</label>${isparent}`;
+				html+=`<br><label>是否默认权限：</label>${isdefaultauth}`;
+				html+=`<br><label>显示位置：</label>${showwhere}`;
+				html+=`<br><label>关键词：</label>${this.listData[index].keyword}`;
+				html+=`<br><label>栏目编号：</label>${this.listData[index].menuid}`;
+				html+=`<br><label>状态：</label>${this.listData[index].status}`;
+				html+=`<br><label>备注：</label>${this.listData[index].comment}`;
+				html+="</div>";
+				this.$Modal.success({
+                    title: '查看权限',
+                    content: html
+                })
 			},
 			edit(actionid){//编辑
 				var s = this;
