@@ -29,41 +29,36 @@
 							<FormItem label="英文名称">
 					            <Input v-model="formItem.englishname" placeholder="英文名称"></Input>
 					        </FormItem>
-						</Col>
-						
+						</Col>						
 					</Row>
 					<Row>
 						<Col span="11">
-							<FormItem label="URL地址">
-				            <Input v-model="formItem.actionurl" placeholder="权限url地址"></Input>
-				        </FormItem>
-						</Col>
+						    <FormItem label="上一级">			
+					            <Select v-model="formItem.parentactionid" placeholder="请选择父级">
+							        <Option v-for="item in parentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+							    </Select>
+						    </FormItem>
+				        </Col>					    
+			        	<Col span="11">
+			        		<FormItem label="URL地址">
+					            <Input v-model="formItem.actionurl" placeholder="权限url地址"></Input>
+					        </FormItem>
+					    </Col>
+			        </Row>
+					<Row>
 						<Col span="11">
-					        <FormItem label="编号">
+							<FormItem label="编号">
 					            <Input v-model="formItem.actionnumber" placeholder="权限编号"></Input>
 					        </FormItem>
-			        	</Col>
-					</Row>	        	
-			        <Row>
+						</Col>
 						<Col span="11">
-						    <FormItem label="权限级别">
+					        <FormItem label="权限级别">
 					            <Select v-model="formItem.urllevel" placeholder="请选择级别">
 							        <Option v-for="item in levelList" :value="item.value" :key="item.value">{{ item.label }}</Option>
 							    </Select>
-							    </FormItem>
-				        </Col>
-					
-					    
-			        	<Col span="11">
-			        		<FormItem label="上一级">			
-				            <Select v-model="formItem.parentactionid" placeholder="请选择父级">
-						        <Option v-for="item in parentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-						    </Select>
 						    </FormItem>
-					    </Col>
-			        </Row>
-					
-						
+			        	</Col>
+					</Row>	
 			        <Row>
 			        	<Col span="11">
 					        <FormItem label="排序">
@@ -79,7 +74,6 @@
 					        </FormItem>
 			        	</Col>
 			        </Row>
-
 			        <Row>
 			        	<Col span="11">					        
 					        <FormItem label="关键词">
@@ -95,7 +89,6 @@
 					        </FormItem>
 			        	</Col>
 			        </Row>
-
 			        <Row>
 			        	<Col span="11">					        
 					        <FormItem label="栏目编号">
@@ -111,14 +104,11 @@
 					        </FormItem>
 			        	</Col>
 			        </Row>
-					<FormItem label="所属作品" v-show="isShow">
-			            <Input v-model="formItem.worksid" placeholder="所属作品"></Input>
-			        </FormItem>
 			        <FormItem label="备注">
 			            <Input v-model="formItem.comment" placeholder="备注"></Input>
 			        </FormItem>
 		    	</Form>
-		    	<p style="text-align:center;">提示：权限级别，用于树型结构中的层级关系,0:第一层,1:第二层</p>
+		    	<p style="text-align:center;">提示：权限级别，用于树型结构中的层级关系,0为第一层,1为第二层</p>
 	    	</div>
 	    </Modal>
 		<div class="top20"></div>
@@ -143,7 +133,6 @@
 				modal1: false,//默认关闭对话框
 				currentIndex:'',//当前数据标识,默认为空
 				titlemodal:'新增权限',
-				isShow:false,
 				isParents:false,
 				levelList:[{
 					'value':'0',
@@ -318,8 +307,7 @@
 			open(){//打开新增对话框
 				var s = this;
 				s.modal1 = true;
-				s.titlemodal="新增权限";
-				s.isShow=false;//隐藏所属作品			
+				s.titlemodal="新增权限";		
                 s.formItem={
                     actionname: '',
                     englishname:'',
@@ -403,7 +391,6 @@
 				s.modal1=true;
 				s.currentIndex=this.listData[index].actionid;
 				s.titlemodal="修改权限";
-				s.isShow=true;//显示所属作品
 				//console.log(s.listData[index].actionid,'s.currentIndex');
 				s.formItem={
 					actionname:s.listData[index].actionname,
@@ -418,7 +405,6 @@
 					keyword:s.listData[index].keyword,
 					showwhere:String(s.listData[index].showwhere),
 					menuid:s.listData[index].menuid,
-					worksid:s.listData[index].worksid,
 					comment:s.listData[index].comment
 				}
 			},
@@ -430,7 +416,6 @@
                     englishname:s.formItem.englishname,
                     parentactionid:s.formItem.parentactionid,
                     actionurl:s.formItem.actionurl,
-                    worksid:s.formItem.worksid,//所属作品
                     actionnumber:s.formItem.actionnumber,
                     urllevel:s.formItem.urllevel,
                     sort:s.formItem.sort,
