@@ -43,7 +43,7 @@
                     <Button slot="append" icon="ios-search"></Button>
                 </Input>
                 <div class="top20"></div>
-                <Table ref="selection" :columns="columns2" :data="rolelistData"></Table>
+                <Table ref="selection" height="230" :columns="columns2" :data="rolelistData"></Table>
                 <div class="top20"></div>
                 <Button @click="handleSelectAll(true)">全部</Button>
                 <Button @click="handleSelectAll(false)">反选</Button>
@@ -169,6 +169,54 @@
                     }
                 ],
                 rolelistData: [
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    },
                     {
                         name: 'Brown',                      
                         type: '地主'
