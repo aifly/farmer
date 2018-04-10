@@ -248,7 +248,7 @@
 				                                    },
 				                                    on: {
 				                                        click: () => {
-				                                            this.subshow(text.index);
+				                                            this.show(text.row.actionid);
 				                                            console.log(text.row.actionid,'text.row.actionid');
 				                                        }
 				                                    }
@@ -379,8 +379,8 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index);
-                                            console.log(params.index,'params.index');
+                                            this.show(params.row.actionid);
+                                            console.log(params.row.actionid,'params.row.actionid');
                                         }
                                     }
                                 }, '修改'),
@@ -547,48 +547,38 @@
 					}
 				})
 			},
-			show(index){//打开修改对话框
+			show(actionid){//打开修改对话框
 				var s = this;
-				s.modal1=true;
-				s.currentIndex=this.listData[index].actionid;
+				s.modal1=true;	
 				s.titlemodal="修改权限";
-				//console.log(index,'s.currentIndex-show');
-				s.formItem={
-					actionname:s.listData[index].actionname,
-					englishname:s.listData[index].englishname,
-					parentactionid:s.listData[index].parentactionid,
-					actionurl:s.listData[index].actionurl,
-					actionnumber:s.listData[index].actionnumber,
-					urllevel:String(s.listData[index].urllevel),
-					sort:s.listData[index].sort,
-					isparent:String(s.listData[index].isparent),
-					isdefaultauth:String(s.listData[index].isdefaultauth),
-					keyword:s.listData[index].keyword,
-					showwhere:String(s.listData[index].showwhere),
-					menuid:s.listData[index].menuid,
-					comment:s.listData[index].comment
-				}
-			},
-			subshow(index){//打开子列表修改对话框
-				var s = this;
-				s.modal1=true;				
-				s.currentIndex=this.sublistData[index].actionid;
-				s.titlemodal="修改权限";
-				s.formItem={
-					actionname:s.sublistData[index].actionname,
-					englishname:s.sublistData[index].englishname,
-					parentactionid:s.sublistData[index].parentactionid,
-					actionurl:s.sublistData[index].actionurl,
-					actionnumber:s.sublistData[index].actionnumber,
-					urllevel:String(s.sublistData[index].urllevel),
-					sort:s.sublistData[index].sort,
-					isparent:String(s.sublistData[index].isparent),
-					isdefaultauth:String(s.sublistData[index].isdefaultauth),
-					keyword:s.sublistData[index].keyword,
-					showwhere:String(s.sublistData[index].showwhere),
-					menuid:s.sublistData[index].menuid,
-					comment:s.sublistData[index].comment
-				}
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/getauthllist",
+					validate:s.validateData,
+					data:{
+						actionid:actionid,
+					},
+					fn(data){						
+						if(data.getret===0){
+							console.log(data.list[0],'查看本行数据');
+							s.currentIndex=actionid;
+							s.formItem={
+								actionname:data.list[0].actionname,
+								englishname:data.list[0].englishname,
+								parentactionid:data.list[0].parentactionid,
+								actionurl:data.list[0].actionurl,
+								actionnumber:data.list[0].actionnumber,
+								urllevel:String(data.list[0].urllevel),
+								sort:data.list[0].sort,
+								isparent:String(data.list[0].isparent),
+								isdefaultauth:String(data.list[0].isdefaultauth),
+								keyword:data.list[0].keyword,
+								showwhere:String(data.list[0].showwhere),
+								menuid:data.list[0].menuid,
+								comment:data.list[0].comment
+							}
+						}
+					}
+				})
 			},
 			detail(index){//详情
 				var s = this;
