@@ -29,6 +29,17 @@
 	        	</Form>
 	        </div>
 	    </Modal>
+        <Modal
+            v-model="modalperson"
+            title="人员列表"
+            @on-ok="ok"
+            @on-cancel="cancel">
+            <Transfer
+            :data="data1"
+            :target-keys="targetKeys1"
+            :render-format="render1"
+            @on-change="handleChange1"></Transfer>
+        </Modal>
 	</div>	
 </template>
 <script>
@@ -43,6 +54,7 @@
 		data(){
 			return {
 				modal1: false,
+                modalperson:false,
 				currentIndex:'',
 				formItem:{
 					name:'',
@@ -102,7 +114,8 @@
                                         marginRight: '5px'
                                     },
                                     on: {
-                                        click: () => {                                            
+                                        click: () => {
+                                            this.send(params.index);                                      
                                             console.log(params.index,'params.index');
                                         }
                                     }
@@ -122,7 +135,9 @@
                         content: 'contentcontentcontentcontent',
                         date: '2017-10-03',
                     }
-                ]
+                ],
+                data1: this.getMockData(),
+                targetKeys1: this.getTargetKeys()
 			}
 		},
 		components:{
@@ -154,6 +169,37 @@
             		content:s.listData[index].content,
             		date:s.listData[index].date,
             	}
+            },
+            send(index){//发送
+              var s = this;
+              s.modalperson=true;
+              console.log('open-personal');  
+            },
+            getMockData () {
+                let mockData = [];
+                for (let i = 1; i <= 20; i++) {
+                    mockData.push({
+                        key: i.toString(),
+                        label: 'Content ' + i,
+                        description: 'The desc of content  ' + i,
+                        disabled: Math.random() * 3 < 1
+                    });
+                }
+                return mockData;
+            },
+            getTargetKeys () {
+                return this.getMockData()
+                        .filter(() => Math.random() * 2 > 1)
+                        .map(item => item.key);
+            },
+            render1 (item) {
+                return item.label;
+            },
+            handleChange1 (newTargetKeys, direction, moveKeys) {
+                console.log(newTargetKeys);
+                console.log(direction);
+                console.log(moveKeys);
+                this.targetKeys1 = newTargetKeys;
             }
 		},
 		mounted(){//页面加载完成后显示

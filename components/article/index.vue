@@ -41,11 +41,16 @@
 			            <Input v-model="formItem.url" placeholder="网址"></Input>
 			        </FormItem>
 			        <FormItem label="状态">
-			            <Input v-model="formItem.status" placeholder="状态"></Input>
+			           <div>
+			           	<RadioGroup v-model="formItem.status">					        
+					        <Radio label="1"><span>开</span></Radio>
+					        <Radio label="0"><span>关</span></Radio>
+					    </RadioGroup>
+			           </div>
 			        </FormItem>
 	        	</Form>
 	        </div>
-	    </Modal>
+	    </Modal>	    
 	</div>	
 </template>
 <script>
@@ -59,10 +64,15 @@
 
 		data(){
 			return {
-				modal1: false,
+				modal1: false,		
 				currentIndex:'',
 				formItem:{
 					name:'',
+					pics:'',
+					tid:'',
+					position:'',
+					url:'',
+					status:'1',
 				},
 				columns1: [
                     {
@@ -74,14 +84,14 @@
                         key: 'pics',
                         render:(h,params)=>{
                         	return h('div',[                      		
-                        		h('img',{
-                        			style:{
-                        				width:'100px',
-                        				height:'30px'
-                        			},                  		
+                        		h('img',{                        			                  		
 	                    			attrs:{
 	                    				'src':params.row.pics
-	                    			}                        		
+	                    			},
+	                    			style:{
+                        				width:'100px',
+                        				height:'30px'
+                        			}                       		
                         		})
                         	])
                         }
@@ -153,7 +163,7 @@
                         tid: '横图',
                         position:'首页',                        
                         url:'/news',                        
-                        status: '开',
+                        status: '0',
                         date: '2016-10-03',
                     },
                     {
@@ -162,7 +172,7 @@
                         tid: '方图',
                         position:'首页',                        
                         url:'/news',                        
-                        status: '关',
+                        status: '1',
                         date: '2016-10-03'
                     }
                 ]
@@ -180,6 +190,7 @@
 			open(){
 				var s = this;
 				s.modal1=true;
+				s.formItem.status='1';		
 				s.currentIndex='';
 			},
 			ok () {
@@ -201,6 +212,9 @@
             		status:s.listData[index].status,
             		date:s.listData[index].date,
             	}
+            },
+            change (status) {
+                this.$Message.info('开关状态：' + status);
             }
 		},
 		mounted(){//页面加载完成后显示
