@@ -111,7 +111,10 @@
                     },                    
                     {
                         title: '状态',
-                        key: 'status'
+                        key: 'status',
+                        render:(h,params)=>{
+                        	return h('div',params.row.status==1?'开':'关')
+                        }
                     },
                     {
                         title: '时间',
