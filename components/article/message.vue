@@ -32,13 +32,26 @@
         <Modal
             v-model="modalperson"
             title="人员列表"
+            width="600"
             @on-ok="ok"
             @on-cancel="cancel">
-            <Transfer
-            :data="data1"
-            :target-keys="targetKeys1"
-            :render-format="render1"
-            @on-change="handleChange1"></Transfer>
+                <Input v-model="value13">
+                    <Select v-model="select3" slot="prepend" style="width: 80px">
+                        <Option value="0">地主</Option>
+                        <Option value="1">农夫</Option>
+                    </Select>
+                    <Button slot="append" icon="ios-search"></Button>
+                </Input>
+                <div class="top20"></div>
+                <Table ref="selection" :columns="columns2" :data="rolelistData"></Table>
+                <div class="top20"></div>
+                <Button @click="handleSelectAll(true)">全部</Button>
+                <Button @click="handleSelectAll(false)">反选</Button>
+                <div style="margin: 10px;overflow: hidden">
+                    <div style="float: right;">
+                        <Page :total="100" :current="1" @on-change="changePage"></Page>
+                    </div>
+                </div>              
         </Modal>
 	</div>	
 </template>
@@ -55,6 +68,9 @@
 			return {
 				modal1: false,
                 modalperson:false,
+                value13: '',
+                select3: '0',
+                fruit: ['苹果'],
 				currentIndex:'',
 				formItem:{
 					name:'',
@@ -136,8 +152,32 @@
                         date: '2017-10-03',
                     }
                 ],
-                data1: this.getMockData(),
-                targetKeys1: this.getTargetKeys()
+                columns2: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '名称',
+                        key: 'name'
+                    },
+                    {
+                        title: '类别',
+                        key: 'type',
+                        width:150,
+                    }
+                ],
+                rolelistData: [
+                    {
+                        name: 'Brown',                      
+                        type: '地主'
+                    },
+                    {
+                        name: 'John',                      
+                        type: '农夫'
+                    }
+                ]
 			}
 		},
 		components:{
@@ -175,31 +215,11 @@
               s.modalperson=true;
               console.log('open-personal');  
             },
-            getMockData () {
-                let mockData = [];
-                for (let i = 1; i <= 20; i++) {
-                    mockData.push({
-                        key: i.toString(),
-                        label: 'Content ' + i,
-                        description: 'The desc of content  ' + i,
-                        disabled: Math.random() * 3 < 1
-                    });
-                }
-                return mockData;
+            handleSelectAll (status) {
+                this.$refs.selection.selectAll(status);
             },
-            getTargetKeys () {
-                return this.getMockData()
-                        .filter(() => Math.random() * 2 > 1)
-                        .map(item => item.key);
-            },
-            render1 (item) {
-                return item.label;
-            },
-            handleChange1 (newTargetKeys, direction, moveKeys) {
-                console.log(newTargetKeys);
-                console.log(direction);
-                console.log(moveKeys);
-                this.targetKeys1 = newTargetKeys;
+            changePage () {
+                
             }
 		},
 		mounted(){//页面加载完成后显示
