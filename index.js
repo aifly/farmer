@@ -20,6 +20,7 @@ import Farmer1 from './components/farmer1/index';
 import Rolepanel from './components/rolepanel/index';
 import Role from './components/role/index';
 import Purview from './components/purview/index';
+import Article from './components/article/index';
 import iView from 'iview';
 import VueRouter from 'vue-router'
 import './components/css/index.css';
@@ -44,7 +45,8 @@ const router = new VueRouter({
     
     { path: '/role/', name: 'role', component: Role, props: true },
     { path: '/rolepanel/', name: 'rolepanel', component: Rolepanel, props: true },
-    { path: '/purview/', name: 'order', component: Purview, props: true},
+    { path: '/purview/', name: 'purview', component: Purview, props: true},
+	{ path: '/article/', name: 'article', component: Article, props: true},
     
     { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},

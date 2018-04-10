@@ -4,7 +4,7 @@
 			<Row>
 		        <Col span="6"><h5>权限管理</h5></Col>
 		        <Col span="18">
-		        	<div class="text-right"><Button type="primary" @click="open">新增权限</Button></div>
+		        	<div class="text-right"><Button type="primary" @click="open">新增权限</Button><Button type="primary" @click="sendtoperson">发给谁</Button></div>
 		        </Col>
 		    </Row>
 		</div>
@@ -404,6 +404,20 @@
                                         size: 'small'
                                     },
                                     style: {
+                                        display:params.row.status==1?'none':'inline',
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.row.actionid,1);
+                                        }
+                                    }
+                                }, '彻底删除'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    style: {
                                         display:params.row.status==1?'inline':'none',
                                     },
                                     on: {
@@ -675,6 +689,7 @@
 					validate:s.validateData,
 					data:{
 						actionids:actionids,
+						deltype:deltype
 					},
 					fn(data){						
 						if(data.getret===0){
@@ -703,6 +718,26 @@
 						if(data.getret===0){
 							s.$Message.success(data.getmsg);
 							s.getListData();
+						}
+						else{
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 5
+							});
+						}						
+					}
+				})
+			},
+			sendtoperson(){
+				var s = this;
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/getrolelist",
+					type:'post',
+					validate:s.validateData,
+					fn(data){						
+						if(data.getret===0){
+							s.$Message.success(data.getmsg);
+							console.log(data,'data-person');
 						}
 						else{
 							s.$Message.error({
