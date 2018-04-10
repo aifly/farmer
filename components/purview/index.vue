@@ -4,7 +4,7 @@
 			<Row>
 		        <Col span="6"><h5>权限管理</h5></Col>
 		        <Col span="18">
-		        	<div class="text-right"><Button type="primary" @click="open">新增权限</Button><Button type="primary" @click="sendtoperson">发给谁</Button></div>
+		        	<div class="text-right"><Button type="primary" @click="open">新增权限</Button></div>
 		        </Col>
 		    </Row>
 		</div>
@@ -727,28 +727,7 @@
 						}						
 					}
 				})
-			},
-			sendtoperson(){
-				var s = this;
-				symbinUtil.ajax({
-					url:window.config.baseUrl+"/admin/getrolelist",
-					type:'post',
-					validate:s.validateData,
-					fn(data){						
-						if(data.getret===0){
-							s.$Message.success(data.getmsg);
-							console.log(data,'data-person');
-						}
-						else{
-							s.$Message.error({
-								content:data.getmsg,
-								duration: 5
-							});
-						}						
-					}
-				})
 			}
-
 		},
 		mounted(){//页面加载完成后显示
 			this.getListData();//获取列表
