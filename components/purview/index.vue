@@ -455,6 +455,7 @@
 					fn(data){
 						if(data.getret === 0){
 							s.$Message.success(data.getmsg);
+							s.getListData();//刷新列表
 						}
 						else{
 							s.$Message.error({
