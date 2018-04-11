@@ -65,6 +65,25 @@
 		name:'zmitiindex',
 
 		data(){
+            const validateUrl = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('网址不能为空'));
+                }
+                // 模拟异步验证效果
+                var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+                //var reg=/^([\/])+$/;
+                setTimeout(() => {
+                    if(!reg.test(value)){
+                        callback(new Error('请输入正确的网址'));
+                    } else {
+                        if (value.length < 10) {
+                            callback(new Error('请输入正确的网址'));
+                        } else {
+                            callback();
+                        }
+                    }
+                }, 1000);
+            };
 			return {
 				modal1: false,		
 				currentIndex:'',
@@ -185,7 +204,10 @@
                 ],
                 ruleValidate: {
                     name: [
-                        { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+                        { required: true, message: '广告标题不能为空', trigger: 'blur' }
+                    ],
+                    url: [
+                        {required: true, validator: validateUrl, trigger: 'blur' }
                     ]
                 }
 			}
