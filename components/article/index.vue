@@ -14,10 +14,10 @@
 	        v-model="modal1"
 	        title="广告"
 	        @on-ok="ok"
-	        @on-cancel="cancel">
+	        @on-cancel="cancel('formItem')">
 	        <div class="symbin-article-addinfo">
-	        	<Form ref="formItem" :model="formItem" :label-width="80">
-					<FormItem label="标题">
+	        	<Form ref="formItem" :model="formItem" :rules="ruleValidate" :label-width="80">
+					<FormItem label="标题" prop="name">
 			            <Input v-model="formItem.name" placeholder="标题"></Input>
 			        </FormItem>
 			        <FormItem label="图片">
@@ -37,8 +37,9 @@
 			        <FormItem label="位置">
 			            <Input v-model="formItem.position" placeholder="位置"></Input>
 			        </FormItem>
-			        <FormItem label="网址">
-			            <Input v-model="formItem.url" placeholder="网址"></Input>
+
+			        <FormItem label="网址" prop="url">
+                        <Input v-model="formItem.url" placeholder="网址"></Input>
 			        </FormItem>
 			        <FormItem label="状态">
 			           <div>
@@ -66,6 +67,7 @@
 			return {
 				modal1: false,		
 				currentIndex:'',
+                select1: 'http',
 				formItem:{
 					name:'',
 					pics:'',
@@ -178,7 +180,12 @@
                         status: '1',
                         date: '2016-10-03'
                     }
-                ]
+                ],
+                ruleValidate: {
+                    name: [
+                        { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+                    ]
+                }
 			}
 		},
 		components:{
@@ -197,10 +204,11 @@
 				s.currentIndex='';
 			},
 			ok () {
-                this.$Message.info('Clicked ok');
+                //this.$Message.info('Clicked ok');
+                this.handleSubmit('formItem');
             },
-            cancel () {
-                this.$Message.info('Clicked cancel');
+            cancel (name) {
+                this.$refs[name].resetFields();
             },
             show(index){
             	var s = this;
@@ -218,6 +226,15 @@
             },
             change (status) {
                 this.$Message.info('开关状态：' + status);
+            },
+            handleSubmit (name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('提交成功!');
+                    } else {
+                        this.$Message.error('提交失败!');
+                    }
+                })
             }
 		},
 		mounted(){//页面加载完成后显示
