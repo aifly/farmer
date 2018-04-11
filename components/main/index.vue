@@ -89,7 +89,7 @@
                             },
                             {
                                 name:'权限管理',
-                                link:'/admin/'
+                                link:'/purview/'
                             }
                         ]
                     }

@@ -390,6 +390,7 @@
                                         size: 'small'
                                     },
                                     style: {
+                                    	marginRight: '5px',
                                         display:params.row.status==1?'none':'inline',
                                     },
                                     on: {
