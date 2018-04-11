@@ -13,7 +13,8 @@
 		<Modal
 	        v-model="modal1"
 	        title="广告"
-	        @on-ok="ok"
+            :loading="loading"
+	        @on-ok="asyncOK('formItem')"
 	        @on-cancel="cancel('formItem')">
 	        <div class="symbin-article-addinfo">
 	        	<Form ref="formItem" :model="formItem" :rules="ruleValidate" :label-width="80">
@@ -68,6 +69,7 @@
 				modal1: false,		
 				currentIndex:'',
                 select1: 'http',
+                loading: true,
 				formItem:{
 					name:'',
 					pics:'',
@@ -200,14 +202,31 @@
 			open(){
 				var s = this;
 				s.modal1=true;
-				s.formItem.status='1';		
+				s.formItem={
+                    name: '',
+                    pics:'',
+                    tid: '',
+                    position:'',                        
+                    url:'',                        
+                    status: '1',
+                    date: ''
+                }		
 				s.currentIndex='';
 			},
-			ok () {
-                //this.$Message.info('Clicked ok');
-                this.handleSubmit('formItem');
+			asyncOK (name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('提交成功!');
+                    } else {
+                        this.$Message.error('提交失败!');
+                    }
+                })
+                setTimeout(() => {
+                    this.modal1 = false;
+                    this.$refs[name].resetFields();
+                }, 2000);
             },
-            cancel (name) {
+            cancel (name) {                
                 this.$refs[name].resetFields();
             },
             show(index){
@@ -226,16 +245,7 @@
             },
             change (status) {
                 this.$Message.info('开关状态：' + status);
-            },
-            handleSubmit (name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.$Message.success('提交成功!');
-                    } else {
-                        this.$Message.error('提交失败!');
-                    }
-                })
-            }
+            }            
 		},
 		mounted(){//页面加载完成后显示
 
