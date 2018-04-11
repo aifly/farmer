@@ -65,25 +65,6 @@
 		name:'zmitiindex',
 
 		data(){
-            const validateUrl = (rule, value, callback) => {
-                if (!value) {
-                    return callback(new Error('网址不能为空'));
-                }
-                // 模拟异步验证效果
-                var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-                //var reg=/^([\/])+$/;
-                setTimeout(() => {
-                    if(!reg.test(value)){
-                        callback(new Error('请输入正确的网址'));
-                    } else {
-                        if (value.length < 10) {
-                            callback(new Error('请输入正确的网址'));
-                        } else {
-                            callback();
-                        }
-                    }
-                }, 1000);
-            };
 			return {
 				modal1: false,		
 				currentIndex:'',
@@ -207,7 +188,7 @@
                         { required: true, message: '广告标题不能为空', trigger: 'blur' }
                     ],
                     url: [
-                        {required: true, validator: validateUrl, trigger: 'blur' }
+                        {required: true, validator: this.validateUrl, trigger: 'blur' }
                     ]
                 }
 			}
@@ -236,17 +217,21 @@
 				s.currentIndex='';
 			},
 			asyncOK (name) {
-                this.$refs[name].validate((valid) => {
+                this.$refs[name].validate((valid) => {                    
                     if (valid) {
                         this.$Message.success('提交成功!');
+                        this.modal1 = false;
+                        this.loading=false;
                     } else {
                         this.$Message.error('提交失败!');
+                        this.loading=true;
+                        this.modal1 = true;                        
                     }
                 })
-                setTimeout(() => {
+                /*setTimeout(() => {
                     this.modal1 = false;
                     this.$refs[name].resetFields();
-                }, 2000);
+                }, 2000);*/
             },
             cancel (name) {                
                 this.$refs[name].resetFields();
@@ -267,7 +252,30 @@
             },
             change (status) {
                 this.$Message.info('开关状态：' + status);
-            }            
+            },
+            validateUrl(rule, value, callback){
+                var s=this;
+                value=s.formItem.url;
+                if (!value) {
+                    return callback(new Error('网址不能为空'));
+                }
+                // 模拟异步验证效果
+                var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+                //var reg=/^([\/])+$/;
+                setTimeout(() => {
+                    if(!reg.test(value)){
+                        callback(new Error('请输入正确的网址'));
+                    } else {
+                        s.loading=true;
+                        if (value.length < 10) {
+                            callback(new Error('请输入正确的网址'));
+                        } else {
+                            s.loading=false;
+                            callback();
+                        }
+                    }
+                }, 1000);
+            }          
 		},
 		mounted(){//页面加载完成后显示
 
