@@ -205,6 +205,7 @@
 			open(){
 				var s = this;
 				s.modal1=true;
+                s.loading=true;
 				s.formItem={
                     name: '',
                     pics:'',
@@ -262,19 +263,19 @@
                 // 模拟异步验证效果
                 var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
                 //var reg=/^([\/])+$/;
-                setTimeout(() => {
-                    if(!reg.test(value)){
+                
+                if(!reg.test(value)){
+                    callback(new Error('请输入正确的网址'));
+                } else {
+                    s.loading=true;
+                    if (value.length < 10) {
                         callback(new Error('请输入正确的网址'));
                     } else {
-                        s.loading=true;
-                        if (value.length < 10) {
-                            callback(new Error('请输入正确的网址'));
-                        } else {
-                            s.loading=false;
-                            callback();
-                        }
+                        s.loading=false;
+                        callback();
                     }
-                }, 1000);
+                }
+                
             }          
 		},
 		mounted(){//页面加载完成后显示
