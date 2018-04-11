@@ -190,16 +190,10 @@
 					                {
 					                    title: '中文名',
 					                    key: 'actionname',
-					                    width:150,
 					                },
 					                {
 				                        title: '英文名称',
 				                        key: 'englishname',
-				                        width:120,
-				                    },
-				                    {
-				                        title: '权限编号',
-				                        key: 'actionnumber',
 				                        width:120,
 				                    },
 									{
@@ -307,7 +301,6 @@
                     {
                         title: '中文名称',
                         key: 'actionname',
-                        width:150,
                         render:(h,params)=>{
                         	return h('div',[
                         		h('a',{
@@ -326,11 +319,6 @@
                     {
                         title: '英文名称',
                         key: 'englishname',
-                        width:120,
-                    },
-                    {
-                        title: '权限编号',
-                        key: 'actionnumber',
                         width:120,
                     },
                     {
@@ -356,7 +344,7 @@
                     },
                     {
                         title: '显示位置',
-                        key: 'showwhere',
+                        key: 'showwhere',                       
                         render:(h,params)=>{
                         	return h('div',[
                         		h('span',params.row.showwhere=='1'?'顶部导航':'左侧菜单')
