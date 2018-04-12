@@ -12,10 +12,7 @@
 		<Table :columns="columns1" :data="listData"></Table>
 		<Modal
 	        v-model="modal1"
-	        title="广告"
-            :loading="loading"
-	        @on-ok="asyncOK('formItem')"
-	        @on-cancel="cancel('formItem')">
+	        title="广告">
 	        <div class="symbin-article-addinfo">
 	        	<Form ref="formItem" :model="formItem" :rules="ruleValidate" :label-width="80">
 					<FormItem label="标题" prop="title">
@@ -69,6 +66,9 @@
 			        </FormItem>
 	        	</Form>
 	        </div>
+	        <div slot="footer">
+	            <Button type="text" @click="cancel('formItem')">取消</Button><Button type="primary" @click="asyncOK('formItem')" >确定</Button>
+	        </div>
 	    </Modal>	    
 	</div>	
 </template>
@@ -86,7 +86,6 @@
 				modal1: false,		
 				currentIndex:'',
                 select1: 'http',
-                loading: true,
 				formItem:{
 					title:'',
 					content:'',
@@ -209,7 +208,10 @@
                         { required: true, message: '广告标题不能为空', trigger: 'blur' }
                     ],
                     adlink: [
-                        {required: true, validator: this.validateUrl, trigger: 'blur' }
+                        { required: true, message: '广告网址不能为空', trigger: 'blur' },
+                        { type: 'url', message: '网址格式不正确', trigger: 'blur',function(){
+                        	console.log('test');
+                        } }
                     ]
                 }
 			}
@@ -243,7 +245,6 @@
 						if(data.getret === 0){
 							s.$Message.success(data.getmsg);
 							s.modal1 = false;
-                        	s.loading=false;
 							s.getListData();//刷新列表
 						}
 						else{
@@ -259,13 +260,12 @@
 			open(){
 				var s = this;
 				s.modal1=true;
-                s.loading=true;
 				s.formItem={
                     title: '',
                     content:'',
                     adimageurl:'',
                     adtype: '0',
-                    adlocation:'0',                        
+                    adlocation:'0',
                     adlink:'',                        
                     status: '1',
                     date: ''
@@ -282,25 +282,17 @@
 		                }else{
 		                	this.add();//保存新增
 		                }
-                        this.modal1 = false;
-                        this.loading=false;
+                        this.modal1=false;
+                        
                     } else {
-                        this.$Message.error('提交失败!');
-                        this.loading=true;
-                        this.modal1 = true;                        
+                        this.$Message.error('提交失败!');                        
+                        this.modal1 = true; 
+                                             
                     }
                 })
-                /*if(s.currentIndex!=''){
-                	this.edit(s.currentIndex);
-                }else{
-                	this.add();//保存新增
-                }*/
-                /*setTimeout(() => {
-                    this.modal1 = false;
-                    this.$refs[name].resetFields();
-                }, 2000);*/
             },
-            cancel (name) {                
+            cancel (name) {
+            	this.modal1=false;            
                 this.$refs[name].resetFields();
             },
             show(index){
@@ -320,29 +312,6 @@
             },
             change (status) {
                 this.$Message.info('开关状态：' + status);
-            },
-            validateUrl(rule, value, callback){
-                var s=this;
-                value=s.formItem.adlink;
-                if (!value) {
-                    return callback(new Error('网址不能为空'));
-                }
-                // 模拟异步验证效果
-                var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-                //var reg=/^([\/])+$/;
-                
-                if(!reg.test(value)){
-                    callback(new Error('请输入正确的网址'));
-                } else {
-                    s.loading=true;
-                    if (value.length < 10) {
-                        callback(new Error('请输入正确的网址'));
-                    } else {
-                        s.loading=false;
-                        callback();
-                    }
-                }
-                
             },
             getListData(rak,fn){//获取数据
 				var s = this;
