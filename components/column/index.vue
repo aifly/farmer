@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<!--弹窗样式-->
-				<Modal v-model="addColumn" title="新增栏目" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel" class-name="adduser-cls">
+				<Modal v-model="addColumn" title="新增栏目"  class-name="adduser-cls">
 					<div class="addColumn-body">
 						<Row align="middle" justify="center">
 							<Col span="3" offset="4" class-name="text-rig top7 rig8">
@@ -83,6 +83,9 @@
 							</Col>
 						</Row>
 					</div>
+					<div slot="footer">
+			            <Button type="text" @click="cancel">取消</Button><Button type="primary" @click="ok">确认</Button>
+			        </div>
 				</Modal>
 				<!--弹窗样式结束-->
 		</div>
@@ -414,6 +417,7 @@
 					},
 					fn(data){
 						if(data.getret === 0){
+							s.addColumn=false;
 							s.$Message.success(data.getmsg);
 							s.bingAgain();//显示栏目列表
 						}
@@ -513,9 +517,19 @@
 			},
 
 			ok(){
-				this.getaddColumns()
+				var s = this;
+				var menuurl=this.menuurl;
+				var patrn=/^(\/)[^\s]+/;
+				if (!patrn.exec(menuurl)){
+				   s.$Message.error("网址格式不正确");
+				   return false
+				}else{
+					s.getaddColumns();
+				}
+				return true				
 			},
 			cancel(){
+				this.addColumn=false;
 				//console.log("cancel");
 			},
 			edit(index){
