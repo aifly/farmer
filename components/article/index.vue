@@ -180,8 +180,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                        	this.show(params.index);                                       
-                                            console.log(params.index,'params.index');
+                                        	this.show(params.index);
                                         }
                                     }
                                 }, '修改'),
@@ -245,7 +244,7 @@
 							s.$Message.success(data.getmsg);
 							s.modal1 = false;
                         	s.loading=false;
-							//s.getListData();//刷新列表
+							s.getListData();//刷新列表
 						}
 						else{
 							s.$Message.error({
