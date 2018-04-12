@@ -18,12 +18,15 @@
 	        @on-cancel="cancel('formItem')">
 	        <div class="symbin-article-addinfo">
 	        	<Form ref="formItem" :model="formItem" :rules="ruleValidate" :label-width="80">
-					<FormItem label="标题" prop="name">
-			            <Input v-model="formItem.name" placeholder="标题"></Input>
+					<FormItem label="标题" prop="title">
+			            <Input v-model="formItem.title" placeholder="标题"></Input>
+			        </FormItem>
+			        <FormItem label="内容">
+			            <Input v-model="formItem.content" type="textarea" :rows="4" placeholder="内容"></Input>
 			        </FormItem>
 			        <FormItem label="图片">
 			        	<Row>
-			        		<Col span="15"><Input v-model="formItem.pics" placeholder="图片"></Input></Col>
+			        		<Col span="15"><Input v-model="formItem.adimageurl" placeholder="图片"></Input></Col>
 			        		<Col span="1">&nbsp;</Col>
 			        		<Col span="8">
 			        			<Upload action="//jsonplaceholder.typicode.com/posts/">
@@ -33,14 +36,25 @@
 			        	</Row>
 			        </FormItem>			        
 			        <FormItem label="类型">
-			            <Input v-model="formItem.tid" placeholder="类型"></Input>
+						<div>
+							<RadioGroup v-model="formItem.adtype">					        
+							<Radio label="0"><span>图片广告</span></Radio>
+							<Radio label="1"><span>图文广告</span></Radio>
+							<Radio label="2"><span>文字广告</span></Radio>
+							</RadioGroup>
+						</div>
 			        </FormItem>
 			        <FormItem label="位置">
-			            <Input v-model="formItem.position" placeholder="位置"></Input>
+			            <div>
+							<RadioGroup v-model="formItem.adlocation">					        
+							<Radio label="0"><span>全部页面</span></Radio>
+							<Radio label="1"><span>首页</span></Radio>
+							</RadioGroup>
+						</div>
 			        </FormItem>
 
-			        <FormItem label="网址" prop="url">
-                        <Input v-model="formItem.url" placeholder="网址"></Input>
+			        <FormItem label="网址" prop="adlink">
+                        <Input v-model="formItem.adlink" placeholder="网址"></Input>
 			        </FormItem>
 			        <FormItem label="状态">
 			           <div>
@@ -49,6 +63,9 @@
 					        <Radio label="0"><span>关</span></Radio>
 					    </RadioGroup>
 			           </div>
+			        </FormItem>
+			        <FormItem label="序号">
+                        <Input v-model="formItem.sort" placeholder="序号"></Input>
 			        </FormItem>
 	        	</Form>
 	        </div>
@@ -71,26 +88,32 @@
                 select1: 'http',
                 loading: true,
 				formItem:{
-					name:'',
-					pics:'',
-					tid:'',
-					position:'',
-					url:'',
+					title:'',
+					content:'',
+					adimageurl:'',
+					adtype:'0',
+					adlocation:'0',
+					adlink:'',
 					status:'1',
+					sort:0
 				},
 				columns1: [
+					{
+                        title: '序号',
+                        key: 'sort'
+                    },
                     {
                         title: '标题',
-                        key: 'name'
+                        key: 'title'
                     },
                     {
                         title: '图片',
-                        key: 'pics',
+                        key: 'adimageurl',
                         render:(h,params)=>{
                         	return h('div',[                      		
                         		h('img',{                        			                  		
 	                    			attrs:{
-	                    				'src':params.row.pics
+	                    				'src':params.row.adimageurl
 	                    			},
 	                    			style:{
                         				width:'100px',
@@ -102,16 +125,32 @@
                     },
                     {
                         title: '类型',
-                        key: 'tid'
+                        key: 'adtype',
+                        render:(h,params)=>{
+                        	if(params.row.adtype==0){                    			
+                    			return h('span','图片广告');
+                    		}else if(params.row.adtype==1){
+                    			return h('span','图文广告');
+                    		}else{
+                    			return h('span','文字广告');
+                    		}                        	
+                        }
                     },
                     {
                         title: '位置',
-                        key: 'position'
+                        key: 'adlocation',
+                        render:(h,params)=>{
+                        	if(params.row.adlocation==0){                    			
+                    			return h('span','全部页面');
+                    		}else{
+                    			return h('span','首页');
+                    		}                        	
+                        }
                     },
                     
                     {
                         title: '网址',
-                        key: 'url'
+                        key: 'adlink'
                     },                    
                     {
                         title: '状态',
@@ -122,12 +161,13 @@
                     },
                     {
                         title: '时间',
-                        key: 'date'
+                        key: 'createtime'
                     },
                     {
                         title: '操作',
                         key: 'action',
                         align: 'left',
+                        width:130,
                         render: (h, params) => {
                         	return h('div', [
                                 h('Button', {
@@ -154,7 +194,8 @@
                                         marginRight: '5px'
                                     },
                                     on: {
-                                        click: () => {                                            
+                                        click: () => {
+                                        	this.remove(params.row.adids);                                  
                                             console.log(params.index,'params.index');
                                         }
                                     }
@@ -163,31 +204,12 @@
                         }
                     }
                 ],
-                listData: [
-                    {
-                        name: 'Brown',
-                        pics:'https://www.baidu.com/img/baidu_jgylogo3.gif',
-                        tid: '横图',
-                        position:'首页',                        
-                        url:'/news',                        
-                        status: '0',
-                        date: '2016-10-03',
-                    },
-                    {
-                        name: 'John',
-                        pics:'https://www.baidu.com/img/baidu_jgylogo3.gif',
-                        tid: '方图',
-                        position:'首页',                        
-                        url:'/news',                        
-                        status: '1',
-                        date: '2016-10-03'
-                    }
-                ],
+                listData: [],
                 ruleValidate: {
-                    name: [
+                    title: [
                         { required: true, message: '广告标题不能为空', trigger: 'blur' }
                     ],
-                    url: [
+                    adlink: [
                         {required: true, validator: this.validateUrl, trigger: 'blur' }
                     ]
                 }
@@ -199,28 +221,68 @@
 		beforeCreate(){
 			this.validateData = sysbinVerification.validate(this);
 			//symbinUtil.clearCookie('login');
-
 		},
 		methods:{
+			add(currentIndex){//增加
+				var s = this;
+				var formparams={
+					title: s.formItem.title,
+                    content:s.formItem.content,
+                    adlink:s.formItem.adlink,
+                    adtype:s.formItem.adtype,
+                    adlocation:s.formItem.adlocation,
+                    adimageurl:s.formItem.adimageurl,
+                    sort:s.formItem.sort,
+                    status:s.formItem.status
+				}
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/addadver",
+					type:'post',
+					validate:s.validateData,
+					data:formparams,
+					fn(data){
+						if(data.getret === 0){
+							s.$Message.success(data.getmsg);
+							s.modal1 = false;
+                        	s.loading=false;
+							//s.getListData();//刷新列表
+						}
+						else{
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 10
+							});
+						}
+					}
+				})				
+
+			},
 			open(){
 				var s = this;
 				s.modal1=true;
                 s.loading=true;
 				s.formItem={
-                    name: '',
-                    pics:'',
-                    tid: '',
-                    position:'',                        
-                    url:'',                        
+                    title: '',
+                    content:'',
+                    adimageurl:'',
+                    adtype: '0',
+                    adlocation:'0',                        
+                    adlink:'',                        
                     status: '1',
                     date: ''
                 }		
 				s.currentIndex='';
 			},
 			asyncOK (name) {
+				var s = this;
                 this.$refs[name].validate((valid) => {                    
                     if (valid) {
-                        this.$Message.success('提交成功!');
+                        //this.add();                        
+		                if(s.currentIndex!=''){
+		                	this.edit(s.currentIndex);
+		                }else{
+		                	this.add();//保存新增
+		                }
                         this.modal1 = false;
                         this.loading=false;
                     } else {
@@ -229,6 +291,11 @@
                         this.modal1 = true;                        
                     }
                 })
+                /*if(s.currentIndex!=''){
+                	this.edit(s.currentIndex);
+                }else{
+                	this.add();//保存新增
+                }*/
                 /*setTimeout(() => {
                     this.modal1 = false;
                     this.$refs[name].resetFields();
@@ -240,15 +307,16 @@
             show(index){
             	var s = this;
             	s.modal1=true;
-            	s.currentIndex=index;
+            	s.currentIndex=s.listData[index].adid;            	
             	s.formItem={
-            		name:s.listData[index].name,
-            		pics:s.listData[index].pics,
-            		tid:s.listData[index].tid,
-            		position:s.listData[index].position,
-            		url:s.listData[index].url,
-            		status:s.listData[index].status,
-            		date:s.listData[index].date,
+            		adid:s.listData[index].adid,
+            		title:s.listData[index].title,
+            		content:s.listData[index].content,
+            		adimageurl:s.listData[index].adimageurl,
+            		adtype:String(s.listData[index].adtype),
+            		adlocation:String(s.listData[index].adlocation),
+            		adlink:s.listData[index].adlink,
+            		status:String(s.listData[index].status),
             	}
             },
             change (status) {
@@ -256,7 +324,7 @@
             },
             validateUrl(rule, value, callback){
                 var s=this;
-                value=s.formItem.url;
+                value=s.formItem.adlink;
                 if (!value) {
                     return callback(new Error('网址不能为空'));
                 }
@@ -276,11 +344,89 @@
                     }
                 }
                 
-            }          
+            },
+            getListData(rak,fn){//获取数据
+				var s = this;
+				symbinUtil.ajax({
+					//url:window.config.baseUrl+"/admin/getadverlist",
+					url:'https://api.symbin.cn/v1/admin/getadverlist?adminusername=admin&admintoken=6b5c58be-5a2c-b98a-018a-5acec14fc9ba&adtype=0',					
+					type:'post',
+					fn(data){						
+						if(data.getret===0){
+							console.log(data,'data');
+							s.listData=data.list;
+						}
+						else{
+							 s.$Message.error({
+							  	content:data.getmsg,
+							  	duration: 10
+							  });
+							 if(data.getret === 1300){
+							 	window.location.hash = '/login/'
+							 }
+						}
+						
+					}
+				})
+			},
+			edit(adid){//编辑
+				var s = this;
+				var formparams={
+					adid:adid,
+					title: s.formItem.title,
+					content: s.formItem.content,
+					adlink: s.formItem.adlink,
+					adtype: s.formItem.adtype,
+					adlocation: s.formItem.adlocation,
+					adimageurl: s.formItem.adimageurl,
+					sort: s.formItem.sort,
+					status: s.formItem.status
+				}
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/editadver",
+					type:'post',
+					validate:s.validateData,
+					data:formparams,
+					fn(data){						
+						if(data.getret===0){
+							s.$Message.success(data.getmsg);
+							s.getListData();
+						}
+						else{
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 5
+							});
+						}						
+					}
+				})
+			},
+			remove(adids){//删除
+				var s = this;
+				symbinUtil.ajax({
+					url:window.config.baseUrl+"/admin/deladver",
+					type:'post',
+					validate:s.validateData,
+					data:{
+						adids:adids
+					},
+					fn(data){						
+						if(data.getret===0){
+							s.$Message.success(data.getmsg);
+							s.getListData();
+						}
+						else{
+							s.$Message.error({
+								content:data.getmsg,
+								duration: 5
+							});
+						}						
+					}
+				})
+			},     
 		},
 		mounted(){//页面加载完成后显示
-
-			
+			this.getListData();//获取列表
 		},
 	}
 </script>
