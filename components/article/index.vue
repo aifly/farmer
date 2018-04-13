@@ -154,8 +154,16 @@
                     {
                         title: '状态',
                         key: 'status',
-                        render:(h,params)=>{
-                        	return h('div',params.row.status==1?'开':'关')
+                        render:(h,params)=>{                        	
+                        	return h('Icon',{
+                        		props:{
+                        			type:params.row.status==1?'checkmark-circled':'minus-circled'
+                        		},
+                        		style:{
+                        			fontSize:'20px',
+                        			color:params.row.status==1?'#19be6b':'#ed3f14'
+                        		}
+                        	})
                         }
                     },
                     {
@@ -193,8 +201,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                        	this.remove(params.row.adids);                                  
-                                            console.log(params.index,'params.index');
+                                        	this.remove(params.row.adid);
                                         }
                                     }
                                 }, '删除')
@@ -316,9 +323,13 @@
             getListData(rak,fn){//获取数据
 				var s = this;
 				symbinUtil.ajax({
-					//url:window.config.baseUrl+"/admin/getadverlist",
-					url:'https://api.symbin.cn/v1/admin/getadverlist?adminusername=admin&admintoken=6b5c58be-5a2c-b98a-018a-5acec14fc9ba&adtype=0',					
+					url:window.config.baseUrl+"/admin/getadverlist",				
 					type:'post',
+					validate:s.validateData,
+					data:{
+						admin:s.validateData.adminusername,
+						admintoken:s.validateData.admintoken
+					},
 					fn(data){						
 						if(data.getret===0){
 							console.log(data,'data');
@@ -376,7 +387,8 @@
 					type:'post',
 					validate:s.validateData,
 					data:{
-						adids:adids
+						adids:adids,
+						deltype:1,
 					},
 					fn(data){						
 						if(data.getret===0){
