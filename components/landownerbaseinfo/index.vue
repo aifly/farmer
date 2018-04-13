@@ -10,10 +10,10 @@
 		    </Row>
 		</div>
 		<div class="top20"></div>
-		<Input v-model="value13">
-            <Select v-model="select3" slot="prepend" style="width: 80px">
-                <Option value="0">地主</Option>
-                <Option value="1">农夫</Option>
+
+        <Input v-model="value13">
+            <Select v-model="modelcity" slot="prepend" style="width:100px">
+                <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
             <Button slot="append" icon="ios-search"></Button>
         </Input>
@@ -21,11 +21,11 @@
         <Table ref="selection" height="520" :columns="columns2" :data="rolelistData"></Table>
         <div class="top20"></div>
         <Row>
-        	<Col span="18">
-        		<Button @click="handleSelectAll(true)">全部</Button>
-        		<Button @click="handleSelectAll(false)">反选</Button>
-        		<Button>删除</Button>
-        	</Col>
+            <Col span="18">
+                <Button @click="handleSelectAll(true)">全部</Button>
+                <Button @click="handleSelectAll(false)">反选</Button>
+                <Button icon="trash-a">删除</Button>
+            </Col>
         </Row>
         
         <div style="margin: 10px 0;overflow: hidden">
@@ -33,6 +33,7 @@
                 <Page :total="100" :current="1" @on-change="changePage"></Page>
             </div>
         </div>
+
         <Modal
 	        v-model="modal1"
 	        title="消息"
@@ -71,6 +72,21 @@
 				modal1:false,
 				value13: '',
                 select3: '0',
+                cityList: [
+                    {
+                        value: 'beijing',
+                        label: '北京'
+                    },
+                    {
+                        value: 'shanghai',
+                        label: '上海'
+                    },
+                    {
+                        value: 'tianjing',
+                        label: '天津'
+                    }
+                ],
+                modelcity: '',
                 formItem:{
                 	name:'',
                 	age:'',
@@ -165,6 +181,39 @@
                             } else if (value === 0) {
                                 return row.type < 1;
                             }
+                        }
+                    },
+                    {
+                        title:'操作',
+                        key:'action',
+                        width:150,
+                        render:(h,params)=>{
+                            return h('div',[
+                                h('Button',{
+                                    props: {
+                                        size: 'small'
+                                    },
+                                    style:{
+                                        marginRight:'5px'
+                                    },
+                                    on:{
+                                       click:()=>{
+                                            console.log(params.index,'修改')
+                                       }
+                                    }
+                                },'修改'),
+                                h('Button',{
+                                    props:{
+                                        type:'error',
+                                        size: 'small'
+                                    },
+                                    on:{
+                                        click:()=>{
+                                            console.log(params.index,'删除')
+                                        }
+                                    }
+                                },'删除')
+                            ])
                         }
                     }
                 ],
@@ -312,8 +361,8 @@
 			handleSelectAll (status) {
                 this.$refs.selection.selectAll(status);
             },
-            changePage () {
-                
+            changePage (value) {
+                return console.log('第'+value+'页');
             }
 		},
 		mounted(){//页面加载完成后显示

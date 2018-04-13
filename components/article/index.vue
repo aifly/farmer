@@ -315,6 +315,7 @@
             		adlocation:String(s.listData[index].adlocation),
             		adlink:s.listData[index].adlink,
             		status:String(s.listData[index].status),
+            		sort:s.listData[index].sort
             	}
             },
             change (status) {
@@ -332,7 +333,7 @@
 					},
 					fn(data){						
 						if(data.getret===0){
-							console.log(data,'data');
+							//console.log(data,'data');
 							s.listData=data.list;
 						}
 						else{
