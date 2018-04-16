@@ -72,6 +72,7 @@
 				modal1:false,
 				value13: '',
                 select3: '0',
+                selectall:[],
                 cityList: [
                     {
                         value: 'beijing',
@@ -359,7 +360,10 @@
 
 			},			
 			handleSelectAll (status) {
+                var s= this;
                 this.$refs.selection.selectAll(status);
+                console.log(status,'selectAll');
+                
             },
             changePage (value) {
                 return console.log('第'+value+'页');
