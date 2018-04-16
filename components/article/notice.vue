@@ -19,7 +19,13 @@
 			            <Input v-model="formItem.title" placeholder="标题"></Input>
 			        </FormItem>			        		        
 			        <FormItem label="内容" prop="content">
-			            <Input v-model="formItem.content" placeholder="内容"></Input>
+			            <Input v-model="formItem.content" type="textarea" :rows="4" placeholder="内容"></Input>
+			        </FormItem>
+			        <FormItem label="状态" prop="status">
+			            <RadioGroup v-model="formItem.status">					        
+					        <Radio label="1"><span>开</span></Radio>
+					        <Radio label="0"><span>关</span></Radio>
+					    </RadioGroup>
 			        </FormItem>
 	        	</Form>
 	        </div>
@@ -44,6 +50,8 @@
 				currentIndex:'',
 				formItem:{
 					title:'',
+					content:'',
+					status:'1'
 				},
 				columns1: [
                     {
@@ -54,6 +62,22 @@
                         title: '时间',
                         key: 'createtime',
                         width:150,
+                    },
+                    {
+                        title: '状态',
+                        key: 'status',
+                        width:150,
+                        render:(h,params)=>{                        	
+                        	return h('Icon',{
+                        		props:{
+                        			type:params.row.status==1?'checkmark-circled':'minus-circled'
+                        		},
+                        		style:{
+                        			fontSize:'20px',
+                        			color:params.row.status==1?'#19be6b':'#ed3f14'
+                        		}
+                        	})
+                        }
                     },
                     {
                         title: '操作',
@@ -73,7 +97,6 @@
                                     on: {
                                         click: () => {
                                         	this.show(params.row.noticeid);
-                                        	this.getListData(params.row.noticeid);
                                         }
                                     }
                                 }, '修改'),
@@ -95,18 +118,7 @@
                         }
                     }
                 ],
-                listData: [
-                    {
-                        name: 'Brown',                      
-                        content: 'BrownBrownBrownBrown',
-                        date: '2016-10-03',
-                    },
-                    {
-                        name: 'content',                      
-                        content: 'contentcontentcontentcontent',
-                        date: '2017-10-03',
-                    }
-                ],
+                listData: [],
                 ruleValidate: {
                     title: [
                         { required: true, message: '标题不能为空', trigger: 'blur' }
@@ -133,20 +145,29 @@
 				s.formItem={
 					noticeid:'',
 					title: '',
-					content: ''
+					content: '',
+					status:'1'
 				}
 				console.log(s.currentIndex,'s.currentIndex');
 			},
             cancel (name) {
-                //this.$Message.info('Clicked cancel');
                 this.modal1=false;            
                 this.$refs[name].resetFields();
             },
-            show(index){
+            show(ids){
             	var s = this;
             	s.modal1=true;
-            	s.currentIndex=index;
-            	console.log(s.currentIndex,'s.currentIndex');            	            	
+            	s.currentIndex=ids;
+				s.listData.forEach(function(value, index) {
+					if(value.noticeid==ids){
+						s.formItem={
+							noticeid:ids,
+							title: value.title,
+							content: value.content,
+							status:String(value.status)
+						}										
+					}								    
+				});
             },
             add(){//增加
 				var s = this;
@@ -178,7 +199,8 @@
 				var formparams={
 					noticeid:ids,
 					title: s.formItem.title,
-					content: s.formItem.content
+					content: s.formItem.content,
+					status:s.formItem.status
 				}
 				
 				symbinUtil.ajax({
@@ -217,7 +239,7 @@
                     }
                 })
             },
-            getListData(ids){//获取数据
+            getListData(){//获取数据
 				var s = this;
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/getnoticelist",				
@@ -231,20 +253,6 @@
 						if(data.getret===0){
 							console.log(data,'data');
 							s.listData=data.list;
-							if(ids==undefined){
-								console.log("列表")
-							}else{
-								data.list.forEach(function(value, index) {
-									if(value.noticeid==ids){
-										s.formItem={
-											noticeid:ids,
-											title: value.title,
-											content: value.content
-										}
-										//console.log(s.formItem,'s.formparams')
-									}								    
-								});								
-							}
 						}
 						else{
 							 s.$Message.error({
