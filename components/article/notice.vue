@@ -10,6 +10,9 @@
 		</div>
 		<div class="top20"></div>
 		<Table :columns="columns1" :data="listData"></Table>
+		<div class="top20"></div>
+		<Page :total="total" @on-change="setpages" :page-size="3"></Page>
+		<div class="top20"></div>
 		<Modal
 	        v-model="modal1"
 	        title="公告">
@@ -48,6 +51,8 @@
 			return {
 				modal1: false,
 				currentIndex:'',
+				total:10,//总条数
+				pagesize:3,//每页数量
 				formItem:{
 					title:'',
 					content:'',
@@ -239,7 +244,7 @@
                     }
                 })
             },
-            getListData(){//获取数据
+            getListData(index){//获取数据
 				var s = this;
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/getnoticelist",				
@@ -248,11 +253,14 @@
 					data:{
 						admin:s.validateData.adminusername,
 						admintoken:s.validateData.admintoken,
+						page:index,//页码
+						pagenum:s.pagesize//每页数量
 					},
 					fn(data){						
 						if(data.getret===0){
 							console.log(data,'data');
 							s.listData=data.list;
+							s.total=4;//总条数
 						}
 						else{
 							 s.$Message.error({
@@ -291,9 +299,13 @@
 					}
 				})
 			},
+			setpages(index){
+				var s = this;
+				s.getListData(index);
+			}
 		},
 		mounted(){//页面加载完成后显示
-			this.getListData();			
+			this.getListData(1);			
 		},
 	}
 </script>
