@@ -22,13 +22,13 @@
 			            <Input v-model="formItem.content" type="textarea" :rows="4" placeholder="内容"></Input>
 			        </FormItem>
 			        <FormItem label="图片">
-			        	<Row>
-			        		<Col span="15"><Input v-model="formItem.adimageurl" placeholder="图片"></Input></Col>
-			        		<Col span="1">&nbsp;</Col>
-			        		<Col span="8">
-			        			<Upload action="//jsonplaceholder.typicode.com/posts/">
-							        <Button type="ghost" icon="ios-cloud-upload-outline">上传图片</Button>
-							    </Upload>
+			        	<Row type='flex'>
+			        		<Col span="15">
+								<img  v-if='formItem.adimageurl' :src="formItem.adimageurl" alt="">
+							</Col>
+			        		<Col span="3" class='symbin-upload-C'>
+							    <Button type="ghost" icon="ios-cloud-upload-outline">上传图片</Button>
+							    <input @change='upload' type="file" name="" ref='file'>
 			        		</Col>			            
 			        	</Row>
 			        </FormItem>			        
@@ -77,6 +77,7 @@
 	import sysbinVerification from '../lib/verification';
 	import symbinUtil from '../lib/util';
 	import Vue from 'vue';
+	import $ from 'jquery';
 	export default {
 		props:['obserable'],
 		name:'zmitiindex',
@@ -404,7 +405,41 @@
 						}						
 					}
 				})
-			},     
+			}, 
+			upload(){
+
+ 
+				var formData = new FormData();
+	  		    var s = this;
+	  					
+				formData.append('setupfile', this.$refs['file'].files[0]);
+				formData.append('uploadtype', 0);
+				formData.append('adminusername', s.validateData.adminusername);
+				formData.append('admintoken', s.validateData.admintoken);
+				
+				$.ajax({
+					type: "POST",
+					contentType: false,
+					processData: false,
+					url: window.config.baseUrl+'/share/upload_file/',
+					data: formData,
+					error(e){
+						
+					},
+					success(data){
+						window.s = s;
+						console.log(data);
+						//alert('服务器返回正确');
+						if (data.getret === 0) {
+							var url = data.getfileurl[0].datainfourl;
+							s.formItem.adimageurl = url;
+							 
+						}else{
+							
+						}
+					}
+				});
+			}   
 		},
 		mounted(){//页面加载完成后显示
 			this.getListData();//获取列表
