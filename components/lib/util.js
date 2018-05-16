@@ -32,6 +32,7 @@ var symbinUtil = {
 			}else{
 			}
 			option.fn && option.fn(dt);
+			option.success && option.success(dt);
 		})
 	},
 	setCookie(cname, cvalue, exdays){

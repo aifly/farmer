@@ -202,7 +202,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                        	this.remove(params.row.adid);
+                                        	this.remove(params.row);
                                         }
                                     }
                                 }, '删除')
@@ -382,7 +382,25 @@
 					}
 				})
 			},
-			remove(adids){//删除
+			deleteImg(filepath){//删除广告对应的图片
+				var s = this;
+				alert('开始删除' + filepath);
+				symbinUtil.ajax({
+					url:window.config.baseUrl+'/admin/deletefile',
+					validate:s.validateData,
+					data:{
+						filepath
+					},
+					error(){
+						
+					},
+					success(data){
+						console.log(data);
+					}
+				})
+			},
+			remove(ad){//删除
+				var adids = ad.adid;
 				var s = this;
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/deladver",
@@ -394,8 +412,12 @@
 					},
 					fn(data){						
 						if(data.getret===0){
+
 							s.$Message.success(data.getmsg);
+							alert(data.getmsg);
+							s.deleteImg(ad.adimageurl);
 							s.getListData();
+
 						}
 						else{
 							s.$Message.error({
@@ -411,7 +433,9 @@
  
 				var formData = new FormData();
 	  		    var s = this;
-	  					
+	  			if(!this.$refs['file'].files.length){
+	  				return;
+	  			}
 				formData.append('setupfile', this.$refs['file'].files[0]);
 				formData.append('uploadtype', 0);
 				formData.append('adminusername', s.validateData.adminusername);
