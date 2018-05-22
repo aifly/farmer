@@ -152,18 +152,19 @@
                         name:dt.menuname,
                         link:dt.menuurl
                     })
-                })
-
+                });
+                
                 data.list.filter((d)=>{return d.showwhere === 2}).forEach((menu,i)=>{
                     var children = menu.children;
                     var childArr = [];
-                   
-                    children.forEach(child=>{
-                        childArr.push({
-                            name:child.menuname,
-                            link:child.menuurl+''+(child.children?child.menuid:'')
-                        })
-                    })
+                   if(children){
+                       children.forEach(child=>{
+                           childArr.push({
+                               name:child.menuname,
+                               link:child.menuurl+''+(child.children?child.menuid:'')
+                           })
+                       })
+                   }
                     arr.push({
                         name:menu.menuname,
                         subMenu:childArr
