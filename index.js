@@ -12,6 +12,8 @@ import FError from './components/ferror/index'
 import Column from './components/column/index';
 import Console1 from './components/console/index';
 import Hatchery from './components/hatchery/index';
+import GoodsClass from './components/goodsclass/index';
+import Goods from './components/goods/index';
 import ProdutDetail from './components/productdetail/index';
 
 import LandownerBaseInfo from './components/landownerbaseInfo/index';
@@ -47,6 +49,18 @@ const router = new VueRouter({
 	{ path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
     { path: '/console/', name: 'console', component: Console1, props: true },
 	  { path: '/breed/', name: 'breed', component: Hatchery, props: true },
+	  {
+	  	path: '/goods/',
+	  	name: 'goods',
+	  	component: Goods,
+	  	props: true
+	  },
+	  {
+	  	path: '/goodsclass/',
+	  	name: 'goodsclass',
+	  	component: GoodsClass,
+	  	props: true
+	  },
 	  { path: '/hatchery/', name: 'hatchery', component: Hatchery, props: true },
 	  {
 	  	path: '/productdetail/',
