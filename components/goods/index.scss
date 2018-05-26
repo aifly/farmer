@@ -29,7 +29,13 @@
     textarea.ivu-input {
         resize: none;
     }
-
+    input[type='file']{
+        @include pos(a);
+        left: 0;
+        top: 0;
+        opacity:0;
+        cursor: pointer;
+    }
     .ivu-input-wrapper {
         width: 90%;
 	}	

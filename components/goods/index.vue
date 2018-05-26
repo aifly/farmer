@@ -49,7 +49,17 @@
 					<FormItem label="商品库存" prop="goodsnumber">
 						<Input v-model="formItem.goodsnumber" placeholder="商品库存"></Input>
 					</FormItem>
-
+					<FormItem label="商品图片" prop="imagepath">
+						<Row type='flex'>
+							<Col>
+								<img :src="formItem.imagepath" alt="">
+							</Col>
+							<Col>
+								<Button icon='upload'>上传</Button>
+								<input type="file" ref='file' @change='upload' name="">
+							</Col>
+						</Row>
+					</FormItem>
 					<FormItem label="商品价格" prop="goodsprice">
 						<Input v-model="formItem.goodsprice" placeholder="商品价格"></Input>
 					</FormItem>
@@ -77,7 +87,7 @@
 	import './index.css';
 	
 	import sysbinVerification from '../lib/verification';
-	
+	import $ from 'jquery';
 	
 	
 	import symbinUtil from '../lib/util';
@@ -94,7 +104,7 @@
 	
 			return {
 	
-				modal1: false,
+				modal1: true,
 				currentIndex:'',
 				
 				goodsClassData:[
@@ -109,7 +119,8 @@
 					goodsdesc:'',
 					goodsnumber:'',
 					goodscreatetime:'',
-					createtime:''
+					createtime:'',
+					imagepath:""
 
 				},
 	
@@ -274,7 +285,43 @@
 		},
 	
 		methods: {
-			
+			upload(){
+
+
+				
+				var formData = new FormData();
+	  		    var s = this;
+
+	  					
+			      formData.append('setupfile', this.$refs['file'].files[0]);
+			      formData.append('uploadtype', 0);
+			     
+			      $.ajax({
+			        type: "POST",
+			        contentType: false,
+			        processData: false,
+			        url:window.config.baseUrl+'/share/upload_file/',
+			        data: formData,
+			        error(e){
+			        	
+			          	setTimeout(()=>{
+			          		s.detectionError = '';
+			          	},2000)
+			          	
+			        },
+			        success(data){
+			        	 console.log(data);
+				        if (data.getret === 0) {
+				          var url = data.getfileurl[0].datainfourl;
+				          s.formItem.imagepath = url;
+				          s.formItem.uploadfileid = data.uploadfileid;
+				        }else{
+				        	
+				        	
+				        }
+			        }
+			      });
+			},
 			getGoodsClassList(){
 				var s = this;
 				
@@ -308,7 +355,9 @@
 					goodsdesc: s.formItem.goodsdesc,
 					goodsprice: s.formItem.goodsprice,
 					goodsnumber: s.formItem.goodsnumber,
+					imagepath: s.formItem.imagepath,
 					goodsclassid: s.formItem.goodsClass[0],
+
 					goodscreatetime:s.formItem.goodscreatetime.format('yyyy-MM-dd')
 					
 				}
@@ -427,6 +476,7 @@
 				s.currentIndex = s.listData[index].goodsid;
 				
 				s.formItem = {
+					imagepath: s.listData[index].imagepath,
 					goodsid: s.listData[index].goodsid,
 					goodsname: s.listData[index].goodsname,
 					goodsClass:[s.listData[index].goodsclassid],
@@ -465,7 +515,7 @@
 					},
 	
 					fn(data) {
-	
+						console.log(data);
 						if (data.getret === 0) {
 	
 	
@@ -515,8 +565,15 @@
 	
 					goodsid: goodsid,
 					goodsname: s.formItem.goodsname,
-					sort:s.formItem.sort
+					sort:s.formItem.sort,
+					goodsprice:s.formItem.goodsprice,
+					goodsnumber:s.formItem.goodsnumber,
+					goodsdesc:s.formItem.goodsdesc,
+					imagepath:s.formItem.imagepath,
+
 				}
+
+				console.log(formparams);
 	
 				symbinUtil.ajax({
 	
@@ -524,7 +581,7 @@
 					validate: s.validateData,
 					data: formparams,
 					fn(data) {
-						//console.log(data);
+						console.log(data,'edit');
 						if (data.getret === 0) {
 	
 							s.$Message.success(data.getmsg);
