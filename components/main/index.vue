@@ -11,7 +11,7 @@
                     <Col>
                         <Menu mode="horizontal" theme="dark" active-name="1">
                             <div class="layout-nav">
-                                <MenuItem :keys='i' :name='i' v-for='(menu,i) in topMenu'>
+                                <MenuItem :key='i' :name='i' v-for='(menu,i) in topMenu'>
                                     <router-link  :to="menu.link">{{menu.name}}</router-link>
                                 </MenuItem>
                             </div>
