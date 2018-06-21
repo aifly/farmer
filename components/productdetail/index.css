@@ -49,18 +49,18 @@
   }
 }
 
-.symbin-article-ui {
+.symbin-productdetail-ui {
   padding: 0 10px;
   background-color: #ffffff;
 }
 
-.symbin-article-ui .symbin-article-title {
+.symbin-productdetail-ui .symbin-productdetail-title {
   padding: 16px 0px;
   min-height: 70px;
   border-bottom: 1px solid #ddd;
 }
 
-.symbin-article-ui .symbin-article-title h5 {
+.symbin-productdetail-ui .symbin-productdetail-title h5 {
   margin: 8px;
   border-left: 2px solid #88B7E0;
   text-indent: 8px;
@@ -70,28 +70,28 @@
   font-weight: normal;
 }
 
-.symbin-article-ui .text-right {
+.symbin-productdetail-ui .text-right {
   text-align: right;
 }
 
-.symbin-article-addinfo textarea.ivu-input {
+.symbin-productdetail-addinfo textarea.ivu-input {
   resize: none;
 }
 
-.symbin-article-addinfo .ivu-input-wrapper {
+.symbin-productdetail-addinfo .ivu-input-wrapper {
   width: 90%;
 }
 
-.symbin-article-addinfo .ivu-col-span-15 .ivu-input-wrapper {
+.symbin-productdetail-addinfo .ivu-col-span-15 .ivu-input-wrapper {
   width: 100%;
 }
 
-.symbin-article-addinfo .symbin-upload-C {
+.symbin-productdetail-addinfo .symbin-upload-C {
   position: relative;
   margin-left: 8px;
 }
 
-.symbin-article-addinfo .symbin-upload-C > input[type='file'] {
+.symbin-productdetail-addinfo .symbin-upload-C > input[type='file'] {
   position: absolute;
   height: 100%;
   left: 0;

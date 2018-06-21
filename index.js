@@ -10,7 +10,11 @@ import User from './components/user/index'
 import Order from './components/order/index'
 import FError from './components/ferror/index'
 import Column from './components/column/index';
-import Console from './components/console/index';
+import Console1 from './components/console/index';
+import Hatchery from './components/hatchery/index';
+import GoodsClass from './components/goodsclass/index';
+import Goods from './components/goods/index';
+import ProdutDetail from './components/productdetail/index';
 
 import LandownerBaseInfo from './components/landownerbaseInfo/index';
 import LandownerAddress from './components/landowneraddress/index';
@@ -43,7 +47,27 @@ const router = new VueRouter({
     { path: '/', name: 'login', component: Login, props: true },
 	{ path: '/home/', name: 'home', component: Home, props: true },
 	{ path: '/adminuser/', name: 'adminuser', component: Adminuser, props: true },
-    { path: '/console/', name: 'console', component: Console, props: true },
+    { path: '/console/', name: 'console', component: Console1, props: true },
+	  { path: '/breed/', name: 'breed', component: Hatchery, props: true },
+	  {
+	  	path: '/goods/',
+	  	name: 'goods',
+	  	component: Goods,
+	  	props: true
+	  },
+	  {
+	  	path: '/goodsclass/',
+	  	name: 'goodsclass',
+	  	component: GoodsClass,
+	  	props: true
+	  },
+	  { path: '/hatchery/', name: 'hatchery', component: Hatchery, props: true },
+	  {
+	  	path: '/productdetail/',
+	  	name: 'productdetail',
+	  	component: ProdutDetail,
+	  	props: true
+	  },
     
     { path: '/role/', name: 'role', component: Role, props: true },
     { path: '/rolepanel/', name: 'rolepanel', component: Rolepanel, props: true },
@@ -91,7 +115,7 @@ new Vue({
 		Admin,
 		Adminuser,
 		Column,
-		Console,
+		Console1,
 		Farmer,
 		Farmer1
 	},

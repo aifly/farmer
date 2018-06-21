@@ -35,56 +35,57 @@
 				</div>
 			</div>
 			<!--弹窗样式-->
-				<Modal v-model="addColumn" title="新增栏目" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel" class-name="adduser-cls" :loading='isLoading'>
+				<Modal v-model="addColumn" title="新增栏目"  class-name="adduser-cls">
 					<div class="addColumn-body">
-					<Form ref="formColumn" :model="formColumn" :rules="ruleColumn" inline>
 						<Row align="middle" justify="center">
 							<Col span="3" offset="4" class-name="text-rig top7 rig8">
 								<span class="text-danger">*</span><span>栏目名称:</span>
 							</Col>
-							<Col span="12"><FormItem prop="menuname"><Input v-model="formColumn.menuname" placeholder="请录入栏目名称"></Input></FormItem></Col>
+							<Col span="12"><Input v-model="menuname" placeholder="请录入栏目名称"></Input></Col>
 						</Row>
+						<br>
 						<Row align="middle" justify="center">
 							<Col span="3" offset="4" class-name="text-rig top7 rig8">
 								<span>英文名称:</span>
 							</Col>
-							<Col span="12"><FormItem prop="menuename"><Input v-model="formColumn.menuename" placeholder="请录入栏目英文名称"></Input></FormItem></Col>
+							<Col span="12"><Input v-model="menuename" placeholder="请录入栏目英文名称"></Input></Col>
 						</Row>
+						<br>
 						<Row align="middle" justify="center">
 							<Col span="3" offset="4" class-name="text-rig top7 rig8">
 								<span class="text-danger">*</span><span>连接地址:</span>
 							</Col>
-							<Col span="12"><FormItem prop="menuurl"><Input v-model="formColumn.menuurl" placeholder="请录入栏目连接地址"></Input></FormItem></Col>
+							<Col span="12"><Input v-model="menuurl" placeholder="请录入栏目连接地址"></Input></Col>
 						</Row>
+						<br>
 						<Row align="middle" justify="center">
-							<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<Col span="3" offset="4" class-name="text-rig rig8">
 								<span class="text-danger">*</span><span>显示位置:</span>
 							</Col>
 							<Col span="12">
-							<FormItem prop="showwhere">
-								<RadioGroup v-model="formColumn.showwhere" @on-change="getColumnsData()">
-							        <Radio :label="2">
+								<RadioGroup v-model="showwhere">
+							        <Radio label="2">
 							            <span>左侧显示</span>
 							        </Radio>
-							        <Radio :label="1">
+							        <Radio label="1">
 							            <span>顶部显示</span>
 							        </Radio>
 							    </RadioGroup>
-							</FormItem>
 							</Col>
 						</Row>
+						<br>
 						<Row align="middle" justify="center">
 							<Col span="3" offset="4" class-name="text-rig top7 rig8">
 								<span class="text-danger">*</span><span>所属父级:</span>
 							</Col>
 							<Col span="12">
-							<FormItem prop="parentmenuid">
-								<Cascader :data="ColumnsData" v-model="formColumn.parentmenuid"  change-on-select></Cascader>
-							</FormItem>
+								<Cascader :data="ColumnsData" v-model="parentmenuid"  change-on-select></Cascader>
 							</Col>
 						</Row>
-					</Form>
 					</div>
+					<div slot="footer">
+			            <Button type="text" @click="cancel">取消</Button><Button type="primary" @click="ok">确认</Button>
+			        </div>
 				</Modal>
 				<!--弹窗样式结束-->
 		</div>
@@ -179,12 +180,10 @@
 			return{
 				addColumn:false,
 				showHeader:false,
-				isLoading:true,
-				topListdate:[],
-				leftListdata:[],
-				subListdate:[],
-				defaultdata:[],
-
+				menuname:'',
+				showwhere:'',
+				menuename:'',
+				menuurl:'',
 
 
 				leftExpandColums1:[
@@ -375,28 +374,18 @@
 
 					}
 				],
-				formColumn:{
-					menuname:'',
-					menuurl:'',
-					parentmenuid:[],
-					showwhere:2,
-				},
-				ruleColumn:{
-                    menuname: [
-                        { required: true, message: '栏目名称不能为空', trigger: 'blur' }
-                    ],
-                    menuurl:[
-                    	{ required: true, message: '连接地址不能为空', trigger: 'blur' }
-                    ],
-                    parentmenuid:[
-                    	{ required: true, message: '连接地址不能为空', trigger: 'blur' }
-                    ],
-                    showwhere:[
-                    	{ required: true, message: '显示位置不能为空', trigger: 'blur' }
-                    ]
-                },
+				
+				topListdate:[],
+				leftListdata:[],
+				subListdate:[],
+				parentmenuid: [],
+				//loadData:'',
 				ColumnsData:[
-									
+					{
+						label:'当前级',
+						value:'',
+
+					}					
 				],
 
 				
@@ -406,9 +395,7 @@
 			//symbinTable:symbinTable
 		},
 		mounted(){//页面加载完成后显示
-			this.getColumnslist("allList",data=>{
-
-			});//显示栏目列表
+			this.getColumnslist("allList");//显示栏目列表
 		},
 		beforeCreate(){
 			this.validateData = sysbinVerification.validate(this);
@@ -418,21 +405,19 @@
 		methods:{
 			getaddColumns(){//增加新栏目
 				var s = this;
-				console.log(s.formColumn.parentmenuid[s.formColumn.parentmenuid.length-1]);
-					console.log(s.formColumn.parentmenuid);
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/addmenu",
 					validate:s.validateData,
-
 					data:{
 						menuname:s.menuname,
-						parentmenuid:s.formColumn.parentmenuid[s.formColumn.parentmenuid.length-1],
-						menuename:s.formColumn.menuename,
-						menuurl:s.formColumn.menuurl,
-						showwhere:s.formColumn.showwhere
+						parentmenuid:s.parentmenuid[s.parentmenuid.length-1],
+						menuename:s.menuename,
+						menuurl:s.menuurl,
+						showwhere:s.showwhere
 					},
 					fn(data){
 						if(data.getret === 0){
+							s.addColumn=false;
 							s.$Message.success(data.getmsg);
 							s.bingAgain();//显示栏目列表
 						}
@@ -497,21 +482,11 @@
 			},
 			
 			bindParentmenu(data){//将栏目绑定到新增栏目模块的下拉列表中
-
-
 				var dt = JSON.parse(JSON.stringify(data.list).replace(/menuname/ig,'label').replace(/menuid/ig,'value'));
 				dt.forEach((item,i)=>{
-					this.ColumnsData.push(item);
-					this.defaultdata.push(item);
-				});
-				this.ColumnsData = this.ColumnsData.concat([]).filter((item)=>{
-					return item.showwhere === this.formColumn.showwhere
-				});
-
-				this.ColumnsData.unshift({
-					label:'当前级',
-					value:'',
-				});				
+					this.ColumnsData.push(item)
+				})
+				
 			},
 			loadData(item,callback){//新增栏目中的下拉选项
 				//if(item.value!=""){
@@ -533,24 +508,28 @@
 					item.loading=false;
 					
 				})
+
+
+
+				 
+
+				//}
 			},
 
 			ok(){
-
-				this.isLoading = true;
-				this.$refs['formColumn'].validate((valid)=>{
-
-					if(valid){
-						this.getaddColumns();
-						this.isLoading = false;
-					}
-					else{
-						this.isLoading = false;
-					}
-				})
-				
+				var s = this;
+				var menuurl=this.menuurl;
+				var patrn=/^(\/)[^\s]+/;
+				if (!patrn.exec(menuurl)){
+				   s.$Message.error("网址格式不正确");
+				   return false
+				}else{
+					s.getaddColumns();
+				}
+				return true				
 			},
 			cancel(){
+				this.addColumn=false;
 				//console.log("cancel");
 			},
 			edit(index){
@@ -593,16 +572,6 @@
 			},
 			bingAgain(){//重新绑定列表数据
 				this.getColumnslist("relist");
-			},
-			getColumnsData(){
-				this.formColumn.parentmenuid = [];
-				this.ColumnsData = this.defaultdata.filter((item)=>{
-					return item.showwhere == this.formColumn.showwhere;
-				})
-				this.ColumnsData.unshift({
-					label:'当前级',
-					value:'',
-				});	
 			}
 			//showSubline(index,lig){//显示下级栏目
 

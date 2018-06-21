@@ -1,10 +1,10 @@
 ﻿@import "../css/base.scss";
 
-.symbin-article-ui {
+.symbin-productdetail-ui {
     padding: 0 10px;
     background-color: #ffffff;
 
-    .symbin-article-title {
+    .symbin-productdetail-title {
         padding: 16px 0px;
         min-height: 70px;
         border-bottom: 1px solid #ddd;
@@ -25,7 +25,7 @@
     }
 }
 
-.symbin-article-addinfo {
+.symbin-productdetail-addinfo {
     textarea.ivu-input {
         resize: none;
     }

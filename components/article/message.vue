@@ -143,12 +143,12 @@
                 listData: [
                     {
                         name: 'Brown',                      
-                        content: 'BrownBrownBrownBrown',
+                        content: 'BrownBrownBrownBrown',                        
                         date: '2016-10-03',
                     },
                     {
                         name: 'content',                      
-                        content: 'contentcontentcontentcontent',
+                        content: 'contentcontentcontentcontent',                        
                         date: '2017-10-03',
                     }
                 ],
@@ -160,70 +160,173 @@
                     },
                     {
                         title: '名称',
-                        key: 'name'
+                        key: 'name',
+                    },
+                    {
+                        title: '年龄',
+                        key: 'age',
+                        filters: [
+                            {
+                                label: '大于25岁',
+                                value: 1
+                            },
+                            {
+                                label: '小于25岁',
+                                value: 2
+                            }
+                        ],
+                        filterMultiple: false,
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.age > 25;
+                            } else if (value === 2) {
+                                return row.age < 25;
+                            }
+                        }
+                    },
+                    {
+                        title:'省级',
+                        key:'province',
+                        render: (h, params) => {
+                            let provincename='';
+                            if(params.row.province=='beijing'){                                
+                                provincename='北京';
+                            }else if(params.row.province=='tianjing'){
+                                provincename='天津';
+                            }else if(params.row.province=='shanghai'){
+                                provincename='上海';
+                            }
+                            return h('span',provincename);
+                        },
+                        filters: [
+                            {
+                                label: '北京',
+                                value: 'beijing'
+                            },
+                            {
+                                label: '天津',
+                                value: 'tianjing'
+                            },
+                            {
+                                label: '上海',
+                                value: 'shanghai'
+                            }
+                        ],
+                        filterMethod (value, row) {
+                            return row.province.indexOf(value) > -1;
+                        }
                     },
                     {
                         title: '类别',
                         key: 'type',
                         width:150,
+                        render:(h,params)=>{
+                            return h('span',params.row.type==0?'地主':'农夫');
+                        },
+                        filters: [
+                            {
+                                label: '地主',
+                                value: 0
+                            },
+                            {
+                                label: '农夫',
+                                value: 1
+                            }
+                        ],
+                        filterMultiple: false,
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.type > 0;
+                            } else if (value === 0) {
+                                return row.type < 1;
+                            }
+                        }
                     }
                 ],
                 rolelistData: [
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown',
+                        age: 18, 
+                        province:'beijing',               
+                        type: 0
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John', 
+                        age: 22,
+                        province:'beijing',               
+                        type: 1
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown',
+                        age: 24,
+                        province:'shanghai',                 
+                        type: 0
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John',
+                        age: 19,
+                        province:'beijing',                      
+                        type: 1
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown', 
+                        age: 32,
+                        province:'shanghai',                     
+                        type: 0
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John', 
+                        age: 42,
+                        province:'beijing',                     
+                        type: 1
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown',
+                        age: 33,
+                        province:'shanghai',                    
+                        type: 0
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John', 
+                        age: 38, 
+                        province:'shanghai',                    
+                        type: 0
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown',
+                        age: 45,
+                        province:'beijing',                     
+                        type: 1
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John',
+                        age: 48,
+                        province:'shanghai',                    
+                        type: 1
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown',
+                        age: 28,
+                        province:'beijing',                      
+                        type: 1
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John',
+                        age: 31,
+                        province:'beijing',                      
+                        type: 1
                     },
                     {
-                        name: 'Brown',                      
-                        type: '地主'
+                        name: 'Brown', 
+                        age: 39, 
+                        province:'tianjing',                    
+                        type: 0
                     },
                     {
-                        name: 'John',                      
-                        type: '农夫'
+                        name: 'John', 
+                        age: 29, 
+                        province:'beijing',                    
+                        type: 0
                     }
                 ]
 			}
