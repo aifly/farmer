@@ -74,8 +74,6 @@
 			return {
 				addRole:true,
 				isLoading:true,
-				formRole:[],
-				ruleForm:[],
 				roleListdata:[],
 				roleListColums:[
 					{
@@ -104,7 +102,7 @@
                     {
                     	title:'操作',
                     	key:"action",
-                    	width:130,
+                    	width:120,
 						render:(h,params)=>{
 							return h('div',[
 								h('Button',{
@@ -134,7 +132,8 @@
                     }
 				],
 				formRole: {
-                    rolename: ''
+                    rolename: '',
+                    actionids:'',
                 },
                 ruleForm: {
                     rolename: [
@@ -183,9 +182,9 @@
 
 					},
 					fn(data){
-						console.log(data);
+						//console.log(data);
 						if(data.getret === 0){
-
+							s.roleListdata=data.list
 							s.$Message.success(data.getmsg);
 						}
 						else{
@@ -199,7 +198,7 @@
 			},
 			insertRole(){
 				var s = this;
-				console.log(s.formRole.defaultRole);
+				//console.log(s.formRole.defaultRole);
 				symbinUtil.ajax({
 					url:window.config.baseUrl+"/admin/addrole",
 					validate:s.validateData,
@@ -210,7 +209,7 @@
 						actionids:s.formRole.actionids,
 					},
 					fn(data){
-						console.log(data);
+						//console.log(data);
 						if(data.getret === 0){
 
 							s.$Message.success(data.getmsg);
