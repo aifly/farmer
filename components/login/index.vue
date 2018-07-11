@@ -135,9 +135,9 @@
 							symbinUtil.clearCookie('login');
 							symbinUtil.setCookie('login',JSON.stringify(param),1);
 							window.location.hash = '/console/';
-							//window.location.reload();
 							_this.$Message.success('登录成功~')
 							_this.isLogined = true;
+							window.location.reload();
 						}else{
 							_this.toastError(data.getmsg);
 						}
