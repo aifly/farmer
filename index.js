@@ -75,10 +75,14 @@ const router = new VueRouter({
 	{ path: '/article/', name: 'article', component: Article, props: true},
 	{ path: '/article/notice', name: 'article', component: Notice, props: true},
 	{ path: '/article/message', name: 'article', component: Message, props: true},
-    
+    {
+    	path: '/order/',
+    	name: 'order',
+    	component: Order
+    },
     { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},
-     	{ path: '/order/', name: 'order', component: Order},     	
+     	
      	{ path: '/admin/:id', name: 'admin', component: Admin},
      	{ path: '/column/:id', name: 'column', component: Column},
      	{ path: '/farmer/:id', name: 'farmer', component: Farmer, props: true },
