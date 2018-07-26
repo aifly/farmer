@@ -63,11 +63,11 @@
 								<span class="text-danger">*</span><span>显示位置:</span>
 							</Col>
 							<Col span="12">
-								<RadioGroup v-model="showwhere">
-							        <Radio label="2">
+								<RadioGroup v-model="showwhere" :value='showwhere'>
+							        <Radio :label="2">
 							            <span>左侧显示</span>
 							        </Radio>
-							        <Radio label="1">
+							        <Radio :label="1">
 							            <span>顶部显示</span>
 							        </Radio>
 							    </RadioGroup>
@@ -137,7 +137,8 @@
 				key:"showwhere",
 				width:130,
 				render:(h,params)=>{
-
+					var s = _this;
+					
 					return h('div',[
 						h('Button',{
 							props: {
@@ -145,7 +146,7 @@
 	                        },
 							on:{
 								click:()=>{
-									this.edit(params.index,1)
+									s.edit(params,1)
 								}
 							}
 
@@ -354,7 +355,7 @@
                                     },
 									on:{
 										click:()=>{
-											this.edit(params.index,2)
+											this.edit(params,2)
 										}
 									}
 
@@ -396,6 +397,7 @@
 		},
 		mounted(){//页面加载完成后显示
 			this.getColumnslist("allList");//显示栏目列表
+			window.s = this;
 		},
 		beforeCreate(){
 			this.validateData = sysbinVerification.validate(this);
@@ -449,6 +451,7 @@
 					fn(data){
 						
 						if(data.getret===0){
+							console.log(data.list)
 							s.leftListdata = data.list.filter((item,i)=>{
 								return item.showwhere === 2;//左侧
 							});
@@ -532,7 +535,20 @@
 				this.addColumn=false;
 				//console.log("cancel");
 			},
-			edit(index){
+			edit(menu){
+
+				this.addColumn = true;
+				var menu = menu.row;
+				this.menuname = menu.menuname;
+				this.menuename = menu.menuename;
+				this.menuurl = menu.menuurl;
+				
+				this.parentmenuid = menu.parentmenuid || [];
+
+				this.showwhere = menu.showwhere;
+
+				console.log(menu);
+
 				//console.log(this.leftListdata);
 
 			},
