@@ -124,6 +124,10 @@
                 
                 this.menus = data|| [];
 
+                
+
+               
+
             })
             switch(this.$route.name){
                 case 'rolepanel':
@@ -161,7 +165,7 @@
                        children.forEach(child=>{
                            childArr.push({
                                name:child.menuname,
-                               link:child.menuurl+''+(child.children?child.menuid:'')
+                               link:child.menuurl//+''+(child.children?child.menuid:'')
                            })
                        })
                    }

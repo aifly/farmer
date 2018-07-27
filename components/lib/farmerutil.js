@@ -13,7 +13,7 @@ var farmerUtil = {
 			fnError(){
 			},
 			fn(data){
-
+			 
 
 				if(data.getret === 0){
 					
@@ -25,14 +25,15 @@ var farmerUtil = {
 								if(dt.parentmenuid === menu.menuid){
 									childrenArr.push({
 										name:dt.menuname,
-										link:dt.menuurl+_menuid
+										//link:dt.menuurl+_menuid
+										link:dt.menuurl
 									})
 								}
 							})
 							var menuObj = {
 								name:menu.menuname,
 								status:false,
-								link:menu.menuurl+(menu.children?'':_menuid)
+								link:menu.menuurl //+(menu.children?'':_menuid)
 							};
 							if(childrenArr.length){
 								menuObj.children =  childrenArr;

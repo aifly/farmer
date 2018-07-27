@@ -80,14 +80,14 @@ const router = new VueRouter({
     	name: 'order',
     	component: Order
     },
+	{ path: '/landownerbaseinfo/', name: 'landownerbaseinfo', component: LandownerBaseInfo, props: true },
+	{ path: '/farmer/', name: 'farmer', component: Farmer, props: true },
     { path: '/group/', name: 'group', component: Group, props: true,children:[
      	{ path: '/user/', name: 'user', component: User},
      	
      	{ path: '/admin/:id', name: 'admin', component: Admin},
      	{ path: '/column/:id', name: 'column', component: Column},
-     	{ path: '/farmer/:id', name: 'farmer', component: Farmer, props: true },
       	{ path: '/farmer1/:id', name: 'farmer1', component: Farmer1, props: true },
-      	{ path: '/landownerbaseinfo/:id', name: 'landownerbaseinfo', component: LandownerBaseInfo, props: true },
       	{ path: '/landowneraddress/:id', name: 'landowneraddress', component: LandownerAddress, props: true },
       	{ path: '/repository/:id', name: 'repository', component: Repository, props: true },
     	] 
