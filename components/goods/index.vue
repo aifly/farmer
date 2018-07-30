@@ -63,6 +63,10 @@
 					<FormItem label="商品价格" prop="goodsprice">
 						<Input v-model="formItem.goodsprice" placeholder="商品价格"></Input>
 					</FormItem>
+
+					<FormItem label="商品详情" prop="goodscontent">
+						<Input type="textarea" v-model="formItem.goodscontent" placeholder="商品详情"></Input>
+					</FormItem>
 					<FormItem label="商品生产日期" prop="goodsprice">
 						<DatePicker format="yyyy-MM-dd" type="date" v-model="formItem.goodscreatetime" :value="formItem.createtime" placeholder="Select date" style="width:100%;"></DatePicker>
 					</FormItem>
@@ -119,6 +123,7 @@
 					goodsdesc:'',
 					goodsnumber:'',
 					goodscreatetime:'',
+					goodscontent:"",
 					createtime:'',
 					imagepath:""
 
@@ -354,6 +359,7 @@
 					goodsname: s.formItem.goodsname,
 					goodsdesc: s.formItem.goodsdesc,
 					goodsprice: s.formItem.goodsprice,
+					goodscontent: s.formItem.goodscontent,
 					goodsnumber: s.formItem.goodsnumber,
 					imagepath: s.formItem.imagepath,
 					goodsclassid: s.formItem.goodsClass[0],
@@ -483,10 +489,10 @@
 					goodsdesc:s.listData[index].goodsdesc,
 					goodsnumber:s.listData[index].goodsnumber,
 					goodsprice:s.listData[index].goodsprice,
+					goodscontent:s.listData[index].goodscontent,
 					uploadfileid:s.listData[index].uploadfileid,
 					goodscreatetime:s.listData[index].goodscreatetime,
 				}
-	
 			},
 	
 			change(status) {
@@ -517,8 +523,6 @@
 					fn(data) {
 						console.log(data);
 						if (data.getret === 0) {
-	
-	
 							data.list.forEach((item, i) => {
 	
 								item.sort = i + 1;
@@ -527,7 +531,7 @@
 							data.list.forEach((item,i)=>{
 								item.key = i+1;
 							})
-						
+
 							s.listData = data.list;
 
 	
@@ -567,6 +571,7 @@
 					goodsname: s.formItem.goodsname,
 					sort:s.formItem.sort,
 					goodsprice:s.formItem.goodsprice,
+					goodscontent:s.formItem.goodscontent,
 					goodsnumber:s.formItem.goodsnumber,
 					goodsdesc:s.formItem.goodsdesc,
 					imagepath:s.formItem.imagepath,
