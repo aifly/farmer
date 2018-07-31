@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import sysbinVerification from './verification';
 
 Date.prototype.format = function (fmt) {
 	var o = {
@@ -36,8 +37,12 @@ var symbinUtil = {
 	},
 	ajax(option){
 		var opt = option.data || {};
-	
-		if(option.validate){
+		var validateData = sysbinVerification.validate(this);
+		if(!option.validate){
+			opt.adminusername = validateData.adminusername;
+			opt.admintoken = validateData.admintoken;
+		}
+		else{
 			opt.adminusername = option.validate.adminusername;
 			opt.admintoken = option.validate.admintoken;
 		}

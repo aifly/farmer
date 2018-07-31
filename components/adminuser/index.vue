@@ -37,84 +37,84 @@
 			</div>
 		</div>
 		<Modal v-model="addUser" title="新增管理员" @on-ok="ok" ok-text="确认" cancel-text="取消" @on-cancel="cancel" class-name="adduser-cls" :loading='isLoading'>
-		<div class="addUser-body">
-			<Form ref="formAdmin" :model="formAdmin" :rules="adminForm" inline>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span class="text-danger">*</span><span>登录名:</span>
-					</Col>
-					<Col span="12"><FormItem prop="username"><Input v-model="formAdmin.username" placeholder="请录入用户名"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span class="text-danger">*</span><span>昵称:</span>
-					</Col>
-					<Col span="12"><FormItem prop="nickname"><Input v-model="formAdmin.nickname" placeholder="您期望的显示名"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span class="text-danger">*</span><span>登录密码:</span>
-					</Col>
-					<Col span="12"><FormItem prop="userpwd"><Input v-model="formAdmin.userpwd" placeholder="您的登录密码" type="password"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span class="text-danger">*</span><span>手机号:</span>
-					</Col>
-					<Col span="12"><FormItem prop="adminmobile"><Input v-model="formAdmin.adminmobile" placeholder="您的手机号"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span>真实姓名:</span>
-					</Col>
-					<Col span="12"><FormItem prop="realname"><Input v-model="formAdmin.realname" placeholder="真实姓名"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span>性别:</span>
-					</Col>
-					<Col span="12">
-					<FormItem prop="sex">
-						<RadioGroup v-model="formAdmin.sex">
-					        <Radio label="">
-					            <span>男</span>
-					        </Radio>
-					        <Radio label="android">
-					            <span>女</span>
-					        </Radio>
-					    </RadioGroup>
-					</FormItem>
-					</Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span>邮箱:</span>
-					</Col>
-					<Col span="12"><FormItem prop="adminemail"><Input v-model="formAdmin.adminemail" placeholder="邮箱"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top8 rig8">
-						<span>备注:</span>
-					</Col>
-					<Col span="12"><FormItem prop="admincomment"><Input v-model="formAdmin.admincomment" placeholder="备注信息" type="textarea"></Input></FormItem></Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col span="3" offset="4" class-name="text-rig top7 rig8">
-						<span class="text-danger">*</span><span>用户角色:</span>
-					</Col>
-					<Col span="12">
-						<FormItem prop="admincomment">
-							<CheckboxGroup v-model="formAdmin.roleids">
-						        <Checkbox label="角色1" ></Checkbox>
-						        <Checkbox label="角色2" ></Checkbox>
-						        <Checkbox label="角色3"></Checkbox>
-						    </CheckboxGroup>
+			<div class="addUser-body">
+				<Form ref="formAdmin" :model="formAdmin" :rules="adminForm" inline>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span class="text-danger">*</span><span>登录名:</span>
+						</Col>
+						<Col span="12"><FormItem prop="username"><Input v-model="formAdmin.username" placeholder="请录入用户名"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span class="text-danger">*</span><span>昵称:</span>
+						</Col>
+						<Col span="12"><FormItem prop="nickname"><Input v-model="formAdmin.nickname" placeholder="您期望的显示名"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span class="text-danger">*</span><span>登录密码:</span>
+						</Col>
+						<Col span="12"><FormItem prop="userpwd"><Input v-model="formAdmin.userpwd" placeholder="您的登录密码" type="password"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span class="text-danger">*</span><span>手机号:</span>
+						</Col>
+						<Col span="12"><FormItem prop="adminmobile"><Input v-model="formAdmin.adminmobile" placeholder="您的手机号"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span>真实姓名:</span>
+						</Col>
+						<Col span="12"><FormItem prop="realname"><Input v-model="formAdmin.realname" placeholder="真实姓名"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span>性别:</span>
+						</Col>
+						<Col span="12">
+						<FormItem prop="sex">
+							<RadioGroup v-model="formAdmin.sex">
+								<Radio label="">
+									<span>男</span>
+								</Radio>
+								<Radio label="android">
+									<span>女</span>
+								</Radio>
+							</RadioGroup>
 						</FormItem>
-					</Col>
-				</Row>
-			</Form>
-		</div>
-	</Modal>
+						</Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span>邮箱:</span>
+						</Col>
+						<Col span="12"><FormItem prop="adminemail"><Input v-model="formAdmin.adminemail" placeholder="邮箱"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top8 rig8">
+							<span>备注:</span>
+						</Col>
+						<Col span="12"><FormItem prop="admincomment"><Input v-model="formAdmin.admincomment" placeholder="备注信息" type="textarea"></Input></FormItem></Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span="3" offset="4" class-name="text-rig top7 rig8">
+							<span class="text-danger">*</span><span>用户角色:</span>
+						</Col>
+						<Col span="12">
+							<FormItem prop="admincomment">
+								<CheckboxGroup v-model="formAdmin.roleids">
+									<Checkbox label="角色1" ></Checkbox>
+									<Checkbox label="角色2" ></Checkbox>
+									<Checkbox label="角色3"></Checkbox>
+								</CheckboxGroup>
+							</FormItem>
+						</Col>
+					</Row>
+				</Form>
+			</div>
+		</Modal>
 	</div>
 </template>
 
