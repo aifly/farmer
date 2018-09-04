@@ -30,7 +30,7 @@ import Message from './components/article/message';
 import iView from 'iview';
 import VueRouter from 'vue-router'
 import './components/css/index.css';
-import './components/css/theme.css';
+import './components/css/theme.less';
 
 Vue.use(VueRouter)
 Vue.use(iView)

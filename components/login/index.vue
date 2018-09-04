@@ -121,12 +121,16 @@
 					this.toastError('密码不能为空');
  					return;
 				}
+
+				var p = {
+					adminpwd:_this.password,
+					adminusername:_this.username
+				}
+				
 				symbinUtil.ajax({
 					url:window.config.baseUrl+'/admin/adminlogin',
-					data:{
-						adminusername:_this.username,
-						adminpwd:_this.password
-					},
+					data:p,
+					isLogin:true,
 					fn(data){
 						if(data.getret === 0){
 							var param = data;
@@ -314,7 +318,9 @@
 
  			setTimeout(()=>{
  				//console.log( Vue.obserable )
- 			},1000)
+			 },1000)
+			 
+			 window.s = this;
  			
  			this.initWebgl();
 

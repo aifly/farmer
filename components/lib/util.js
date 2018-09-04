@@ -38,13 +38,15 @@ var symbinUtil = {
 	ajax(option){
 		var opt = option.data || {};
 		var validateData = sysbinVerification.validate(this);
-		if(!option.validate){
-			opt.adminusername = validateData.adminusername;
-			opt.admintoken = validateData.admintoken;
-		}
-		else{
-			opt.adminusername = option.validate.adminusername;
-			opt.admintoken = option.validate.admintoken;
+		if (!option.isLogin){
+			if (!option.validate ) {
+				opt.adminusername = validateData.adminusername;
+				opt.admintoken = validateData.admintoken;
+			}
+			else{
+				opt.adminusername = option.validate.adminusername;
+				opt.admintoken = option.validate.admintoken;
+			}
 		}
 		$.ajax({
 			url:option.url,
