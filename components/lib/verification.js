@@ -5,7 +5,7 @@ var sysbinVerification = {
 		try{
 			return JSON.parse(symbinUtil.getCookie('login'));
 		}catch(e){
-			$this.$Message.warning('登录失效，请登录');
+			$this.$Message && $this.$Message.warning('登录失效，请登录');
 			setTimeout(()=>{
 				window.location.hash = '/login/';
 			},300)
